@@ -6,6 +6,7 @@
 <h3><font size="4">Welcome to our Rubik Cube website, where you can dive into the world of this iconic puzzle! Our interactive platform offers both entertainment and education, allowing users to play with virtual Rubik's Cubes while also learning various solving techniques and algorithms. Through HTML, CSS, and JavaScript, we've created a user-friendly interface where enthusiasts can explore different cube configurations, solve puzzles, and track their progress. </h3>
 </div>
 
+<br>
 
 <div align="center">
 <h2><font size="6"> Features </font></h2>
