@@ -22,6 +22,7 @@
 *:focus {
   outline: none;
 }
+
 /* adding position for th ebulp image */
 .bulp{
   z-index: 1000;
