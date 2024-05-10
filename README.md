@@ -15,6 +15,7 @@
 - **Interactive Interface:** Enjoy a user-friendly and interactive platform
 - **Progress Tracking:** Keep track of your solving progress and achievements
 
+<br>
 
 </div>
 <div align="center">
@@ -40,16 +41,18 @@
     `
     git clone https://github.com/Dev-tanay/Rubik-Cube.git
     `
-
 3. Open the `index.html` file in your web browser.
 4. Start exploring different cube configurations, solving techniques, and puzzles.
 5. Enjoy solving Rubik's Cubes and learning new strategies!
+
+<br>
 
 <div align="center">
 <h1><font size="6"> Contributing</font></h1>
 <h3><font size="4"> We welcome contributions from the community to enhance our Rubik's Cube website. If you have any ideas for new features, improvements, or bug fixes, feel free to submit a pull request.  </h3>
 </div>
 
+<br>
 
 ## Contact Us
 <button type="button" class="btn btn-secondary">
