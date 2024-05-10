@@ -6,6 +6,7 @@
 <h3><font size="4">Welcome to our Rubik Cube website, where you can dive into the world of this iconic puzzle! Our interactive platform offers both entertainment and education, allowing users to play with virtual Rubik's Cubes while also learning various solving techniques and algorithms. Through HTML, CSS, and JavaScript, we've created a user-friendly interface where enthusiasts can explore different cube configurations, solve puzzles, and track their progress. </h3>
 </div>
 
+
 <div align="center">
 <h2><font size="6"> Features </font></h2>
 
@@ -14,8 +15,9 @@
 - **Interactive Interface:** Enjoy a user-friendly and interactive platform
 - **Progress Tracking:** Keep track of your solving progress and achievements
 
+
 </div>
-<div>
+<div align="center">
 <h2><font size="6">Tech Stack</font></h2>
 <p>
 <div align="center">
@@ -29,14 +31,15 @@
 
 <br>
 
+
 <div align="center">
 <h2><font size="6"> How to use it? </font></h2>
 
 1. Fork this repository
 2. Clone this repository to your local machine.
-    '''bash
+    `
     git clone https://github.com/Dev-tanay/Rubik-Cube.git
-    '''
+    `
 
 3. Open the `index.html` file in your web browser.
 4. Start exploring different cube configurations, solving techniques, and puzzles.
@@ -46,6 +49,7 @@
 <h1><font size="6"> Contributing</font></h1>
 <h3><font size="4"> We welcome contributions from the community to enhance our Rubik's Cube website. If you have any ideas for new features, improvements, or bug fixes, feel free to submit a pull request.  </h3>
 </div>
+
 
 ## Contact Us
 <button type="button" class="btn btn-secondary">
