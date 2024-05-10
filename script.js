@@ -4075,6 +4075,20 @@ class Game {
   }
 
 }
+//adding interactivity for the image
+function changeImage() {
+    if (currentImage === imageOn) {
+        document.getElementById("image").src = imageOff;
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+        currentImage = imageOff;
+    } else {
+        document.getElementById("image").src = imageOn;
+        document.body.style.backgroundColor = "";
+        document.body.style.color = "";
+        currentImage = imageOn;
+    }
+}
 
 window.version = '0.99.2';
 window.game = new Game();
