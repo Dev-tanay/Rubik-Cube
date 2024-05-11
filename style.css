@@ -225,6 +225,10 @@ body {
   bottom: 75%;
   font-size: 4.4em;
   height: 1.2em;
+  animation: mymove 4s infinite;
+}
+@keyframes mymove {
+  50% {text-shadow: 1px 10px 0px burlywood;}
 }
 .text--title span {
   display: block;
@@ -241,6 +245,10 @@ body {
   bottom: 78%;
   font-size: 3.5em;
   line-height: 1;
+ animation: mymoves 4s infinite;
+}
+@keyframes mymoves {
+  50% {color: burlywood;}
 }
 .text--complete, .text--best-time {
   font-size: 1.5em;
@@ -260,6 +268,12 @@ body {
   font-size: 1.2em;
   color: rgba(0, 0, 0, 0.25);
   opacity: 0;
+  transition: 0.4s ease;
+}
+.btn:hover{
+    cursor:pointer;
+    color:black;
+   font-size:1.5em;
 }
 .btn:after {
   position: absolute;
