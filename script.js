@@ -4080,7 +4080,7 @@ class Game {
   let currentImage = "BulpOn.png";
   let imageOn = "BulpOn.png";
   let imageOff = "BulpOff.png";
-  function changeImage() {
+function changeImage() {
       if (currentImage === imageOn) {
           document.getElementById("bulp").src = imageOff;
           document.querySelector('.ui__background').style.backgroundColor = "black";
@@ -4097,6 +4097,7 @@ class Game {
           document.querySelector('.t5').style.color = "white";
           document.querySelector('.t6').style.color = "white";
           document.querySelector('.t7').style.color = "white";
+          document.querySelector('.range__list').style.color = "white";
           currentImage = imageOff;
       } else {
           document.getElementById("bulp").src = imageOn;
@@ -4114,6 +4115,7 @@ class Game {
           document.querySelector('.t5').style.color = "";
           document.querySelector('.t6').style.color = "";
           document.querySelector('.t7').style.color = "";
+          document.querySelector('.range__list').style.color = "";
           currentImage = imageOn;
       }
   }
