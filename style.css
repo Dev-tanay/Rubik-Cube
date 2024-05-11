@@ -261,6 +261,10 @@ body {
   color: rgba(0, 0, 0, 0.25);
   opacity: 0;
 }
+.btn:hover{
+    cursor:pointer;
+    color:black;
+}
 .btn:after {
   position: absolute;
   content: "";
