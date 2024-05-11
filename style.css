@@ -245,6 +245,10 @@ body {
   bottom: 78%;
   font-size: 3.5em;
   line-height: 1;
+ animation: mymoves 4s infinite;
+}
+@keyframes mymoves {
+  50% {color: burlywood;}
 }
 .text--complete, .text--best-time {
   font-size: 1.5em;
