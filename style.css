@@ -225,6 +225,10 @@ body {
   bottom: 75%;
   font-size: 4.4em;
   height: 1.2em;
+  animation: mymove 4s infinite;
+}
+@keyframes mymove {
+  50% {text-shadow: 1px 10px 0px burlywood;}
 }
 .text--title span {
   display: block;
