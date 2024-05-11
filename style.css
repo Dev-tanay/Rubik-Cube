@@ -68,6 +68,10 @@ body {
   line-height: 0.75em;
   padding-bottom: 0.5em;
   z-index: 2;
+   animation: mymoves 3s infinite;
+}
+@keyframes mymoves {
+  50% {opacity: 0.5;}
 }
 .range__track {
   position: relative;
