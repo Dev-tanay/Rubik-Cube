@@ -52,7 +52,8 @@ Contributions are welcome! Please follow these guidelines:
 For questions or support, please contact Tanay Das at [@Dev-tanay](https://github.com/Dev-tanay/Rubik-Cube).
 
 ## LICENSE
-[Licence](Licence)
+
+[Licence](https://github.com/KhalkarYash/Rubik-Cube/blob/main/LICENSE)
 
 ## Demo
 Check out the live demo [here](https://dev-tanay.github.io/Rubik-Cube/)
