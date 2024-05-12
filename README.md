@@ -47,7 +47,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Credits
 
 - Tanay Das: Project Manager, Frontend Development
-- Contributors: Yash Khalkar [@KhalkarYash](https://github.com/KhalkarYash)
+- Contributors:
+- - Yash Khalkar [@KhalkarYash](https://github.com/KhalkarYash)
 ## Contact
 
 For questions or support, please contact Tanay Das at [@Dev-tanay](https://github.com/Dev-tanay/Rubik-Cube).
