@@ -2,6 +2,8 @@
 
 Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev-tanay.github.io/Rubik-Cube/</a>
 
+<img src="images/home.png" width="300">
+
 <ol>
 <li><h3>About the Game</h3></li>
 <p>This is a simple and elegant game where you can play Rubik's Cube from your own web browser.</p>
@@ -13,9 +15,12 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <p>This can be done in two ways:</p>
 <ol type="i">
 <li>Twisting the segments</li>
-<p>This can be done by dragging the cursor over the segment you want to rotate</p>
+<p>This can be done by dragging the cursor over the segment you want to rotate.</p>
+<img src="images/twist1.png" width="200">
+<img src="images/twist2.png" width="200">
 <li>Changing the view of the cube</li>
-<p>This can be done by dragging the cursor </p>
+<p>This can be done by dragging the cursor in an arrow around the cube.</p>
+<img src="images/changeview.png" width="200">
 </ol>
 <li><h3>Installation</h3></li>
 <ol type="i">
@@ -36,7 +41,15 @@ cd Rubik-Cube
 <br>
 <p>There, you've opened the game screen!</p>
 <li><h3>Navigating the Game Screen</h3></li>
-a. 
+a. Home
+<img src="images/home.png" width="300">
+b. Game start
+<img src="images/start.png" width="300">
+c. Preferences
+<img src="images/preferences.png" width="300">
+d. Theme
+<img src="images/theme.png" width="300">
+e. Leaderboard
 </ol>
 
 <h3>LICENSE</h3>
