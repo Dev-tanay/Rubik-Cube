@@ -22,7 +22,7 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <p>This can be done by dragging the cursor in an arrow around the cube.</p>
 <img src="images/changeview.png" width="300">
 </ol>
-<h2>>Installation</h2>
+<h2>Installation</h2>
 <ol type="i">
 <li>Clone the repository</li>
   
@@ -52,7 +52,7 @@ You can start the game by double-clicking on the text "DOUBLE TAP TO START"
 <img src="images/start.png" width="300">
 <br>
 <p>Once you start the game, a timer will show above the cube. </p>
-Now you'll see only one icon, that is Back.
+Now you'll see only one icon, that is Back.<br>
 <li>Preferences</li>
 <img src="images/preferences.png" width="300">
 <br>
