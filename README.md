@@ -41,18 +41,19 @@ cd Rubik-Cube
 <br>
 <p>There, you've opened the game screen!</p>
 <li><h3>Navigating the Game Screen</h3></li>
-a. Home
+<ul>
+<li>Home</li>
 <img src="images/home1.png" width="200">
 <br>
 <p>You'll see two icons, each on the two bottom corners of the screen. They're (1) Leaderboard and (2) Preferences.</p>
 
 You can start the game by double-clicking on the text "DOUBLE TAP TO START"
-b. Game start
+<li>Game start</li>
 <img src="images/start.png" width="200">
 <br>
 <p>Once you start the game, a timer will show above the cube. </p>
 Now you'll see only one icon, that is Back.
-c. Preferences
+<li>Preferences</li>
 <img src="images/preferences.png" width="200">
 <br>
 <p>On clicking Preferences from Home screen, you'll be led to the settings page.</p>
@@ -64,19 +65,20 @@ iv. Camera Angle
 v. Color Scheme
 
 <p>Also, there are two new icons in the bottom corners - (3) Back and (4) Theme. </p>
-d. Theme
+<li>Theme</li>
 <img src="images/theme.png" width="200">
 <br>
 <p>Here, you can adjust the hue, saturation, and lightness of the screen to your liking.</p>
 
 The new icons in the bottom corners are - (5) Back and (6) Reset
-e. Stats
+<li>Stats</li>
 <img src="images/stats.png" width="200">
 <br>
 These display the statistics of your Rubik's Cube game. The stats include:
 i. Total Number of Solves
 ii. Best time
 iii. Average of 5, 12, 25
+</ul>
 </ol>
 
 <h3>LICENSE</h3>
