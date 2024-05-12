@@ -4078,3 +4078,9 @@ class Game {
 
 window.version = '0.99.2';
 window.game = new Game();
+
+const toggle = document.getElementById('theme-toggle');
+
+toggle.addEventListener('change', () => {
+  document.documentElement.classList.toggle('dark');
+});
