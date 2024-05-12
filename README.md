@@ -2,7 +2,7 @@
 
 Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev-tanay.github.io/Rubik-Cube/</a>
 
-<img src="images/home.png" width="300">
+<img src="images/home.png" width="350">
 
 <ol>
 <li><h3>About the Game</h3></li>
@@ -16,11 +16,11 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <ol type="i">
 <li>Twisting the segments</li>
 <p>This can be done by dragging the cursor over the segment you want to rotate.</p>
-<img src="images/twist1.png" width="200">
-<img src="images/twist2.png" width="200">
+<img src="images/twist1.png" width="300">
+<img src="images/twist2.png" width="300">
 <li>Changing the view of the cube</li>
 <p>This can be done by dragging the cursor in an arrow around the cube.</p>
-<img src="images/changeview.png" width="200">
+<img src="images/changeview.png" width="300">
 </ol>
 <li><h3>Installation</h3></li>
 <ol type="i">
@@ -43,18 +43,18 @@ cd Rubik-Cube
 <li><h3>Navigating the Game Screen</h3></li>
 <ul>
 <li>Home</li>
-<img src="images/home1.png" width="250">
+<img src="images/home1.png" width="300">
 <br>
 <p>You'll see two icons, each on the two bottom corners of the screen. They're (1) Leaderboard and (2) Preferences.</p>
 
 You can start the game by double-clicking on the text "DOUBLE TAP TO START"
 <li>Game start</li>
-<img src="images/start.png" width="250">
+<img src="images/start.png" width="300">
 <br>
 <p>Once you start the game, a timer will show above the cube. </p>
 Now you'll see only one icon, that is Back.
 <li>Preferences</li>
-<img src="images/preferences.png" width="250">
+<img src="images/preferences.png" width="300">
 <br>
 <p>On clicking Preferences from Home screen, you'll be led to the settings page.</p>
 <p>The options you can change here are:</p>
@@ -67,13 +67,13 @@ v. Color Scheme<br>
 
 <p>Also, there are two new icons in the bottom corners - (3) Back and (4) Theme. </p>
 <li>Theme</li>
-<img src="images/theme.png" width="250">
+<img src="images/theme.png" width="300">
 <br>
 <p>Here, you can adjust the hue, saturation, and lightness of the screen to your liking.</p>
 
 The new icons in the bottom corners are - (5) Back and (6) Reset
 <li>Stats</li>
-<img src="images/stats.png" width="250">
+<img src="images/stats.png" width="300">
 <br>
 These display the statistics of your Rubik's Cube game. The stats include:
 i. Total Number of Solves<br>
