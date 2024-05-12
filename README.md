@@ -40,15 +40,12 @@ Contributions are welcome! Please follow these guidelines:
 5. Push to the branch: `git push origin feature-branch`
 6. Submit a pull request
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Credits
 
 - Tanay Das: Project Manager, Frontend Development
 - Contributors:
-- - Yash Khalkar [@KhalkarYash](https://github.com/KhalkarYash)
+- - Yash Khalkar - [@KhalkarYash](https://github.com/KhalkarYash)
 ## Contact
 
 For questions or support, please contact Tanay Das at [@Dev-tanay](https://github.com/Dev-tanay/Rubik-Cube).
