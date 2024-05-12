@@ -5,7 +5,7 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <img src="images/home.png" width="350">
 
 
-<li><h3>About the Game</h3></li>
+<h3>About the Game</h3>
 <p>This is a simple and elegant game where you can play Rubik's Cube from your own web browser.</p>
 <p>Each of the six faces of the Rubik's cube is in one of the six colors - red, green, yellow, blue, white, and orange.<p>
 <p>The visible part of the cube is divided into 26 pieces - 6 central pieces (only one colored side), 12 edge pieces (two colored sides), and 8 corner pieces (three colored sides).</p>
