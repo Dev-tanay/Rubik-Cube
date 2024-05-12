@@ -43,41 +43,42 @@ cd Rubik-Cube
 <li><h3>Navigating the Game Screen</h3></li>
 <ul>
 <li>Home</li>
-<img src="images/home1.png" width="200">
+<img src="images/home1.png" width="250">
 <br>
 <p>You'll see two icons, each on the two bottom corners of the screen. They're (1) Leaderboard and (2) Preferences.</p>
 
 You can start the game by double-clicking on the text "DOUBLE TAP TO START"
 <li>Game start</li>
-<img src="images/start.png" width="200">
+<img src="images/start.png" width="250">
 <br>
 <p>Once you start the game, a timer will show above the cube. </p>
 Now you'll see only one icon, that is Back.
 <li>Preferences</li>
-<img src="images/preferences.png" width="200">
+<img src="images/preferences.png" width="250">
 <br>
 <p>On clicking Preferences from Home screen, you'll be led to the settings page.</p>
 <p>The options you can change here are:</p>
-i. Cube size
-ii. Flip Type
-iii. Scramble
-iv. Camera Angle
-v. Color Scheme
+
+i. Cube size<br>
+ii. Flip Type<br>
+iii. Scramble<br>
+iv. Camera Angle<br>
+v. Color Scheme<br>
 
 <p>Also, there are two new icons in the bottom corners - (3) Back and (4) Theme. </p>
 <li>Theme</li>
-<img src="images/theme.png" width="200">
+<img src="images/theme.png" width="250">
 <br>
 <p>Here, you can adjust the hue, saturation, and lightness of the screen to your liking.</p>
 
 The new icons in the bottom corners are - (5) Back and (6) Reset
 <li>Stats</li>
-<img src="images/stats.png" width="200">
+<img src="images/stats.png" width="250">
 <br>
 These display the statistics of your Rubik's Cube game. The stats include:
-i. Total Number of Solves
-ii. Best time
-iii. Average of 5, 12, 25
+i. Total Number of Solves<br>
+ii. Best time<br>
+iii. Average of 5, 12, 25<br>
 </ul>
 </ol>
 
