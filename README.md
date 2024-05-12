@@ -42,7 +42,7 @@ cd Rubik-Cube
 <p>There, you've opened the game screen!</p>
 <li><h3>Navigating the Game Screen</h3></li>
 a. Home
-<img src="images/home.png" width="300">
+<img src="images/home1.png" width="300">
 b. Game start
 <img src="images/start.png" width="300">
 c. Preferences
