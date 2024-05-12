@@ -343,3 +343,17 @@ body {
 .ui__buttons {
   z-index: 5;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  z-index: 10;
+}
+
+.btn--about {
+  position: relative;
+  z-index: 10; /* Ensure it's on top */
+}
+
