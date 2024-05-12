@@ -5,13 +5,12 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <img src="images/home.png" width="350">
 
 
-<h3>About the Game</h3>
+<h2>About the Game</h2>
 <p>This is a simple and elegant game where you can play Rubik's Cube from your own web browser.</p>
 <p>Each of the six faces of the Rubik's cube is in one of the six colors - red, green, yellow, blue, white, and orange.<p>
 <p>The visible part of the cube is divided into 26 pieces - 6 central pieces (only one colored side), 12 edge pieces (two colored sides), and 8 corner pieces (three colored sides).</p>
 <p>The 26 pieces are "scrambled" to have different colors on each face.</p>
-<ul>
-<li><h3>How to Play</h3></li>
+<h2>How to Play</h2>
 <p>The objective of this game is to get each face of the cube to have a single color.</p>
 <p>This can be done in two ways:</p>
 <ol type="i">
@@ -23,7 +22,7 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <p>This can be done by dragging the cursor in an arrow around the cube.</p>
 <img src="images/changeview.png" width="300">
 </ol>
-<li><h3>Installation</h3></li>
+<h2>>Installation</h2>
 <ol type="i">
 <li>Clone the repository</li>
   
@@ -41,7 +40,7 @@ cd Rubik-Cube
 </ol>
 <br>
 <p>There, you've opened the game screen!</p>
-<li><h3>Navigating the Game Screen</h3></li>
+<h2>Navigating the Game Screen</h2>
 <ul>
 <li>Home</li>
 <img src="images/home1.png" width="300">
