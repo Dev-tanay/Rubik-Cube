@@ -13,17 +13,32 @@ Link to game demo: <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev
 <p>This can be done in two ways:</p>
 <ol type="i">
 <li>Twisting the segments</li>
-<p>This can be done in two ways:</p>
+<p>This can be done by dragging the cursor over the segment you want to rotate</p>
 <li>Changing the view of the cube</li>
-<p>This can be done in two ways:</p>
+<p>This can be done by dragging the cursor </p>
 </ol>
 <li><h3>Installation</h3></li>
 <ol type="i">
 <li>Clone the repository</li>
+  
+```
+git clone https://github.com/Dev-tanay/Rubik-Cube.git
+```
+
 <li>Navigate to the cloned repository</li>
+
+```
+cd Rubik-Cube
+```
+
 <li>Open the index.html file in a web browser</li>
 </ol>
-There, you've opened the game screen!
+<br>
+<p>There, you've opened the game screen!</p>
 <li><h3>Navigating the Game Screen</h3></li>
 a. 
 </ol>
+
+<h3>LICENSE</h3>
+
+This project is licensed under the MIT License - see the LICENSE file for details.
