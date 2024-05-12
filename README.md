@@ -46,8 +46,10 @@ Contributions are welcome! Please follow these guidelines:
 - Tanay Das: Project Manager, Frontend Development
 - Contributors:
 - - Yash Khalkar - [@KhalkarYash](https://github.com/KhalkarYash)
+
 ## Contact
 
 For questions or support, please contact Tanay Das at [@Dev-tanay](https://github.com/Dev-tanay/Rubik-Cube).
 
-Link -> https://dev-tanay.github.io/Rubik-Cube/
+## Demo
+Check out the live demo [here](https://dev-tanay.github.io/Rubik-Cube/)
