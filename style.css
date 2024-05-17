@@ -187,6 +187,7 @@ body {
   display: flex;
   justify-content: space-between;
   opacity: 0;
+  
 }
 .stats:not(:last-child) {
   margin-bottom: 1.5em;
@@ -236,6 +237,7 @@ body {
 .text--note {
   top: 87%;
   font-size: 1em;
+  cursor: pointer;
 }
 .text--timer {
   bottom: 78%;
@@ -260,6 +262,7 @@ body {
   font-size: 1.2em;
   color: rgba(0, 0, 0, 0.25);
   opacity: 0;
+  cursor: pointer;
 }
 .btn:after {
   position: absolute;
@@ -336,6 +339,7 @@ body {
   align-items: center;
   overflow: hidden;
   z-index: 4;
+  cursor: pointer;
 }
 .ui__theme {
   padding-top: 15em;
