@@ -83,6 +83,24 @@ iii. Average of 5, 12, 25<br>
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 <!-- readme: contributors -start -->
-
-
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/Dev-tanay">
+                    <img src="https://avatars.githubusercontent.com/u/108722535?v=4" width="100;" alt="Dev-tanay"/>
+                    <br />
+                    <sub><b>Tanay Das</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/irfan-iiitr">
+                    <img src="https://avatars.githubusercontent.com/u/123577873?v=4" width="100;" alt="irfan-iiitr"/>
+                    <br />
+                    <sub><b>irfan-iiitr</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
 <!-- readme: contributors -end -->
