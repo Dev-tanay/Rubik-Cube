@@ -4075,6 +4075,50 @@ class Game {
   }
 
 }
+//adding interactivity for the image
+
+  let currentImage = "BulpOn.png";
+  let imageOn = "BulpOn.png";
+  let imageOff = "BulpOff.png";
+function changeImage() {
+      if (currentImage === imageOn) {
+          document.getElementById("bulp").src = imageOff;
+          document.querySelector('.ui__background').style.backgroundColor = "black";
+          document.querySelector('.ui').style.color = "white";
+          document.querySelector('#b1').style.color = "white";
+          document.querySelector('#b2').style.color = "white";
+          document.querySelector('#b3').style.color = "white";
+          document.querySelector('#b4').style.color = "white";
+          document.querySelector('#b5').style.color = "white";
+          document.querySelector('.t1').style.color = "white";
+          document.querySelector('.t2').style.color = "white";
+          document.querySelector('.t3').style.color = "white";
+          document.querySelector('.t4').style.color = "white";
+          document.querySelector('.t5').style.color = "white";
+          document.querySelector('.t6').style.color = "white";
+          document.querySelector('.t7').style.color = "white";
+          document.querySelector('.range__list').style.color = "white";
+          currentImage = imageOff;
+      } else {
+          document.getElementById("bulp").src = imageOn;
+          document.querySelector('.ui__background').style.backgroundColor = "white";
+          document.querySelector('.ui').style.color = "";
+          document.querySelector('#b1').style.color = "";
+          document.querySelector('#b2').style.color = "";
+          document.querySelector('#b3').style.color = "";
+          document.querySelector('#b4').style.color = "";
+          document.querySelector('#b5').style.color = "";
+          document.querySelector('.t1').style.color = "";
+          document.querySelector('.t2').style.color = "";
+          document.querySelector('.t3').style.color = "";
+          document.querySelector('.t4').style.color = "";
+          document.querySelector('.t5').style.color = "";
+          document.querySelector('.t6').style.color = "";
+          document.querySelector('.t7').style.color = "";
+          document.querySelector('.range__list').style.color = "";
+          currentImage = imageOn;
+      }
+  }
 
 window.version = '0.99.2';
 window.game = new Game();
