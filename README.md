@@ -81,3 +81,8 @@ iii. Average of 5, 12, 25<br>
 <h3>LICENSE</h3>
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+<!-- readme: contributors -start -->
+
+
+<!-- readme: contributors -end -->
