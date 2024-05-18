@@ -2413,13 +2413,12 @@ class Timer extends Animation {
   }
 
   convert() {
+    const milliseconds = parseInt(this.deltaTime % 1000);
+    const seconds = parseInt((this.deltaTime / 1000) % 60);
+    const minutes = parseInt(this.deltaTime / (1000 * 60));
 
-    const seconds = parseInt( ( this.deltaTime / 1000 ) % 60 );
-    const minutes = parseInt( ( this.deltaTime / ( 1000 * 60 ) ) );
-
-    this.converted = minutes + ':' + ( seconds < 10 ? '0' : '' ) + seconds;
-
-  }
+    this.converted = minutes + ':' + (seconds < 10 ? '0' : '') + seconds + ':' + (milliseconds < 100 ? (milliseconds < 10 ? '00' : '0') : '') + milliseconds;
+}
 
   setText() {
 
