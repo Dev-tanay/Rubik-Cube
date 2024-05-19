@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Rubik Cube</title>
-  <link rel="icon" type="image/x-icon" href="images\icon.png">
-  <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><link rel="stylesheet" href="./style.css">
-
+  <link rel="icon" type="image/x-icon" href="images/icon.png">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 
 <div class="ui">
 
@@ -37,11 +36,12 @@
   </div>
 
   <div class="ui__prefs">
-    <range name="size" title="Cube Size" list="2,3,4,5"></range>
-    <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
+    <range name="size" title="Cube Size" list="2,3,4,5" role="slider" aria-valuemin="2" aria-valuemax="5" aria-valuenow="3"></range>
+    <range name="flip" title="Flip Type" list="Swift,Smooth,Bounce"></range>
     <range name="scramble" title="Scramble Length" list="20,25,30"></range>
     <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
     <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
+
   </div>
 
   <div class="ui__theme">
@@ -93,8 +93,9 @@
   </div>
 
 </div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script>
+<script src="script.js"></script>
 
 </body>
 </html>
