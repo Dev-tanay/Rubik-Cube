@@ -343,3 +343,10 @@ body {
 .ui__buttons {
   z-index: 5;
 }
+
+
+/* styling element for the goggle login option to be placed at the top right corner of the webpage. */
+
+.g_id_signin {
+  margin-top: 20px;
+}

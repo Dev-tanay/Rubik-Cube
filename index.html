@@ -9,6 +9,23 @@
 </head>
 <body>
 
+  <!-- separate div element for the goggle sign-in/log-in element -->
+  <!-- g_id_onload is for automatic loading of the Google Identity Services. -->
+  <div id="g_id_onload"
+  data-client_id="1056580552736-gos4t0nvaco0o3eq9v5tdaa1425qhhdu.apps.googleusercontent.com"
+  
+  data-callback="handleCredentialResponse">
+</div>
+<!-- the data client id is the goggle o-auth secret client id. -->
+<!-- g_id_signin is for rendering the Google Sign-In button. -->
+
+<div class="g_id_signin" data-type="standard"></div>
+
+<!-- Adding the Google Identity Services script to your HTML file. -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<!-- Added the script1.js file for initializing the Google Identity Services client and handle the sign-in process. -->
+<script src="script1.js"></script>
 
 <div class="ui">
 
