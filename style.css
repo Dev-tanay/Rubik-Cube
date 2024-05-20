@@ -344,6 +344,24 @@ body {
   z-index: 5;
 }
 
+.ui .ui__buttons #restartButton {
+  padding: 10px 20px 5px 5px;
+  cursor: pointer;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  bottom: 78%;
+  font-size: 20px;
+  align-items: center;
+  position: absolute;
+  left: 60%;
+  right: 25%;
+  text-align: center;
+}
+
+
 
 /* styling element for the goggle login option to be placed at the top right corner of the webpage. */
 

@@ -41,7 +41,7 @@
     <div class="text text--note">
       Double tap to start
     </div>
-    <div class="text text--timer">
+    <div class="text text--timer" id="t">
       0:00
     </div>
     <div class="text text--complete">
@@ -107,11 +107,16 @@
     <button class="btn btn--br btn--reset">
       <icon reset></icon>
     </button>
+    <button id="restartButton" onclick="reset_time()">Restart</button>
   </div>
 
 </div>
 <!-- partial -->
+<script>
+  function reset_time() {
+      document.getElementById("restartButton").t="0:00";
+  }
+  </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
-
 </body>
 </html>
