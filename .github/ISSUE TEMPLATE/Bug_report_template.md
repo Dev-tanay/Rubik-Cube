@@ -1,58 +1,38 @@
+---
 name: 🪲 Bug Report
-description: Report your bug by filling the information given below
-title: "[Bug]: "
+about: Create a bug report to help us resolving the bug
+title: '🪲[Bug]: '
+labels: 'bug'
+assignees: ''
 
-body:
+---
 
-- type: markdown
-  attributes:
-  value: |
-  Thanks for taking the time to fill out this bug report!
-- type: textarea
-  id: bug-description
-  attributes:
-  label: Give a brief about the bug ✍️
-  description: Enter a brief description about the bug report
-  placeholder: Please include a summary, also include relevant motivation and context.
-  value: "Description"
-  validations:
-  required: true
-- type: textarea
-  id: behaviors
-  attributes:
-  label: What is the expected behavior? 🤔
-  description: Enter the expected behavior of bug
-  placeholder: Please include a summary, also include relevant motivation and context.
-  value: "Description"
-  validations:
-  required: true
-- type: textarea
-  id: instructions
-  attributes:
-  label: Provide step by step information to reproduce the bug 📄
-  description: Enter the description on how you plan to find the bug's solution
-  placeholder: Please include a summary, also include relevant motivation and context.
-  value: "Description"
-  validations:
-  required: true
-- type: textarea
-  id: instructions
-  attributes:
-  label: Attach screenshots, if applicable (Optional)
-  placeholder: Please include screenshots, if applicable/available.
-  value: "Description"
-  validations:
-  required: false
-- type: dropdown
-  id: contribution
-  attributes:
-  label: Select program in which you are contributing
-  multiple: true
-  options: - GSSoC24 - Other
-- type: checkboxes
-  id: terms
-  attributes:
-  label: Code of Conduct
-  description: By submitting this issue, you agree to follow our [CODE OF CONDUCT](https://github.com/Dev-tanay/Rubik-Cube/blob/main/README.md)
-  options: - label: I follow [CONTRIBUTING GUIDELINE]() of this project.
-  required: true
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
+
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
+
+**Additional context**
+Add any other context about the problem here.
