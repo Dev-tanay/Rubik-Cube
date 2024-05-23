@@ -359,3 +359,17 @@ body {
 .g_id_signin {
   margin-top: 20px;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  z-index: 10;
+}
+
+.btn--about {
+  position: relative;
+  z-index: 10; /* Ensure it's on top */
+}
