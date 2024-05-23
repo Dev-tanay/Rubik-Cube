@@ -174,6 +174,23 @@ class World extends Animation {
   }
 
 }
+// creating the fucntion for handling the panaromic camera angle
+class PanoramicCamera {
+  constructor(scene, renderer) {
+    this.scene = scene;
+    this.renderer = renderer;
+
+    // Create a cube camera to capture the panoramic view
+    this.cubeCamera = new THREE.CubeCamera(0.1, 10000, 512);
+    this.scene.add(this.cubeCamera);
+  }
+
+  // Update the panoramic view
+  update() {
+    this.cubeCamera.update(this.renderer, this.scene);
+  }
+}
+
 
 function RoundedBoxGeometry( size, radius, radiusSegments ) {
 
