@@ -291,6 +291,15 @@ body {
   display: none !important;
 }
 
+.btn-about{
+  background: transparent;
+  color: gray;
+  left: 1308px;
+  opacity: 1;
+  font-size: 20px;
+  pointer-events: all;
+}
+
 .ui {
   pointer-events: none;
   color: #070d15;
