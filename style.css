@@ -238,6 +238,7 @@ body {
   font-size: 1em;
 }
 .text--timer {
+  
   bottom: 78%;
   font-size: 3.5em;
   line-height: 1;
@@ -300,6 +301,146 @@ body {
   display: none !important;
 }
 
+/*3 buttons*/
+/* .buttons {
+  position: relative;
+  top: 5%; 
+  left: 50%; 
+}
+
+.btn.btn--tc {
+  margin: 10px;
+  padding: 10px 20px; 
+  font-size: 1.2em;
+  background-color: #41aac8; 
+  color: white; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn.btn--tc:hover {
+  background-color: #2c7a97; 
+}  */
+.main_B{
+  padding-left: 35%;
+
+}
+.sub-main{
+  width: 80px;
+  margin:2px;
+  float: left;
+}
+
+.btn1, .btn2 , .btn3 {
+  text-align: center;
+  cursor: pointer;
+  font-size:24px;
+  padding: 10px;
+
+}
+
+
+/* 
+/Button One/ */
+.btn1  {
+  padding:20px 60px;
+  outline: none;
+  background-color: #27ae60;
+  border: none;
+  border-radius:5px;
+  box-shadow: 0 9px #95a5a6;
+}
+
+.btn1 :hover{
+  background-color: #2ecc71;
+}
+
+.btn1 :active {
+  background-color: #2ecc71;
+  box-shadow: 0 5px #95a5a6;
+  transform: translateY(4px);
+}
+
+/* 
+/Button Two/ */
+.btn2 {
+  border-radius: 4px;
+  background-color:#ede9e7;
+  border: none;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+}
+
+
+.btn2  span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn2  span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn2 :hover span {
+  padding-right: 25px;
+}
+
+.btn2:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+/* /Button Three/ */
+.btn3  {
+    position: relative;
+    background-color: #ebe7e0;
+    border: none;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.btn3 :hover{
+   background:#fff;
+   box-shadow:0px 2px 10px 5px #97B1BF;
+   color:#000;
+}
+
+.btn3 :after {
+    content: "";
+    background: #f1c40f;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.btn3 :active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+/*  */
+/***/
 .ui {
   pointer-events: none;
   color: #070d15;
