@@ -300,6 +300,59 @@ body {
   display: none !important;
 }
 
+.main_B{
+  padding-left: 35%;
+}
+
+.sub-main{
+  width: 80px;
+  margin:2px;
+  float: left;
+}
+
+.btn3 {
+  text-align: center;
+  cursor: pointer;
+  font-size:24px;
+  padding: 10px;
+  position: relative;
+  background-color: #ebe7e0;
+  border: none;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.btn3 :hover{
+   background:#fff;
+   box-shadow:0px 2px 10px 5px #97B1BF;
+   color:#000;
+}
+
+.btn3 :after {
+    content: "";
+    background: #f1c40f;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.btn3 :active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
 .ui {
   pointer-events: none;
   color: #070d15;
