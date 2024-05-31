@@ -51,7 +51,7 @@ const animationEngine = ( () => {
 
       this.ids.splice( index, 1 );
       delete this.animations[ animation.id ];
-      animation = null;
+      animation =newGame;
 
     }
 
