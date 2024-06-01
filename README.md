@@ -122,8 +122,8 @@
 <br>
 
 <center>
-<a href="https://github.com/Open-Source-Chandigarh/Euphoria-Check/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Open-Source-Chandigarh/Euphoria-Check" />
+<a href="https://github.com/Dev-tanay/Rubik-Cube/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Dev-tanay/Rubik-Cube" />
 </a>
 </center>
 <br>
