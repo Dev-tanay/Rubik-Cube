@@ -5,9 +5,80 @@
   <title>Rubik Cube</title>
   <link rel="icon" type="image/x-icon" href="images\icon.png">
   <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><link rel="stylesheet" href="./style.css">
+  <style>
+    /*Preloader CSS*/
+#preloader {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%; 
+display: flex;
+justify-content: center;
+align-items: center;
+transition: opacity 2s ease-out, visibility 2s ease-out;
+opacity: 1;
+background-color: white;
+visibility: visible;
+z-index: 9999; 
+}
 
+#preloader.hidden {
+opacity: 0;
+visibility: hidden;
+}
+
+#loader {
+display: block;
+position: relative;
+width: 150px;
+height: 150px;
+border-radius: 50%;
+border: 3px solid transparent;
+border-top-color: #55a5ea;
+animation: spin 3s linear infinite;
+}
+
+#loader:before {
+content: "";
+position: absolute;
+top: 5px;
+left: 5px;
+right: 5px;
+bottom: 5px;
+border-radius: 50%;
+border: 3px solid transparent;
+border-top-color: red;
+animation: spin 3s linear infinite;
+}
+
+#loader:after {
+content: "";
+position: absolute;
+top: 15px;
+left: 15px;
+right: 15px;
+bottom: 15px;
+border-radius: 50%;
+border: 3px solid transparent;
+border-top-color: black;
+animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
+  </style>
 </head>
 <body>
+  <div id="preloader">
+    <div id="loader"></div>
+  </div>
 
   <!-- separate div element for the goggle sign-in/log-in element -->
   <!-- g_id_onload is for automatic loading of the Google Identity Services. -->
@@ -112,6 +183,22 @@
 </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const preloader = document.getElementById('preloader');
+    const mainContent = document.getElementById('main-content');
 
+    // Listen for the window load event
+    window.addEventListener('load', function() {
+        // Set a delay before transitioning the preloader and main content
+        setTimeout(function() {
+            preloader.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('visible');
+        }, 300); // 2000 milliseconds = 2 seconds delay
+    });
+});
+
+  </script>
 </body>
 </html>
