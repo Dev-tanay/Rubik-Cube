@@ -1,3 +1,4 @@
+
 function handleCredentialResponse(response)//is the callback function that handles the ID token received from Google.
  {
     const data = jwt_decode(response.credential);
