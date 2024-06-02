@@ -47,6 +47,7 @@ body {
 }
 
 .icon {
+  cursor:pointer;
   display: inline-block;
   font-size: inherit;
   overflow: visible;
@@ -55,6 +56,7 @@ body {
 }
 
 .range {
+  cursor:pointer;
   position: relative;
   width: 14em;
   z-index: 1;
@@ -64,6 +66,7 @@ body {
   margin-bottom: 2em;
 }
 .range__label {
+  cursor:pointer;
   position: relative;
   font-size: 0.9em;
   line-height: 0.75em;
@@ -71,6 +74,7 @@ body {
   z-index: 2;
 }
 .range__track {
+  cursor:pointer;
   position: relative;
   height: 1em;
   margin-left: 0.5em;
@@ -78,6 +82,7 @@ body {
   z-index: 3;
 }
 .range__track-line {
+  cursor:pointer;
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
   height: 2px;
@@ -88,6 +93,7 @@ body {
   transform-origin: left center;
 }
 .range__handle {
+  cursor:pointer;
   position: absolute;
   width: 0;
   height: 0;
@@ -97,6 +103,7 @@ body {
   z-index: 1;
 }
 .range__handle div {
+  cursor:pointer;
   transition: background 500ms ease;
   position: absolute;
   left: 0;
@@ -123,6 +130,7 @@ body {
   margin-top: -1.5em;
 }
 .range__list {
+  cursor:pointer;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -152,6 +160,7 @@ body {
   height: 100%;
   content: "";
   opacity: 0.5;
+  cursor:pointer;
 }
 .range--color-hue .range__handle {
   color: red;
@@ -182,6 +191,7 @@ body {
 }
 
 .stats {
+  cursor:pointer;
   position: relative;
   width: 14em;
   cursor:pointer;
@@ -210,6 +220,7 @@ body {
 }
 
 .text {
+  cursor:pointer;
   position: absolute;
   left: 0;
   right: 0;
