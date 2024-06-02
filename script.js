@@ -4056,6 +4056,7 @@ class Game {
     } else {
 
       this.state = STATE.Stats;
+      this.transition.buttons(BUTTONS.Stats, BUTTONS.Complete);
       this.saved = false;
 
       this.transition.timer( HIDE );
