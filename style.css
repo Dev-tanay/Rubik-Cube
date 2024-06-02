@@ -215,6 +215,7 @@ body {
   line-height: 0.75;
   perspective: 100rem;
   opacity: 0;
+
 }
 .text i {
   display: inline-block;
@@ -232,6 +233,7 @@ body {
 .text--title span:first-child {
   font-size: 0.5em;
   margin-bottom: 0.2em;
+  margin-top: 28px;
 }
 .text--note {
   top: 87%;
@@ -303,6 +305,7 @@ body {
 .ui {
   pointer-events: none;
   color: #070d15;
+  
 }
 .ui, .ui__background, .ui__game, .ui__texts, .ui__prefs, .ui__theme, .ui__stats, .ui__buttons {
   position: absolute;
@@ -329,6 +332,7 @@ body {
 .ui__game {
   pointer-events: all;
   z-index: 2;
+  background: linear-gradient(to bottom, #fffffff0, #7dadb7f0);
 }
 .ui__game canvas {
   display: block;
@@ -356,6 +360,38 @@ body {
 
 /* styling element for the goggle login option to be placed at the top right corner of the webpage. */
 
-.g_id_signin {
-  margin-top: 20px;
+.navbar .g_id_signin {
+  position: relative;
+  z-index: 160;
+}
+
+/* styling the navbar issue Back option on leaderboad page #112      */
+
+.navbar{
+  border: 1px solid white;
+  width: 80vw;
+  position: relative;
+  justify-content: center;
+  z-index: 15;
+  align-items: center;
+  margin: auto;
+  border-radius: 40px;
+  padding: 20px 0;
+  background: linear-gradient(to bottom, #fffffff0, #7ba9b3f0);
+}
+.navbar ul{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.navbar ul li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+  color: black;
+  transition-duration: 0.3s;
+  width: 100%;
+  font-size: 0.7em;
 }
