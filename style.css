@@ -293,6 +293,13 @@ body {
   bottom: 0.8em;
   left: calc(50% - 0.5em);
 }
+/* For volume button */
+.btn--tr {
+  top: 1.2em; 
+  right: 1.2em; 
+  opacity: 1;
+  pointer-events: auto;
+}
 .btn svg {
   display: block;
 }
