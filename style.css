@@ -359,3 +359,80 @@ body {
 .g_id_signin {
   margin-top: 20px;
 }
+
+/* HOW TO PLAY CSS */
+
+
+/* Body styling */
+body {
+  line-height: 1.2;
+  color: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-right: 1300px;
+  padding-bottom: 500px;
+}
+
+/* Center section styling */
+.sec-center {
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+  z-index: 200;
+}
+
+/* Hide checkboxes */
+[type="checkbox"] {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Dropdown button styling */
+.dropdown:checked + label,
+.dropdown:not(:checked) + label {
+  position: relative;
+  line-height: 2;
+  height: 50px;
+  transition: all 200ms linear;
+  border-radius: 4px;
+  width: 220px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  background-color: #a188eac4;
+  cursor: pointer;
+  color: #102770;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+
+/* Dropdown content styling */
+.section-dropdown {
+  position: absolute;
+  padding: 5px;
+  background-color: #5a29edd8;
+  top: 70px;
+  left: 0;
+  width: 400%;
+  border-radius: 10px;
+  display: block;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 200ms linear;
+}
+
+.dropdown:checked ~ .section-dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
