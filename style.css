@@ -236,6 +236,7 @@ body {
 .text--note {
   top: 87%;
   font-size: 1em;
+  color: black
 }
 .text--timer {
   bottom: 78%;
@@ -324,15 +325,17 @@ body {
   transition: background 500ms ease;
   background: #d1d5db;
 }
-.ui__background:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background-image: linear-gradient(to bottom, white 50%, rgba(255, 255, 255, 0) 100%);
-}
+  .ui__background:after {
+    position: absolute;
+    top: 0;
+    background-image: url("./images/rubicimage.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+  }
 .ui__game {
   pointer-events: all;
   z-index: 2;
