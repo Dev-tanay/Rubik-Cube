@@ -257,11 +257,16 @@ body {
   border-width: 0;
   position: absolute;
   pointer-events: none;
-  font-size: 1.2em;
+  font-size: 1.5em;
   color: rgba(0, 0, 0, 0.25);
   opacity: 0;
 }
+.btn:hover {
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 400ms ease-out;
+}
 .btn:after {
+  cursor: pointer;
   position: absolute;
   content: "";
   width: 3em;
@@ -272,17 +277,28 @@ body {
   margin-top: -1.5em;
   border-radius: 100%;
 }
+.btn--tl {
+  top: 1.2em;
+  left: 1.2em;
+}
 .btn--bl {
-  bottom: 0.8em;
-  left: 0.8em;
+  bottom: 1.2em;
+  left: 1.2em;
 }
 .btn--br {
-  bottom: 0.8em;
-  right: 0.8em;
+  bottom: 1.2em;
+  right: 1.2em;
 }
 .btn--bc {
   bottom: 0.8em;
   left: calc(50% - 0.5em);
+}
+/* For volume button */
+.btn--tr {
+  top: 1.2em; 
+  right: 1.2em; 
+  opacity: 1;
+  pointer-events: auto;
 }
 .btn svg {
   display: block;
@@ -342,4 +358,25 @@ body {
 }
 .ui__buttons {
   z-index: 5;
+}
+
+
+/* styling element for the goggle login option to be placed at the top right corner of the webpage. */
+
+.g_id_signin {
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  z-index: 10;
+}
+
+.btn--about {
+  position: relative;
+  z-index: 10; /* Ensure it's on top */
 }
