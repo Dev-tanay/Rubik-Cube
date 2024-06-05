@@ -278,8 +278,9 @@ body {
   margin-top: -1.5em;
   border-radius: 100%;
 }
+/*The back button was changed to bottom because it interrupts the info button.*/
 .btn--tl {
-  top: 1.2em;
+  bottom: 1.2em;
   left: 1.2em;
 }
 .btn--bl {
@@ -298,6 +299,12 @@ body {
 .btn--tr {
   top: 1.2em; 
   right: 1.2em; 
+  opacity: 1;
+  pointer-events: auto;
+}
+.btn--in{
+  top: 1.2em; 
+  left: 1.2em; 
   opacity: 1;
   pointer-events: auto;
 }
@@ -371,7 +378,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 5px 5px;
   color: #333;
   z-index: 10;
 }
