@@ -50,7 +50,7 @@ body {
   font-size: inherit;
   overflow: visible;
   vertical-align: -0.125em;
-  preserveAspectRatio: none;
+  preserveAspectRatio none;
 }
 
 .range {
