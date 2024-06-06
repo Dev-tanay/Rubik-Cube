@@ -281,7 +281,11 @@ body {
 /*The back button was changed to bottom because it interrupts the info button.*/
 .btn--tl {
   bottom: 1.2em;
+<<<<<<< Updated upstream
   left: 1.2em;
+=======
+  left: 1.2em;  
+>>>>>>> Stashed changes
 }
 .btn--bl {
   bottom: 1.2em;
@@ -302,12 +306,31 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+<<<<<<< Updated upstream
+=======
+/* For info button */
+>>>>>>> Stashed changes
 .btn--in{
   top: 1.2em; 
   left: 1.2em; 
   opacity: 1;
   pointer-events: auto;
 }
+<<<<<<< Updated upstream
+=======
+.btn--about {
+  position: relative;
+  z-index: 10; /* Ensure it's on top */
+} 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+  color: #333;
+  z-index: 10;
+} 
+>>>>>>> Stashed changes
 .btn svg {
   display: block;
 }
@@ -374,6 +397,7 @@ body {
 .g_id_signin {
   margin-top: 20px;
 }
+<<<<<<< Updated upstream
 .header {
   display: flex;
   justify-content: space-between;
@@ -387,3 +411,6 @@ body {
   position: relative;
   z-index: 10; /* Ensure it's on top */
 }
+=======
+ 
+>>>>>>> Stashed changes
