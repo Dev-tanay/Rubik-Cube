@@ -59,7 +59,7 @@
     <range name="size" title="Cube Size" list="2,3,4,5"></range>
     <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
     <range name="scramble" title="Scramble Length" list="20,25,30"></range>
-    <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
+    <range name="fov" title="Camera Angle" list="Ortographic,Perspective,Panoromic"></range> <!-- Added new option that is the panaromic camera angle-->
     <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
   </div>
 
@@ -122,5 +122,32 @@
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
 
+
+  <script>
+    // Initailising PanoramicCamera
+    const panoramicCamera = new PanoramicCamera(world.scene, world.renderer);
+
+    // Updating  the panoramic view
+    panoramicCamera.update();
+
+    // Adding  event listener for camera angle change
+    document.querySelector('[name="camera-angle"]').addEventListener('input', function() {
+      const selectedAngle = this.value;
+      switch (selectedAngle) {
+        case 'Orthographic':
+          // Already Set up Orthographic camera
+          break;
+        case 'Perspective':
+          // Already Set up Perspective camera
+          break;
+        case 'Panoramic':
+          // Update the panoramic view
+          panoramicCamera.update();
+          break;
+        default:
+          break;
+      }
+    });
+  </script>
 </body>
 </html>
