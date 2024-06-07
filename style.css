@@ -293,6 +293,13 @@ body {
   bottom: 0.8em;
   left: calc(50% - 0.5em);
 }
+/* For volume button */
+.btn--tr {
+  top: 1.2em; 
+  right: 1.2em; 
+  opacity: 1;
+  pointer-events: auto;
+}
 .btn svg {
   display: block;
 }
@@ -358,4 +365,18 @@ body {
 
 .g_id_signin {
   margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  z-index: 10;
+}
+
+.btn--about {
+  position: relative;
+  z-index: 10; /* Ensure it's on top */
 }
