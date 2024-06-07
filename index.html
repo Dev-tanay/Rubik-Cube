@@ -50,7 +50,7 @@
     <div class="text text--note">
       Double tap to start
     </div>
-    <div class="text text--timer">
+    <div class="text text--timer" id="t">
       0:00
     </div>
     <div class="text text--complete">
@@ -117,6 +117,7 @@
       <icon reset></icon>
       <button class="btn btn--tr fa-solid fa-volume-high" id="play-btn"></button>
     </button>
+    <button id="restartButton" onclick="reset_time()">Restart</button>
   </div>
   
   <!-- Audio element for background music -->
@@ -126,7 +127,11 @@
 
 </div>
 <!-- partial -->
+<script>
+  function reset_time() {
+      document.getElementById("restartButton").t="0:00";
+  }
+  </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
-
 </body>
 </html>
