@@ -4098,5 +4098,148 @@ musicButton.addEventListener('click', () => {
     }
 });
 
+//rotation functions
+function rotateU() {
+    const move = { axis: 'y', angle: -Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateUPrime() {
+    const move = { axis: 'y', angle: Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateR() {
+    const move = { axis: 'x', angle: -Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateRPrime() {
+    const move = { axis: 'x', angle: Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateF() {
+    const move = { axis: 'z', angle: -Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, 1), axis: move.axis, angle: move.angle });
+}
+
+function rotateFPrime() {
+    const move = { axis: 'z', angle: Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, 1), axis: move.axis, angle: move.angle });
+}
+
+function rotateL() {
+    const move = { axis: 'x', angle: Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(-1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateLPrime() {
+    const move = { axis: 'x', angle: -Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(-1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateD() {
+    const move = { axis: 'y', angle: Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, -1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateDPrime() {
+    const move = { axis: 'y', angle: -Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, -1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateB() {
+    const move = { axis: 'z', angle: Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, -1), axis: move.axis, angle: move.angle });
+}
+
+function rotateBPrime() {
+    const move = { axis: 'z', angle: -Math.PI / 2 };
+    game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, -1), axis: move.axis, angle: move.angle });
+}
+
+// Function to handle view rotation based on direction
+function rotateView(direction, isPrime = false) {
+    const move = {
+        'up': { axis: 'x', angle: isPrime ? Math.PI / 2 : -Math.PI / 2 },
+        'down': { axis: 'x', angle: isPrime ? -Math.PI / 2 : Math.PI / 2 },
+        'left': { axis: 'y', angle: isPrime ? -Math.PI / 2 : Math.PI / 2 },
+        'right': { axis: 'y', angle: isPrime ? Math.PI / 2 : -Math.PI / 2 }
+    }[direction];
+    if (move) {
+        game.controls.keyboardMove('CUBE', move);
+    }
+}
+
+let isPaused = false;
+
+function togglePause() {
+    if (isPaused) {
+        game.timer.start(true);
+        game.controls.enable();
+        console.log('Game resumed');
+    } else {
+        game.timer.stop();
+        game.controls.disable();
+        console.log('Game paused');
+    }
+    isPaused = !isPaused;
+}
+
+// Add event listener for keydown
+document.addEventListener('keydown', function(event) {
+    const isPrime = event.shiftKey;
+    const key = event.key.toLowerCase();
+
+    if (event.key === 'p') {
+        togglePause();
+        return;
+    }
+
+    if (isPaused) return;
+
+    switch (key) {
+        case 'arrowup':
+            rotateView('up', isPrime);
+            break;
+        case 'arrowdown':
+            rotateView('down', isPrime);
+            break;
+        case 'arrowleft':
+            rotateView('left', isPrime);
+            break;
+        case 'arrowright':
+            rotateView('right', isPrime);
+            break;
+        case 'u':
+            isPrime ? rotateUPrime() : rotateU();
+            break;
+        case 'r':
+            isPrime ? rotateRPrime() : rotateR();
+            break;
+        case 'f':
+            isPrime ? rotateFPrime() : rotateF();
+            break;
+        case 'l':
+            isPrime ? rotateLPrime() : rotateL();
+            break;
+        case 'd':
+            isPrime ? rotateDPrime() : rotateD();
+            break;
+        case 'b':
+            isPrime ? rotateBPrime() : rotateB();
+            break;
+        default:
+            break;
+    }
+});
+
+document.addEventListener('mousemove', function() {
+    if (isPaused) {
+        togglePause();
+    }
+});
+
 window.version = '0.99.2';
 window.game = new Game();
