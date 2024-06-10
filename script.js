@@ -3693,6 +3693,7 @@ class Game {
 
   constructor() {
 
+    this.audio = document.getElementById('background-music');
     this.dom = {
       ui: document.querySelector( '.ui' ),
       game: document.querySelector( '.ui__game' ),
@@ -4068,6 +4069,7 @@ class Game {
     } else {
 
       this.state = STATE.Stats;
+      this.transition.buttons(BUTTONS.Stats, BUTTONS.Complete);
       this.saved = false;
 
       this.transition.timer( HIDE );
@@ -4108,6 +4110,21 @@ class Game {
   }
 
 }
+// Volume button functionality
+const musicButton = document.getElementById('play-btn');
+const music = document.getElementById('background-music');
+
+musicButton.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        musicButton.classList.remove('fa-volume-xmark');
+        musicButton.classList.add('fa-volume-high');
+    } else {
+        music.pause();
+        musicButton.classList.remove('fa-volume-high');
+        musicButton.classList.add('fa-volume-xmark');
+    }
+});
 
 window.version = '0.99.2';
 window.game = new Game();
