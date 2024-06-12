@@ -4098,5 +4098,42 @@ musicButton.addEventListener('click', () => {
     }
 });
 
+////Add keyboard shortcuts
+function rotateView(direction) {
+  const move = {
+    'up': { axis: 'x', angle: -Math.PI / 2 },
+    'down': { axis: 'x', angle: Math.PI / 2 },
+    'left': { axis: 'y', angle: Math.PI / 2 },
+    'right': { axis: 'y', angle: -Math.PI / 2 }
+  }[direction];
+  if (move) {
+    game.controls.keyboardMove('CUBE', move);
+  }
+}
+
+document.addEventListener('keydown', function(event) {
+  const key = event.key.toLowerCase();
+  switch (key) {
+    case 'w':
+    case 'arrowup':
+      rotateView('up');
+      break;
+    case 's':
+    case 'arrowdown':
+      rotateView('down');
+      break;
+    case 'a':
+    case 'arrowleft':
+      rotateView('left');
+      break;
+    case 'd':
+    case 'arrowright':
+      rotateView('right');
+      break;
+    default:
+      break;
+  }
+});
+
 window.version = '0.99.2';
 window.game = new Game();
