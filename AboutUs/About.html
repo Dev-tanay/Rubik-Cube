@@ -85,8 +85,13 @@
   <hr/>
 
   <footer class="footer">
-    <p class="text--footer">© 2024 Rubik-Cube</p>
+    <p id="current-year" class="text--footer">© <span id="year"></span> Rubik-Cube</p>
   </footer>
+  
 </body>
 <script  src="./About.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </html>
