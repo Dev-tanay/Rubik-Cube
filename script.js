@@ -175,6 +175,32 @@ class World extends Animation {
 
 }
 
+// script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+  const themeSelector = document.getElementById('theme');
+
+  // Load saved theme from localStorage if it exists
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+      document.body.classList.add(`${savedTheme}-theme`);
+      themeSelector.value = savedTheme;
+  } else {
+      document.body.classList.add('default-theme');
+  }
+
+  // Change theme when the user selects a different option
+  themeSelector.addEventListener('change', (event) => {
+      document.body.className = ''; // Remove all existing classes
+      const selectedTheme = event.target.value;
+      document.body.classList.add(`${selectedTheme}-theme`);
+      
+      // Save selected theme to localStorage
+      localStorage.setItem('theme', selectedTheme);
+  });
+});
+
+
 function RoundedBoxGeometry( size, radius, radiusSegments ) {
 
   THREE.BufferGeometry.call( this );
