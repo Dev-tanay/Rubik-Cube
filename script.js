@@ -1133,7 +1133,7 @@ class Draggable {
 
       start: ( event ) => {
 
-        if ( event.type == 'mousedown' && event.which != 1 ) return;
+        if ( event.type == 'mousedown' && !(event.which == 1 || event.which == 3) ) return;
         if ( event.type == 'touchstart' && event.touches.length > 1 ) return;
 
         this.getPositionCurrent( event );
@@ -1151,8 +1151,8 @@ class Draggable {
         this.onDragStart( this.position );
 
         window.addEventListener( ( this.touch ) ? 'touchmove' : 'mousemove', this.drag.move, false );
-        window.addEventListener( ( this.touch ) ? 'touchend' : 'mouseup', this.drag.end, false );
-
+        window.addEventListener((this.touch) ? 'touchend' : 'mouseup', this.drag.end, false);
+        window.addEventListener("contextmenu", (event) => { event.preventDefault() });
       },
 
       move: ( event ) => {
@@ -1323,8 +1323,8 @@ class Controls {
 
       }
 
-      if ( edgeIntersect !== false && this.dragIntersect !== false ) {
-
+      if (edgeIntersect !== false && this.dragIntersect !== false && event.which != 3) {
+        
         this.dragNormal = edgeIntersect.face.normal.round();
         this.flipType = 'layer';
 
@@ -1377,7 +1377,7 @@ class Controls {
 
         this.dragDirection = this.getMainAxis( this.dragTotal );
 
-        if ( this.flipType === 'layer' ) {
+        if ( this.flipType === 'layer') {
 
           const direction = new THREE.Vector3();
           direction[ this.dragDirection ] = 1;
@@ -1407,7 +1407,7 @@ class Controls {
 
         const rotation = this.dragDelta[ this.dragDirection ];
 
-        if ( this.flipType === 'layer' ) { 
+        if ( this.flipType === 'layer') { 
 
           this.group.rotateOnAxis( this.flipAxis, rotation );
           this.flipAngle += rotation;
@@ -1417,9 +1417,7 @@ class Controls {
           this.edges.rotateOnWorldAxis( this.flipAxis, rotation );
           this.game.cube.object.rotation.copy( this.edges.rotation );
           this.flipAngle += rotation;
-
         }
-
       }
 
     };
