@@ -1,3 +1,38 @@
+/* styles.css */
+
+/* Default theme */
+body.default-theme {
+    background-color: white;
+    color: black;
+}
+
+/* Dark theme */
+body.dark-theme {
+    background-color: #333;
+    color: white;
+}
+
+/* Light theme */
+body.light-theme {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Colorful theme */
+body.colorful-theme {
+    background: linear-gradient(45deg, #ff6f69, #ffcc5c, #ffeead, #88d8b0, #96ceb4);
+    color: #333;
+}
+
+/* Style for the theme selector */
+.theme-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+
 @font-face {
     font-family: "BungeeFont";
     font-weight: normal;
