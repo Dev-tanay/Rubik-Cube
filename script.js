@@ -1,4 +1,4 @@
-const animationEngine = ( () => {
+const animationEngine = (() => {
 
   let uniqueID = 0;
 
@@ -8,11 +8,12 @@ const animationEngine = ( () => {
 
       this.ids = [];
       this.animations = {};
-      this.update = this.update.bind( this );
+      this.update = this.update.bind(this);
       this.raf = 0;
       this.time = 0;
 
     }
+
 
     update() {
 
@@ -22,35 +23,35 @@ const animationEngine = ( () => {
 
       let i = this.ids.length;
 
-      this.raf = i ? requestAnimationFrame( this.update ) : 0;
+      this.raf = i ? requestAnimationFrame(this.update) : 0;
 
-      while ( i-- )
-        this.animations[ this.ids[ i ] ] && this.animations[ this.ids[ i ] ].update( delta );
+      while (i--)
+        this.animations[this.ids[i]] && this.animations[this.ids[i]].update(delta);
 
     }
 
-    add( animation ) {
+    add(animation) {
 
-      animation.id = uniqueID ++;
+      animation.id = uniqueID++;
 
-      this.ids.push( animation.id );
-      this.animations[ animation.id ] = animation;
+      this.ids.push(animation.id);
+      this.animations[animation.id] = animation;
 
-      if ( this.raf !== 0 ) return;
+      if (this.raf !== 0) return;
 
       this.time = performance.now();
-      this.raf = requestAnimationFrame( this.update );
+      this.raf = requestAnimationFrame(this.update);
 
     }
 
-    remove( animation ) {
+    remove(animation) {
 
-      const index = this.ids.indexOf( animation.id );
+      const index = this.ids.indexOf(animation.id);
 
-      if ( index < 0 ) return;
+      if (index < 0) return;
 
-      this.ids.splice( index, 1 );
-      delete this.animations[ animation.id ];
+      this.ids.splice(index, 1);
+      delete this.animations[animation.id];
       animation = null;
 
     }
@@ -59,48 +60,48 @@ const animationEngine = ( () => {
 
   return new AnimationEngine();
 
-} )();
+})();
 
 class Animation {
 
-  constructor( start ) {
+  constructor(start) {
 
-    if ( start === true ) this.start();
+    if (start === true) this.start();
 
   }
 
   start() {
 
-    animationEngine.add( this );
+    animationEngine.add(this);
 
   }
 
   stop() {
 
-    animationEngine.remove( this );
+    animationEngine.remove(this);
 
   }
 
-  update( delta ) {}
+  update(delta) { }
 
 }
 
 class World extends Animation {
 
-  constructor( game ) {
+  constructor(game) {
 
-    super( true );
+    super(true);
 
     this.game = game;
 
     this.container = this.game.dom.game;
     this.scene = new THREE.Scene();
 
-    this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-    this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.container.appendChild( this.renderer.domElement );
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.container.appendChild(this.renderer.domElement);
 
-    this.camera = new THREE.PerspectiveCamera( 2, 1, 0.1, 10000 );
+    this.camera = new THREE.PerspectiveCamera(2, 1, 0.1, 10000);
 
     this.stage = { width: 2, height: 3 };
     this.fov = 10;
@@ -110,13 +111,13 @@ class World extends Animation {
     this.onResize = [];
 
     this.resize();
-    window.addEventListener( 'resize', () => this.resize(), false );
+    window.addEventListener('resize', () => this.resize(), false);
 
   }
 
   update() {
 
-    this.renderer.render( this.scene, this.camera );
+    this.renderer.render(this.scene, this.camera);
 
   }
 
@@ -125,7 +126,7 @@ class World extends Animation {
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
 
-    this.renderer.setSize( this.width, this.height );
+    this.renderer.setSize(this.width, this.height);
 
     this.camera.fov = this.fov;
     this.camera.aspect = this.width / this.height;
@@ -133,62 +134,62 @@ class World extends Animation {
     const aspect = this.stage.width / this.stage.height;
     const fovRad = this.fov * THREE.Math.DEG2RAD;
 
-    let distance = ( aspect < this.camera.aspect )
-      ? ( this.stage.height / 2 ) / Math.tan( fovRad / 2 )
-      : ( this.stage.width / this.camera.aspect ) / ( 2 * Math.tan( fovRad / 2 ) );
+    let distance = (aspect < this.camera.aspect)
+      ? (this.stage.height / 2) / Math.tan(fovRad / 2)
+      : (this.stage.width / this.camera.aspect) / (2 * Math.tan(fovRad / 2));
 
     distance *= 0.5;
 
-    this.camera.position.set( distance, distance, distance);
-    this.camera.lookAt( this.scene.position );
+    this.camera.position.set(distance, distance, distance);
+    this.camera.lookAt(this.scene.position);
     this.camera.updateProjectionMatrix();
 
-    const docFontSize = ( aspect < this.camera.aspect )
-      ? ( this.height / 100 ) * aspect
+    const docFontSize = (aspect < this.camera.aspect)
+      ? (this.height / 100) * aspect
       : this.width / 100;
 
     document.documentElement.style.fontSize = docFontSize + 'px';
 
-    if ( this.onResize ) this.onResize.forEach( cb => cb() );
+    if (this.onResize) this.onResize.forEach(cb => cb());
 
   }
 
   createLights() {
 
     this.lights = {
-      holder:  new THREE.Object3D,
-      ambient: new THREE.AmbientLight( 0xffffff, 0.69 ),
-      front:   new THREE.DirectionalLight( 0xffffff, 0.36 ),
-      back:    new THREE.DirectionalLight( 0xffffff, 0.19 ),
+      holder: new THREE.Object3D,
+      ambient: new THREE.AmbientLight(0xffffff, 0.69),
+      front: new THREE.DirectionalLight(0xffffff, 0.36),
+      back: new THREE.DirectionalLight(0xffffff, 0.19),
     };
 
-    this.lights.front.position.set( 1.5, 5, 3 );
-    this.lights.back.position.set( -1.5, -5, -3 );
+    this.lights.front.position.set(1.5, 5, 3);
+    this.lights.back.position.set(-1.5, -5, -3);
 
-    this.lights.holder.add( this.lights.ambient );
-    this.lights.holder.add( this.lights.front );
-    this.lights.holder.add( this.lights.back );
+    this.lights.holder.add(this.lights.ambient);
+    this.lights.holder.add(this.lights.front);
+    this.lights.holder.add(this.lights.back);
 
-    this.scene.add( this.lights.holder );
+    this.scene.add(this.lights.holder);
 
   }
 
 }
 
-function RoundedBoxGeometry( size, radius, radiusSegments ) {
+function RoundedBoxGeometry(size, radius, radiusSegments) {
 
-  THREE.BufferGeometry.call( this );
+  THREE.BufferGeometry.call(this);
 
   this.type = 'RoundedBoxGeometry';
 
-  radiusSegments = ! isNaN( radiusSegments ) ? Math.max( 1, Math.floor( radiusSegments ) ) : 1;
+  radiusSegments = !isNaN(radiusSegments) ? Math.max(1, Math.floor(radiusSegments)) : 1;
 
   var width, height, depth;
 
   width = height = depth = size;
   radius = size * radius;
 
-  radius = Math.min( radius, Math.min( width, Math.min( height, Math.min( depth ) ) ) / 2 );
+  radius = Math.min(radius, Math.min(width, Math.min(height, Math.min(depth))) / 2);
 
   var edgeHalfWidth = width / 2 - radius;
   var edgeHalfHeight = height / 2 - radius;
@@ -203,10 +204,10 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
   };
 
   var rs1 = radiusSegments + 1;
-  var totalVertexCount = ( rs1 * radiusSegments + 1 ) << 3;
+  var totalVertexCount = (rs1 * radiusSegments + 1) << 3;
 
-  var positions = new THREE.BufferAttribute( new Float32Array( totalVertexCount * 3 ), 3 );
-  var normals = new THREE.BufferAttribute( new Float32Array( totalVertexCount * 3 ), 3 );
+  var positions = new THREE.BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
+  var normals = new THREE.BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
 
   var
     cornerVerts = [],
@@ -216,12 +217,12 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
     vertexPool = [],
     normalPool = [],
     indices = []
-  ;
+    ;
 
   var
     lastVertex = rs1 * radiusSegments,
     cornerVertNumber = rs1 * radiusSegments + 1
-  ;
+    ;
 
   doVertices();
   doFaces();
@@ -233,77 +234,77 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
   function doVertices() {
 
     var cornerLayout = [
-      new THREE.Vector3( 1, 1, 1 ),
-      new THREE.Vector3( 1, 1, - 1 ),
-      new THREE.Vector3( - 1, 1, - 1 ),
-      new THREE.Vector3( - 1, 1, 1 ),
-      new THREE.Vector3( 1, - 1, 1 ),
-      new THREE.Vector3( 1, - 1, - 1 ),
-      new THREE.Vector3( - 1, - 1, - 1 ),
-      new THREE.Vector3( - 1, - 1, 1 )
+      new THREE.Vector3(1, 1, 1),
+      new THREE.Vector3(1, 1, - 1),
+      new THREE.Vector3(- 1, 1, - 1),
+      new THREE.Vector3(- 1, 1, 1),
+      new THREE.Vector3(1, - 1, 1),
+      new THREE.Vector3(1, - 1, - 1),
+      new THREE.Vector3(- 1, - 1, - 1),
+      new THREE.Vector3(- 1, - 1, 1)
     ];
 
-    for ( var j = 0; j < 8; j ++ ) {
+    for (var j = 0; j < 8; j++) {
 
-      cornerVerts.push( [] );
-      cornerNormals.push( [] );
+      cornerVerts.push([]);
+      cornerNormals.push([]);
 
     }
 
     var PIhalf = Math.PI / 2;
-    var cornerOffset = new THREE.Vector3( edgeHalfWidth, edgeHalfHeight, edgeHalfDepth );
+    var cornerOffset = new THREE.Vector3(edgeHalfWidth, edgeHalfHeight, edgeHalfDepth);
 
-    for ( var y = 0; y <= radiusSegments; y ++ ) {
+    for (var y = 0; y <= radiusSegments; y++) {
 
       var v = y / radiusSegments;
       var va = v * PIhalf;
-      var cosVa = Math.cos( va );
-      var sinVa = Math.sin( va );
+      var cosVa = Math.cos(va);
+      var sinVa = Math.sin(va);
 
-      if ( y == radiusSegments ) {
+      if (y == radiusSegments) {
 
-        vertex.set( 0, 1, 0 );
-        var vert = vertex.clone().multiplyScalar( radius ).add( cornerOffset );
-        cornerVerts[ 0 ].push( vert );
-        vertexPool.push( vert );
+        vertex.set(0, 1, 0);
+        var vert = vertex.clone().multiplyScalar(radius).add(cornerOffset);
+        cornerVerts[0].push(vert);
+        vertexPool.push(vert);
         var norm = vertex.clone();
-        cornerNormals[ 0 ].push( norm );
-        normalPool.push( norm );
+        cornerNormals[0].push(norm);
+        normalPool.push(norm);
         continue;
 
       }
 
-      for ( var x = 0; x <= radiusSegments; x ++ ) {
+      for (var x = 0; x <= radiusSegments; x++) {
 
         var u = x / radiusSegments;
         var ha = u * PIhalf;
-        vertex.x = cosVa * Math.cos( ha );
+        vertex.x = cosVa * Math.cos(ha);
         vertex.y = sinVa;
-        vertex.z = cosVa * Math.sin( ha );
+        vertex.z = cosVa * Math.sin(ha);
 
-        var vert = vertex.clone().multiplyScalar( radius ).add( cornerOffset );
-        cornerVerts[ 0 ].push( vert );
-        vertexPool.push( vert );
+        var vert = vertex.clone().multiplyScalar(radius).add(cornerOffset);
+        cornerVerts[0].push(vert);
+        vertexPool.push(vert);
 
         var norm = vertex.clone().normalize();
-        cornerNormals[ 0 ].push( norm );
-        normalPool.push( norm );
+        cornerNormals[0].push(norm);
+        normalPool.push(norm);
 
       }
 
     }
 
-    for ( var i = 1; i < 8; i ++ ) {
+    for (var i = 1; i < 8; i++) {
 
-      for ( var j = 0; j < cornerVerts[ 0 ].length; j ++ ) {
+      for (var j = 0; j < cornerVerts[0].length; j++) {
 
-        var vert = cornerVerts[ 0 ][ j ].clone().multiply( cornerLayout[ i ] );
-        cornerVerts[ i ].push( vert );
-        vertexPool.push( vert );
+        var vert = cornerVerts[0][j].clone().multiply(cornerLayout[i]);
+        cornerVerts[i].push(vert);
+        vertexPool.push(vert);
 
-        var norm = cornerNormals[ 0 ][ j ].clone().multiply( cornerLayout[ i ] );
-        cornerNormals[ i ].push( norm );
-        normalPool.push( norm );
+        var norm = cornerNormals[0][j].clone().multiply(cornerLayout[i]);
+        cornerNormals[i].push(norm);
+        normalPool.push(norm);
 
       }
 
@@ -324,18 +325,18 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
       true
     ];
 
-    var lastRowOffset = rs1 * ( radiusSegments - 1 );
+    var lastRowOffset = rs1 * (radiusSegments - 1);
 
-    for ( var i = 0; i < 8; i ++ ) {
+    for (var i = 0; i < 8; i++) {
 
       var cornerOffset = cornerVertNumber * i;
 
-      for ( var v = 0; v < radiusSegments - 1; v ++ ) {
+      for (var v = 0; v < radiusSegments - 1; v++) {
 
         var r1 = v * rs1;
-        var r2 = ( v + 1 ) * rs1;
+        var r2 = (v + 1) * rs1;
 
-        for ( var u = 0; u < radiusSegments; u ++ ) {
+        for (var u = 0; u < radiusSegments; u++) {
 
           var u1 = u + 1;
           var a = cornerOffset + r1 + u;
@@ -343,25 +344,25 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
           var c = cornerOffset + r2 + u;
           var d = cornerOffset + r2 + u1;
 
-          if ( ! flips[ i ] ) {
+          if (!flips[i]) {
 
-            indices.push( a );
-            indices.push( b );
-            indices.push( c );
+            indices.push(a);
+            indices.push(b);
+            indices.push(c);
 
-            indices.push( b );
-            indices.push( d );
-            indices.push( c );
+            indices.push(b);
+            indices.push(d);
+            indices.push(c);
 
           } else {
 
-            indices.push( a );
-            indices.push( c );
-            indices.push( b );
+            indices.push(a);
+            indices.push(c);
+            indices.push(b);
 
-            indices.push( b );
-            indices.push( c );
-            indices.push( d );
+            indices.push(b);
+            indices.push(c);
+            indices.push(d);
 
           }
 
@@ -369,23 +370,23 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
 
       }
 
-      for ( var u = 0; u < radiusSegments; u ++ ) {
+      for (var u = 0; u < radiusSegments; u++) {
 
         var a = cornerOffset + lastRowOffset + u;
         var b = cornerOffset + lastRowOffset + u + 1;
         var c = cornerOffset + lastVertex;
 
-        if ( ! flips[ i ] ) {
+        if (!flips[i]) {
 
-          indices.push( a );
-          indices.push( b );
-          indices.push( c );
+          indices.push(a);
+          indices.push(b);
+          indices.push(c);
 
         } else {
 
-          indices.push( a );
-          indices.push( c );
-          indices.push( b );
+          indices.push(a);
+          indices.push(c);
+          indices.push(b);
 
         }
 
@@ -402,84 +403,84 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
     var c = lastVertex + cornerVertNumber * 2;
     var d = lastVertex + cornerVertNumber * 3;
 
-    indices.push( a );
-    indices.push( b );
-    indices.push( c );
-    indices.push( a );
-    indices.push( c );
-    indices.push( d );
+    indices.push(a);
+    indices.push(b);
+    indices.push(c);
+    indices.push(a);
+    indices.push(c);
+    indices.push(d);
 
     a = lastVertex + cornerVertNumber * 4;
     b = lastVertex + cornerVertNumber * 5;
     c = lastVertex + cornerVertNumber * 6;
     d = lastVertex + cornerVertNumber * 7;
 
-    indices.push( a );
-    indices.push( c );
-    indices.push( b );
-    indices.push( a );
-    indices.push( d );
-    indices.push( c );
+    indices.push(a);
+    indices.push(c);
+    indices.push(b);
+    indices.push(a);
+    indices.push(d);
+    indices.push(c);
 
     a = 0;
     b = cornerVertNumber;
     c = cornerVertNumber * 4;
     d = cornerVertNumber * 5;
 
-    indices.push( a );
-    indices.push( c );
-    indices.push( b );
-    indices.push( b );
-    indices.push( c );
-    indices.push( d );
+    indices.push(a);
+    indices.push(c);
+    indices.push(b);
+    indices.push(b);
+    indices.push(c);
+    indices.push(d);
 
     a = cornerVertNumber * 2;
     b = cornerVertNumber * 3;
     c = cornerVertNumber * 6;
     d = cornerVertNumber * 7;
 
-    indices.push( a );
-    indices.push( c );
-    indices.push( b );
-    indices.push( b );
-    indices.push( c );
-    indices.push( d );
+    indices.push(a);
+    indices.push(c);
+    indices.push(b);
+    indices.push(b);
+    indices.push(c);
+    indices.push(d);
 
     a = radiusSegments;
     b = radiusSegments + cornerVertNumber * 3;
     c = radiusSegments + cornerVertNumber * 4;
     d = radiusSegments + cornerVertNumber * 7;
 
-    indices.push( a );
-    indices.push( b );
-    indices.push( c );
-    indices.push( b );
-    indices.push( d );
-    indices.push( c );
+    indices.push(a);
+    indices.push(b);
+    indices.push(c);
+    indices.push(b);
+    indices.push(d);
+    indices.push(c);
 
     a = radiusSegments + cornerVertNumber;
     b = radiusSegments + cornerVertNumber * 2;
     c = radiusSegments + cornerVertNumber * 5;
     d = radiusSegments + cornerVertNumber * 6;
 
-    indices.push( a );
-    indices.push( c );
-    indices.push( b );
-    indices.push( b );
-    indices.push( c );
-    indices.push( d );
+    indices.push(a);
+    indices.push(c);
+    indices.push(b);
+    indices.push(b);
+    indices.push(c);
+    indices.push(d);
 
   }
 
   function doHeightEdges() {
 
-    for ( var i = 0; i < 4; i ++ ) {
+    for (var i = 0; i < 4; i++) {
 
       var cOffset = i * cornerVertNumber;
       var cRowOffset = 4 * cornerVertNumber + cOffset;
       var needsFlip = i & 1 === 1;
 
-      for ( var u = 0; u < radiusSegments; u ++ ) {
+      for (var u = 0; u < radiusSegments; u++) {
 
         var u1 = u + 1;
         var a = cOffset + u;
@@ -487,23 +488,23 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
         var c = cRowOffset + u;
         var d = cRowOffset + u1;
 
-        if ( ! needsFlip ) {
+        if (!needsFlip) {
 
-          indices.push( a );
-          indices.push( b );
-          indices.push( c );
-          indices.push( b );
-          indices.push( d );
-          indices.push( c );
+          indices.push(a);
+          indices.push(b);
+          indices.push(c);
+          indices.push(b);
+          indices.push(d);
+          indices.push(c);
 
         } else {
 
-          indices.push( a );
-          indices.push( c );
-          indices.push( b );
-          indices.push( b );
-          indices.push( c );
-          indices.push( d );
+          indices.push(a);
+          indices.push(c);
+          indices.push(b);
+          indices.push(b);
+          indices.push(c);
+          indices.push(d);
 
         }
 
@@ -515,43 +516,43 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
 
   function doDepthEdges() {
 
-    var cStarts = [ 0, 2, 4, 6 ];
-    var cEnds = [ 1, 3, 5, 7 ];
+    var cStarts = [0, 2, 4, 6];
+    var cEnds = [1, 3, 5, 7];
 
-    for ( var i = 0; i < 4; i ++ ) {
+    for (var i = 0; i < 4; i++) {
 
-      var cStart = cornerVertNumber * cStarts[ i ];
-      var cEnd = cornerVertNumber * cEnds[ i ];
+      var cStart = cornerVertNumber * cStarts[i];
+      var cEnd = cornerVertNumber * cEnds[i];
 
       var needsFlip = 1 >= i;
 
-      for ( var u = 0; u < radiusSegments; u ++ ) {
+      for (var u = 0; u < radiusSegments; u++) {
 
         var urs1 = u * rs1;
-        var u1rs1 = ( u + 1 ) * rs1;
+        var u1rs1 = (u + 1) * rs1;
 
         var a = cStart + urs1;
         var b = cStart + u1rs1;
         var c = cEnd + urs1;
         var d = cEnd + u1rs1;
 
-        if ( needsFlip ) {
+        if (needsFlip) {
 
-          indices.push( a );
-          indices.push( c );
-          indices.push( b );
-          indices.push( b );
-          indices.push( c );
-          indices.push( d );
+          indices.push(a);
+          indices.push(c);
+          indices.push(b);
+          indices.push(b);
+          indices.push(c);
+          indices.push(d);
 
         } else {
 
-          indices.push( a );
-          indices.push( b );
-          indices.push( c );
-          indices.push( b );
-          indices.push( d );
-          indices.push( c );
+          indices.push(a);
+          indices.push(b);
+          indices.push(c);
+          indices.push(b);
+          indices.push(d);
+          indices.push(c);
 
         }
 
@@ -565,40 +566,40 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
 
     var end = radiusSegments - 1;
 
-    var cStarts = [ 0, 1, 4, 5 ];
-    var cEnds = [ 3, 2, 7, 6 ];
-    var needsFlip = [ 0, 1, 1, 0 ];
+    var cStarts = [0, 1, 4, 5];
+    var cEnds = [3, 2, 7, 6];
+    var needsFlip = [0, 1, 1, 0];
 
-    for ( var i = 0; i < 4; i ++ ) {
+    for (var i = 0; i < 4; i++) {
 
-      var cStart = cStarts[ i ] * cornerVertNumber;
-      var cEnd = cEnds[ i ] * cornerVertNumber;
+      var cStart = cStarts[i] * cornerVertNumber;
+      var cEnd = cEnds[i] * cornerVertNumber;
 
-      for ( var u = 0; u <= end; u ++ ) {
+      for (var u = 0; u <= end; u++) {
 
         var a = cStart + radiusSegments + u * rs1;
-        var b = cStart + ( u != end ? radiusSegments + ( u + 1 ) * rs1 : cornerVertNumber - 1 );
+        var b = cStart + (u != end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
 
         var c = cEnd + radiusSegments + u * rs1;
-        var d = cEnd + ( u != end ? radiusSegments + ( u + 1 ) * rs1 : cornerVertNumber - 1 );
+        var d = cEnd + (u != end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
 
-        if ( ! needsFlip[ i ] ) {
+        if (!needsFlip[i]) {
 
-          indices.push( a );
-          indices.push( b );
-          indices.push( c );
-          indices.push( b );
-          indices.push( d );
-          indices.push( c );
+          indices.push(a);
+          indices.push(b);
+          indices.push(c);
+          indices.push(b);
+          indices.push(d);
+          indices.push(c);
 
         } else {
 
-          indices.push( a );
-          indices.push( c );
-          indices.push( b );
-          indices.push( b );
-          indices.push( c );
-          indices.push( d );
+          indices.push(a);
+          indices.push(c);
+          indices.push(b);
+          indices.push(b);
+          indices.push(c);
+          indices.push(d);
 
         }
 
@@ -610,36 +611,36 @@ function RoundedBoxGeometry( size, radius, radiusSegments ) {
 
   var index = 0;
 
-  for ( var i = 0; i < vertexPool.length; i ++ ) {
+  for (var i = 0; i < vertexPool.length; i++) {
 
     positions.setXYZ(
       index,
-      vertexPool[ i ].x,
-      vertexPool[ i ].y,
-      vertexPool[ i ].z
+      vertexPool[i].x,
+      vertexPool[i].y,
+      vertexPool[i].z
     );
 
     normals.setXYZ(
       index,
-      normalPool[ i ].x,
-      normalPool[ i ].y,
-      normalPool[ i ].z
+      normalPool[i].x,
+      normalPool[i].y,
+      normalPool[i].z
     );
 
-    index ++;
+    index++;
 
   }
 
-  this.setIndex( new THREE.BufferAttribute( new Uint16Array( indices ), 1 ) );
-  this.addAttribute( 'position', positions );
-  this.addAttribute( 'normal', normals );
+  this.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
+  this.addAttribute('position', positions);
+  this.addAttribute('normal', normals);
 
 }
 
-RoundedBoxGeometry.prototype = Object.create( THREE.BufferGeometry.prototype );
+RoundedBoxGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 RoundedBoxGeometry.constructor = RoundedBoxGeometry;
 
-function RoundedPlaneGeometry( size, radius, depth ) {
+function RoundedPlaneGeometry(size, radius, depth) {
 
   var x, y, width, height;
 
@@ -649,15 +650,15 @@ function RoundedPlaneGeometry( size, radius, depth ) {
 
   const shape = new THREE.Shape();
 
-  shape.moveTo( x, y + radius );
-  shape.lineTo( x, y + height - radius );
-  shape.quadraticCurveTo( x, y + height, x + radius, y + height );
-  shape.lineTo( x + width - radius, y + height );
-  shape.quadraticCurveTo( x + width, y + height, x + width, y + height - radius );
-  shape.lineTo( x + width, y + radius );
-  shape.quadraticCurveTo( x + width, y, x + width - radius, y );
-  shape.lineTo( x + radius, y );
-  shape.quadraticCurveTo( x, y, x, y + radius );
+  shape.moveTo(x, y + radius);
+  shape.lineTo(x, y + height - radius);
+  shape.quadraticCurveTo(x, y + height, x + radius, y + height);
+  shape.lineTo(x + width - radius, y + height);
+  shape.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+  shape.lineTo(x + width, y + radius);
+  shape.quadraticCurveTo(x + width, y, x + width - radius, y);
+  shape.lineTo(x + radius, y);
+  shape.quadraticCurveTo(x, y, x, y + radius);
 
   const geometry = new THREE.ExtrudeBufferGeometry(
     shape,
@@ -670,7 +671,7 @@ function RoundedPlaneGeometry( size, radius, depth ) {
 
 class Cube {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
     this.size = 3;
@@ -686,10 +687,10 @@ class Cube {
     this.object = new THREE.Object3D();
     this.animator = new THREE.Object3D();
 
-    this.holder.add( this.animator );
-    this.animator.add( this.object );
+    this.holder.add(this.animator);
+    this.animator.add(this.object);
 
-    this.game.world.scene.add( this.holder );
+    this.game.world.scene.add(this.holder);
 
   }
 
@@ -697,42 +698,42 @@ class Cube {
 
     this.cubes = [];
     this.object.children = [];
-    this.object.add( this.game.controls.group );
+    this.object.add(this.game.controls.group);
 
-    if ( this.size === 2 ) this.scale = 1.25;
-    else if ( this.size === 3 ) this.scale = 1;
-    else if ( this.size > 3 ) this.scale = 3 / this.size;
+    if (this.size === 2) this.scale = 1.25;
+    else if (this.size === 3) this.scale = 1;
+    else if (this.size > 3) this.scale = 3 / this.size;
 
-    this.object.scale.set( this.scale, this.scale, this.scale );
+    this.object.scale.set(this.scale, this.scale, this.scale);
 
     const controlsScale = this.size === 2 ? 0.825 : 1;
-    this.game.controls.edges.scale.set( controlsScale, controlsScale, controlsScale );
-    
+    this.game.controls.edges.scale.set(controlsScale, controlsScale, controlsScale);
+
     this.generatePositions();
     this.generateModel();
 
-    this.pieces.forEach( piece => {
+    this.pieces.forEach(piece => {
 
-      this.cubes.push( piece.userData.cube );
-      this.object.add( piece );
+      this.cubes.push(piece.userData.cube);
+      this.object.add(piece);
 
-    } );
+    });
 
-    this.holder.traverse( node => {
+    this.holder.traverse(node => {
 
-      if ( node.frustumCulled ) node.frustumCulled = false;
+      if (node.frustumCulled) node.frustumCulled = false;
 
-    } );
+    });
 
-    this.updateColors( this.game.themes.getColors() );
+    this.updateColors(this.game.themes.getColors());
 
     this.sizeGenerated = this.size;
 
   }
 
-  resize( force = false ) {
+  resize(force = false) {
 
-    if ( this.size !== this.sizeGenerated || force ) {
+    if (this.size !== this.sizeGenerated || force) {
 
       this.size = this.game.preferences.ranges.size.value;
 
@@ -749,11 +750,11 @@ class Cube {
 
   reset() {
 
-    this.game.controls.edges.rotation.set( 0, 0, 0 );
+    this.game.controls.edges.rotation.set(0, 0, 0);
 
-    this.holder.rotation.set( 0, 0, 0 );
-    this.object.rotation.set( 0, 0, 0 );
-    this.animator.rotation.set( 0, 0, 0 );
+    this.holder.rotation.set(0, 0, 0);
+    this.object.rotation.set(0, 0, 0);
+    this.animator.rotation.set(0, 0, 0);
 
   }
 
@@ -768,22 +769,22 @@ class Cube {
 
     this.positions = [];
 
-    for ( x = 0; x < this.size; x ++ ) {
-      for ( y = 0; y < this.size; y ++ ) {
-        for ( z = 0; z < this.size; z ++ ) {
+    for (x = 0; x < this.size; x++) {
+      for (y = 0; y < this.size; y++) {
+        for (z = 0; z < this.size; z++) {
 
           let position = new THREE.Vector3(first + x, first + y, first + z);
           let edges = [];
 
-          if ( x == 0 ) edges.push(0);
-          if ( x == m ) edges.push(1);
-          if ( y == 0 ) edges.push(2);
-          if ( y == m ) edges.push(3);
-          if ( z == 0 ) edges.push(4);
-          if ( z == m ) edges.push(5);
+          if (x == 0) edges.push(0);
+          if (x == m) edges.push(1);
+          if (y == 0) edges.push(2);
+          if (y == m) edges.push(3);
+          if (z == 0) edges.push(4);
+          if (z == m) edges.push(5);
 
           position.edges = edges;
-          this.positions.push( position );
+          this.positions.push(position);
 
         }
       }
@@ -801,7 +802,7 @@ class Cube {
     const mainMaterial = new THREE.MeshLambertMaterial();
 
     const pieceMesh = new THREE.Mesh(
-      new RoundedBoxGeometry( pieceSize, this.geometry.pieceCornerRadius, 3 ),
+      new RoundedBoxGeometry(pieceSize, this.geometry.pieceCornerRadius, 3),
       mainMaterial.clone()
     );
 
@@ -811,32 +812,32 @@ class Cube {
       this.geometry.edgeDepth
     );
 
-    this.positions.forEach( ( position, index ) => {
+    this.positions.forEach((position, index) => {
 
       const piece = new THREE.Object3D();
       const pieceCube = pieceMesh.clone();
       const pieceEdges = [];
 
-      piece.position.copy( position.clone().divideScalar( 3 ) );
-      piece.add( pieceCube );
+      piece.position.copy(position.clone().divideScalar(3));
+      piece.add(pieceCube);
       piece.name = index;
       piece.edgesName = '';
 
-      position.edges.forEach( position => {
+      position.edges.forEach(position => {
 
-        const edge = new THREE.Mesh( edgeGeometry, mainMaterial.clone() );
-        const name = [ 'L', 'R', 'D', 'U', 'B', 'F' ][ position ];
+        const edge = new THREE.Mesh(edgeGeometry, mainMaterial.clone());
+        const name = ['L', 'R', 'D', 'U', 'B', 'F'][position];
         const distance = pieceSize / 2;
 
         edge.position.set(
-          distance * [ - 1, 1, 0, 0, 0, 0 ][ position ],
-          distance * [ 0, 0, - 1, 1, 0, 0 ][ position ],
-          distance * [ 0, 0, 0, 0, - 1, 1 ][ position ]
+          distance * [- 1, 1, 0, 0, 0, 0][position],
+          distance * [0, 0, - 1, 1, 0, 0][position],
+          distance * [0, 0, 0, 0, - 1, 1][position]
         );
 
         edge.rotation.set(
-          Math.PI / 2 * [ 0, 0, 1, - 1, 0, 0 ][ position ],
-          Math.PI / 2 * [ - 1, 1, 0, 0, 2, 0 ][ position ],
+          Math.PI / 2 * [0, 0, 1, - 1, 0, 0][position],
+          Math.PI / 2 * [- 1, 1, 0, 0, 2, 0][position],
           0
         );
 
@@ -848,11 +849,11 @@ class Cube {
 
         edge.name = name;
 
-        piece.add( edge );
-        pieceEdges.push( name );
-        this.edges.push( edge );
+        piece.add(edge);
+        pieceEdges.push(name);
+        this.edges.push(edge);
 
-      } );
+      });
 
       piece.userData.edges = pieceEdges;
       piece.userData.cube = pieceCube;
@@ -862,39 +863,39 @@ class Cube {
         rotation: piece.rotation.clone(),
       };
 
-      this.pieces.push( piece );
+      this.pieces.push(piece);
 
-    } );
-
-  }
-
-  updateColors( colors ) {
-
-    if ( typeof this.pieces !== 'object' && typeof this.edges !== 'object' ) return;
-
-    this.pieces.forEach( piece => piece.userData.cube.material.color.setHex( colors.P ) );
-    this.edges.forEach( edge => edge.material.color.setHex( colors[ edge.name ] ) );
+    });
 
   }
 
-  loadFromData( data ) {
+  updateColors(colors) {
+
+    if (typeof this.pieces !== 'object' && typeof this.edges !== 'object') return;
+
+    this.pieces.forEach(piece => piece.userData.cube.material.color.setHex(colors.P));
+    this.edges.forEach(edge => edge.material.color.setHex(colors[edge.name]));
+
+  }
+
+  loadFromData(data) {
 
     this.size = data.size;
 
     this.reset();
     this.init();
 
-    this.pieces.forEach( piece => {
+    this.pieces.forEach(piece => {
 
-      const index = data.names.indexOf( piece.name );
+      const index = data.names.indexOf(piece.name);
 
       const position = data.positions[index];
       const rotation = data.rotations[index];
 
-      piece.position.set( position.x, position.y, position.z );
-      piece.rotation.set( rotation.x, rotation.y, rotation.z );
+      piece.position.set(position.x, position.y, position.z);
+      piece.rotation.set(rotation.x, rotation.y, rotation.z);
 
-    } );
+    });
 
   }
 
@@ -906,27 +907,27 @@ const Easing = {
 
     In: power => {
 
-      power = Math.round( power || 1 );
+      power = Math.round(power || 1);
 
-      return t => Math.pow( t, power );
+      return t => Math.pow(t, power);
 
     },
 
     Out: power => {
 
-      power = Math.round( power || 1 );
+      power = Math.round(power || 1);
 
-      return t => 1 - Math.abs( Math.pow( t - 1, power ) );
+      return t => 1 - Math.abs(Math.pow(t - 1, power));
 
     },
 
     InOut: power => {
 
-      power = Math.round( power || 1 );
+      power = Math.round(power || 1);
 
-      return t => ( t < 0.5 )
-        ? Math.pow( t * 2, power ) / 2
-        : ( 1 - Math.abs( Math.pow( ( t * 2 - 1 ) - 1, power ) ) ) / 2 + 0.5;
+      return t => (t < 0.5)
+        ? Math.pow(t * 2, power) / 2
+        : (1 - Math.abs(Math.pow((t * 2 - 1) - 1, power))) / 2 + 0.5;
 
     },
 
@@ -934,11 +935,11 @@ const Easing = {
 
   Sine: {
 
-    In: () => t => 1 + Math.sin( Math.PI / 2 * t - Math.PI / 2 ),
+    In: () => t => 1 + Math.sin(Math.PI / 2 * t - Math.PI / 2),
 
-    Out: () => t => Math.sin( Math.PI / 2 * t ),
+    Out: () => t => Math.sin(Math.PI / 2 * t),
 
-    InOut: () => t => ( 1 + Math.sin( Math.PI * t - Math.PI / 2 ) ) / 2,
+    InOut: () => t => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,
 
   },
 
@@ -948,7 +949,7 @@ const Easing = {
 
       s = s || 1.70158;
 
-      return t => { return ( t -= 1 ) * t * ( ( s + 1 ) * t + s ) + 1; };
+      return t => { return (t -= 1) * t * ((s + 1) * t + s) + 1; };
 
     },
 
@@ -956,7 +957,7 @@ const Easing = {
 
       s = s || 1.70158;
 
-      return t => { return t * t * ( ( s + 1 ) * t - s ); };
+      return t => { return t * t * ((s + 1) * t - s); };
 
     }
 
@@ -964,17 +965,17 @@ const Easing = {
 
   Elastic: {
 
-    Out: ( amplitude, period ) => {
+    Out: (amplitude, period) => {
 
       let PI2 = Math.PI * 2;
 
-      let p1 = ( amplitude >= 1 ) ? amplitude : 1;
-      let p2 = ( period || 0.3 ) / ( amplitude < 1 ? amplitude : 1 );
-      let p3 = p2 / PI2 * ( Math.asin( 1 / p1 ) || 0 );
+      let p1 = (amplitude >= 1) ? amplitude : 1;
+      let p2 = (period || 0.3) / (amplitude < 1 ? amplitude : 1);
+      let p3 = p2 / PI2 * (Math.asin(1 / p1) || 0);
 
       p2 = PI2 / p2;
 
-      return t => { return p1 * Math.pow( 2, -10 * t ) * Math.sin( ( t - p3 ) * p2 ) + 1 }
+      return t => { return p1 * Math.pow(2, -10 * t) * Math.sin((t - p3) * p2) + 1 }
 
     },
 
@@ -984,14 +985,14 @@ const Easing = {
 
 class Tween extends Animation {
 
-  constructor( options ) {
+  constructor(options) {
 
-    super( false );
+    super(false);
 
     this.duration = options.duration || 500;
-    this.easing = options.easing || ( t => t );
-    this.onUpdate = options.onUpdate || ( () => {} );
-    this.onComplete = options.onComplete || ( () => {} );
+    this.easing = options.easing || (t => t);
+    this.onUpdate = options.onUpdate || (() => { });
+    this.onComplete = options.onComplete || (() => { });
 
     this.delay = options.delay || false;
     this.yoyo = options.yoyo ? false : null;
@@ -1000,36 +1001,36 @@ class Tween extends Animation {
     this.value = 0;
     this.delta = 0;
 
-    this.getFromTo( options );
+    this.getFromTo(options);
 
-    if ( this.delay ) setTimeout( () => super.start(), this.delay );
+    if (this.delay) setTimeout(() => super.start(), this.delay);
     else super.start();
 
-    this.onUpdate( this );
+    this.onUpdate(this);
 
   }
 
-  update( delta ) {
+  update(delta) {
 
     const old = this.value * 1;
-    const direction = ( this.yoyo === true ) ? - 1 : 1;
+    const direction = (this.yoyo === true) ? - 1 : 1;
 
-    this.progress += ( delta / this.duration ) * direction;
+    this.progress += (delta / this.duration) * direction;
 
-    this.value = this.easing( this.progress );
+    this.value = this.easing(this.progress);
     this.delta = this.value - old;
 
-    if ( this.values !== null ) this.updateFromTo();
+    if (this.values !== null) this.updateFromTo();
 
-    if ( this.yoyo !== null ) this.updateYoyo();
-    else if ( this.progress <= 1 ) this.onUpdate( this );
+    if (this.yoyo !== null) this.updateYoyo();
+    else if (this.progress <= 1) this.onUpdate(this);
     else {
 
       this.progress = 1;
       this.value = 1;
-      this.onUpdate( this );
-      this.onComplete( this );
-      super.stop();      
+      this.onUpdate(this);
+      this.onComplete(this);
+      super.stop();
 
     }
 
@@ -1037,30 +1038,30 @@ class Tween extends Animation {
 
   updateYoyo() {
 
-    if ( this.progress > 1 || this.progress < 0 ) {
+    if (this.progress > 1 || this.progress < 0) {
 
-      this.value = this.progress = ( this.progress > 1 ) ? 1 : 0;
-      this.yoyo = ! this.yoyo;
+      this.value = this.progress = (this.progress > 1) ? 1 : 0;
+      this.yoyo = !this.yoyo;
 
     }
 
-    this.onUpdate( this );
+    this.onUpdate(this);
 
   }
 
   updateFromTo() {
 
-    this.values.forEach( key => {
+    this.values.forEach(key => {
 
-      this.target[ key ] = this.from[ key ] + ( this.to[ key ] - this.from[ key ] ) * this.value;
+      this.target[key] = this.from[key] + (this.to[key] - this.from[key]) * this.value;
 
-    } );
+    });
 
   }
 
-  getFromTo( options ) {
+  getFromTo(options) {
 
-    if ( ! options.target || ! options.to ) {
+    if (!options.target || !options.to) {
 
       this.values = null;
       return;
@@ -1072,21 +1073,21 @@ class Tween extends Animation {
     this.to = options.to || null;
     this.values = [];
 
-    if ( Object.keys( this.from ).length < 1 )
-      Object.keys( this.to ).forEach( key => { this.from[ key ] = this.target[ key ]; } );
+    if (Object.keys(this.from).length < 1)
+      Object.keys(this.to).forEach(key => { this.from[key] = this.target[key]; });
 
-    Object.keys( this.to ).forEach( key => { this.values.push( key ); } );
+    Object.keys(this.to).forEach(key => { this.values.push(key); });
 
   }
 
 }
 
-window.addEventListener( 'touchmove', () => {} );
-document.addEventListener( 'touchmove',  event => { event.preventDefault(); }, { passive: false } );
+window.addEventListener('touchmove', () => { });
+document.addEventListener('touchmove', event => { event.preventDefault(); }, { passive: false });
 
 class Draggable {
 
-  constructor( element, options ) {
+  constructor(element, options) {
 
     this.position = {
       current: new THREE.Vector2(),
@@ -1096,76 +1097,76 @@ class Draggable {
       drag: new THREE.Vector2(),
     };
 
-    this.options = Object.assign( {
+    this.options = Object.assign({
       calcDelta: false,
-    }, options || {} );
+    }, options || {});
 
     this.element = element;
     this.touch = null;
 
     this.drag = {
 
-      start: ( event ) => {
+      start: (event) => {
 
-        if ( event.type == 'mousedown' && event.which != 1 ) return;
-        if ( event.type == 'touchstart' && event.touches.length > 1 ) return;
+        if (event.type == 'mousedown' && event.which != 1) return;
+        if (event.type == 'touchstart' && event.touches.length > 1) return;
 
-        this.getPositionCurrent( event );
+        this.getPositionCurrent(event);
 
-        if ( this.options.calcDelta ) {
+        if (this.options.calcDelta) {
 
           this.position.start = this.position.current.clone();
-          this.position.delta.set( 0, 0 );
-          this.position.drag.set( 0, 0 );
+          this.position.delta.set(0, 0);
+          this.position.drag.set(0, 0);
 
         }
 
-        this.touch = ( event.type == 'touchstart' );
+        this.touch = (event.type == 'touchstart');
 
-        this.onDragStart( this.position );
+        this.onDragStart(this.position);
 
-        window.addEventListener( ( this.touch ) ? 'touchmove' : 'mousemove', this.drag.move, false );
-        window.addEventListener( ( this.touch ) ? 'touchend' : 'mouseup', this.drag.end, false );
+        window.addEventListener((this.touch) ? 'touchmove' : 'mousemove', this.drag.move, false);
+        window.addEventListener((this.touch) ? 'touchend' : 'mouseup', this.drag.end, false);
 
       },
 
-      move: ( event ) => {
+      move: (event) => {
 
-        if ( this.options.calcDelta ) {
+        if (this.options.calcDelta) {
 
           this.position.old = this.position.current.clone();
 
         }
 
-        this.getPositionCurrent( event );
+        this.getPositionCurrent(event);
 
-        if ( this.options.calcDelta ) {
+        if (this.options.calcDelta) {
 
-          this.position.delta = this.position.current.clone().sub( this.position.old );
-          this.position.drag = this.position.current.clone().sub( this.position.start );
+          this.position.delta = this.position.current.clone().sub(this.position.old);
+          this.position.drag = this.position.current.clone().sub(this.position.start);
 
         }
 
-        this.onDragMove( this.position );
+        this.onDragMove(this.position);
 
       },
 
-      end: ( event ) => {
+      end: (event) => {
 
-        this.getPositionCurrent( event );
+        this.getPositionCurrent(event);
 
-        this.onDragEnd( this.position );
+        this.onDragEnd(this.position);
 
-        window.removeEventListener( ( this.touch ) ? 'touchmove' : 'mousemove', this.drag.move, false );
-        window.removeEventListener( ( this.touch ) ? 'touchend' : 'mouseup', this.drag.end, false );
+        window.removeEventListener((this.touch) ? 'touchmove' : 'mousemove', this.drag.move, false);
+        window.removeEventListener((this.touch) ? 'touchend' : 'mouseup', this.drag.end, false);
 
       },
 
     };
 
-    this.onDragStart = () => {};
-    this.onDragMove = () => {};
-    this.onDragEnd = () => {};
+    this.onDragStart = () => { };
+    this.onDragMove = () => { };
+    this.onDragEnd = () => { };
 
     this.enable();
 
@@ -1175,8 +1176,8 @@ class Draggable {
 
   enable() {
 
-    this.element.addEventListener( 'touchstart', this.drag.start, false );
-    this.element.addEventListener( 'mousedown', this.drag.start, false );
+    this.element.addEventListener('touchstart', this.drag.start, false);
+    this.element.addEventListener('mousedown', this.drag.start, false);
 
     return this;
 
@@ -1184,27 +1185,27 @@ class Draggable {
 
   disable() {
 
-    this.element.removeEventListener( 'touchstart', this.drag.start, false );
-    this.element.removeEventListener( 'mousedown', this.drag.start, false );
+    this.element.removeEventListener('touchstart', this.drag.start, false);
+    this.element.removeEventListener('mousedown', this.drag.start, false);
 
     return this;
 
   }
 
-  getPositionCurrent( event ) {
+  getPositionCurrent(event) {
 
     const dragEvent = event.touches
-      ? ( event.touches[ 0 ] || event.changedTouches[ 0 ] )
+      ? (event.touches[0] || event.changedTouches[0])
       : event;
 
-    this.position.current.set( dragEvent.pageX, dragEvent.pageY );
+    this.position.current.set(dragEvent.pageX, dragEvent.pageY);
 
   }
 
-  convertPosition( position ) {
+  convertPosition(position) {
 
-    position.x = ( position.x / this.element.offsetWidth ) * 2 - 1;
-    position.y = - ( ( position.y / this.element.offsetHeight ) * 2 - 1 );
+    position.x = (position.x / this.element.offsetWidth) * 2 - 1;
+    position.y = - ((position.y / this.element.offsetHeight) * 2 - 1);
 
     return position;
 
@@ -1219,40 +1220,40 @@ const ANIMATING = 3;
 
 class Controls {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
     this.flipConfig = 0;
 
-    this.flipEasings = [ Easing.Power.Out( 3 ), Easing.Sine.Out(), Easing.Back.Out( 1.5 ) ];
-    this.flipSpeeds = [ 125, 200, 300 ];
+    this.flipEasings = [Easing.Power.Out(3), Easing.Sine.Out(), Easing.Back.Out(1.5)];
+    this.flipSpeeds = [125, 200, 300];
 
     this.raycaster = new THREE.Raycaster();
 
-    const helperMaterial = new THREE.MeshBasicMaterial( { depthWrite: false, transparent: true, opacity: 0, color: 0x0033ff } );
+    const helperMaterial = new THREE.MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0, color: 0x0033ff });
 
     this.group = new THREE.Object3D();
     this.group.name = 'controls';
-    this.game.cube.object.add( this.group );
+    this.game.cube.object.add(this.group);
 
     this.helper = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( 200, 200 ),
+      new THREE.PlaneBufferGeometry(200, 200),
       helperMaterial.clone()
     );
 
-    this.helper.rotation.set( 0, Math.PI / 4, 0 );
-    this.game.world.scene.add( this.helper );
+    this.helper.rotation.set(0, Math.PI / 4, 0);
+    this.game.world.scene.add(this.helper);
 
     this.edges = new THREE.Mesh(
-      new THREE.BoxBufferGeometry( 1, 1, 1 ),
+      new THREE.BoxBufferGeometry(1, 1, 1),
       helperMaterial.clone(),
     );
 
-    this.game.world.scene.add( this.edges );
+    this.game.world.scene.add(this.edges);
 
-    this.onSolved = () => {};
-    this.onMove = () => {};
+    this.onSolved = () => { };
+    this.onMove = () => { };
 
     this.momentum = [];
 
@@ -1280,116 +1281,116 @@ class Controls {
 
   initDraggable() {
 
-    this.draggable = new Draggable( this.game.dom.game );
+    this.draggable = new Draggable(this.game.dom.game);
 
     this.draggable.onDragStart = position => {
 
-      if ( this.scramble !== null ) return;
-      if ( this.state === PREPARING || this.state === ROTATING ) return;
+      if (this.scramble !== null) return;
+      if (this.state === PREPARING || this.state === ROTATING) return;
 
       this.gettingDrag = this.state === ANIMATING;
 
-      const edgeIntersect = this.getIntersect( position.current, this.edges, false );
+      const edgeIntersect = this.getIntersect(position.current, this.edges, false);
 
-      if ( edgeIntersect !== false ) {
+      if (edgeIntersect !== false) {
 
-        this.dragIntersect = this.getIntersect( position.current, this.game.cube.cubes, true );
+        this.dragIntersect = this.getIntersect(position.current, this.game.cube.cubes, true);
 
       }
 
-      if ( edgeIntersect !== false && this.dragIntersect !== false ) {
+      if (edgeIntersect !== false && this.dragIntersect !== false) {
 
         this.dragNormal = edgeIntersect.face.normal.round();
         this.flipType = 'layer';
 
-        this.attach( this.helper, this.edges );
+        this.attach(this.helper, this.edges);
 
-        this.helper.rotation.set( 0, 0, 0 );
-        this.helper.position.set( 0, 0, 0 );
-        this.helper.lookAt( this.dragNormal );
-        this.helper.translateZ( 0.5 );
+        this.helper.rotation.set(0, 0, 0);
+        this.helper.position.set(0, 0, 0);
+        this.helper.lookAt(this.dragNormal);
+        this.helper.translateZ(0.5);
         this.helper.updateMatrixWorld();
 
-        this.detach( this.helper, this.edges );
+        this.detach(this.helper, this.edges);
 
       } else {
 
-        this.dragNormal = new THREE.Vector3( 0, 0, 1 );
+        this.dragNormal = new THREE.Vector3(0, 0, 1);
         this.flipType = 'cube';
 
-        this.helper.position.set( 0, 0, 0 );
-        this.helper.rotation.set( 0, Math.PI / 4, 0 );
+        this.helper.position.set(0, 0, 0);
+        this.helper.rotation.set(0, Math.PI / 4, 0);
         this.helper.updateMatrixWorld();
 
       }
 
-      let planeIntersect = this.getIntersect( position.current, this.helper, false );
-      if ( planeIntersect === false ) return;
+      let planeIntersect = this.getIntersect(position.current, this.helper, false);
+      if (planeIntersect === false) return;
 
-      this.dragCurrent = this.helper.worldToLocal( planeIntersect.point );
+      this.dragCurrent = this.helper.worldToLocal(planeIntersect.point);
       this.dragTotal = new THREE.Vector3();
-      this.state = ( this.state === STILL ) ? PREPARING : this.state;
+      this.state = (this.state === STILL) ? PREPARING : this.state;
 
     };
 
     this.draggable.onDragMove = position => {
 
-      if ( this.scramble !== null ) return;
-      if ( this.state === STILL || ( this.state === ANIMATING && this.gettingDrag === false ) ) return;
+      if (this.scramble !== null) return;
+      if (this.state === STILL || (this.state === ANIMATING && this.gettingDrag === false)) return;
 
-      const planeIntersect = this.getIntersect( position.current, this.helper, false );
-      if ( planeIntersect === false ) return;
+      const planeIntersect = this.getIntersect(position.current, this.helper, false);
+      if (planeIntersect === false) return;
 
-      const point = this.helper.worldToLocal( planeIntersect.point.clone() );
+      const point = this.helper.worldToLocal(planeIntersect.point.clone());
 
-      this.dragDelta = point.clone().sub( this.dragCurrent ).setZ( 0 );
-      this.dragTotal.add( this.dragDelta );
+      this.dragDelta = point.clone().sub(this.dragCurrent).setZ(0);
+      this.dragTotal.add(this.dragDelta);
       this.dragCurrent = point;
-      this.addMomentumPoint( this.dragDelta );
+      this.addMomentumPoint(this.dragDelta);
 
-      if ( this.state === PREPARING && this.dragTotal.length() > 0.05 ) {
+      if (this.state === PREPARING && this.dragTotal.length() > 0.05) {
 
-        this.dragDirection = this.getMainAxis( this.dragTotal );
+        this.dragDirection = this.getMainAxis(this.dragTotal);
 
-        if ( this.flipType === 'layer' ) {
+        if (this.flipType === 'layer') {
 
           const direction = new THREE.Vector3();
-          direction[ this.dragDirection ] = 1;
+          direction[this.dragDirection] = 1;
 
-          const worldDirection = this.helper.localToWorld( direction ).sub( this.helper.position );
-          const objectDirection = this.edges.worldToLocal( worldDirection ).round();
+          const worldDirection = this.helper.localToWorld(direction).sub(this.helper.position);
+          const objectDirection = this.edges.worldToLocal(worldDirection).round();
 
-          this.flipAxis = objectDirection.cross( this.dragNormal ).negate();
+          this.flipAxis = objectDirection.cross(this.dragNormal).negate();
 
-          this.selectLayer( this.getLayer( false ) );
+          this.selectLayer(this.getLayer(false));
 
         } else {
 
-          const axis = ( this.dragDirection != 'x' )
-            ? ( ( this.dragDirection == 'y' && position.current.x > this.game.world.width / 2 ) ? 'z' : 'x' )
+          const axis = (this.dragDirection != 'x')
+            ? ((this.dragDirection == 'y' && position.current.x > this.game.world.width / 2) ? 'z' : 'x')
             : 'y';
 
           this.flipAxis = new THREE.Vector3();
-          this.flipAxis[ axis ] = 1 * ( ( axis == 'x' ) ? - 1 : 1 );
+          this.flipAxis[axis] = 1 * ((axis == 'x') ? - 1 : 1);
 
         }
 
         this.flipAngle = 0;
         this.state = ROTATING;
 
-      } else if ( this.state === ROTATING ) {
+      } else if (this.state === ROTATING) {
 
-        const rotation = this.dragDelta[ this.dragDirection ];
+        const rotation = this.dragDelta[this.dragDirection];
 
-        if ( this.flipType === 'layer' ) { 
+        if (this.flipType === 'layer') {
 
-          this.group.rotateOnAxis( this.flipAxis, rotation );
+          this.group.rotateOnAxis(this.flipAxis, rotation);
           this.flipAngle += rotation;
 
         } else {
 
-          this.edges.rotateOnWorldAxis( this.flipAxis, rotation );
-          this.game.cube.object.rotation.copy( this.edges.rotation );
+          this.edges.rotateOnWorldAxis(this.flipAxis, rotation);
+          this.game.cube.object.rotation.copy(this.edges.rotation);
           this.flipAngle += rotation;
 
         }
@@ -1400,8 +1401,8 @@ class Controls {
 
     this.draggable.onDragEnd = position => {
 
-      if ( this.scramble !== null ) return;
-      if ( this.state !== ROTATING ) {
+      if (this.scramble !== null) return;
+      if (this.state !== ROTATING) {
 
         this.gettingDrag = false;
         this.state = STILL;
@@ -1411,36 +1412,36 @@ class Controls {
 
       this.state = ANIMATING;
 
-      const momentum = this.getMomentum()[ this.dragDirection ];
-      const flip = ( Math.abs( momentum ) > 0.05 && Math.abs( this.flipAngle ) < Math.PI / 2 );
+      const momentum = this.getMomentum()[this.dragDirection];
+      const flip = (Math.abs(momentum) > 0.05 && Math.abs(this.flipAngle) < Math.PI / 2);
 
       const angle = flip
-        ? this.roundAngle( this.flipAngle + Math.sign( this.flipAngle ) * ( Math.PI / 4 ) )
-        : this.roundAngle( this.flipAngle );
+        ? this.roundAngle(this.flipAngle + Math.sign(this.flipAngle) * (Math.PI / 4))
+        : this.roundAngle(this.flipAngle);
 
       const delta = angle - this.flipAngle;
 
-      if ( this.flipType === 'layer' ) {
+      if (this.flipType === 'layer') {
 
-        this.rotateLayer( delta, false, layer => {
+        this.rotateLayer(delta, false, layer => {
 
           this.game.storage.saveGame();
-          
+
           this.state = this.gettingDrag ? PREPARING : STILL;
           this.gettingDrag = false;
 
           this.checkIsSolved();
 
-        } );
+        });
 
       } else {
 
-        this.rotateCube( delta, () => {
+        this.rotateCube(delta, () => {
 
           this.state = this.gettingDrag ? PREPARING : STILL;
           this.gettingDrag = false;
 
-        } );
+        });
 
       }
 
@@ -1448,38 +1449,38 @@ class Controls {
 
   }
 
-  rotateLayer( rotation, scramble, callback ) {
+  rotateLayer(rotation, scramble, callback) {
 
     const config = scramble ? 0 : this.flipConfig;
 
-    const easing = this.flipEasings[ config ];
-    const duration = this.flipSpeeds[ config ];
-    const bounce = ( config == 2 ) ? this.bounceCube() : ( () => {} );
+    const easing = this.flipEasings[config];
+    const duration = this.flipSpeeds[config];
+    const bounce = (config == 2) ? this.bounceCube() : (() => { });
 
-    this.rotationTween = new Tween( {
+    this.rotationTween = new Tween({
       easing: easing,
       duration: duration,
       onUpdate: tween => {
 
         let deltaAngle = tween.delta * rotation;
-        this.group.rotateOnAxis( this.flipAxis, deltaAngle );
-        bounce( tween.value, deltaAngle, rotation );
+        this.group.rotateOnAxis(this.flipAxis, deltaAngle);
+        bounce(tween.value, deltaAngle, rotation);
 
       },
       onComplete: () => {
 
-        if ( ! scramble ) this.onMove();
+        if (!scramble) this.onMove();
 
-        const layer = this.flipLayer.slice( 0 );
+        const layer = this.flipLayer.slice(0);
 
-        this.game.cube.object.rotation.setFromVector3( this.snapRotation( this.game.cube.object.rotation.toVector3() ) );
-        this.group.rotation.setFromVector3( this.snapRotation( this.group.rotation.toVector3() ) );
-        this.deselectLayer( this.flipLayer );
+        this.game.cube.object.rotation.setFromVector3(this.snapRotation(this.game.cube.object.rotation.toVector3()));
+        this.group.rotation.setFromVector3(this.snapRotation(this.group.rotation.toVector3()));
+        this.deselectLayer(this.flipLayer);
 
-        callback( layer );
+        callback(layer);
 
       },
-    } );
+    });
 
   }
 
@@ -1487,149 +1488,149 @@ class Controls {
 
     let fixDelta = true;
 
-    return ( progress, delta, rotation ) => {
+    return (progress, delta, rotation) => {
 
-        if ( progress >= 1 ) {
+      if (progress >= 1) {
 
-          if ( fixDelta ) {
+        if (fixDelta) {
 
-            delta = ( progress - 1 ) * rotation;
-            fixDelta = false;
-
-          }
-
-          this.game.cube.object.rotateOnAxis( this.flipAxis, delta );
+          delta = (progress - 1) * rotation;
+          fixDelta = false;
 
         }
+
+        this.game.cube.object.rotateOnAxis(this.flipAxis, delta);
+
+      }
 
     }
 
   }
 
-  rotateCube( rotation, callback ) {
+  rotateCube(rotation, callback) {
 
     const config = this.flipConfig;
-    const easing = [ Easing.Power.Out( 4 ), Easing.Sine.Out(), Easing.Back.Out( 2 ) ][ config ];
-    const duration = [ 100, 150, 350 ][ config ];
+    const easing = [Easing.Power.Out(4), Easing.Sine.Out(), Easing.Back.Out(2)][config];
+    const duration = [100, 150, 350][config];
 
-    this.rotationTween = new Tween( {
+    this.rotationTween = new Tween({
       easing: easing,
       duration: duration,
       onUpdate: tween => {
 
-        this.edges.rotateOnWorldAxis( this.flipAxis, tween.delta * rotation );
-        this.game.cube.object.rotation.copy( this.edges.rotation );
+        this.edges.rotateOnWorldAxis(this.flipAxis, tween.delta * rotation);
+        this.game.cube.object.rotation.copy(this.edges.rotation);
 
       },
       onComplete: () => {
 
-        this.edges.rotation.setFromVector3( this.snapRotation( this.edges.rotation.toVector3() ) );
-        this.game.cube.object.rotation.copy( this.edges.rotation );
+        this.edges.rotation.setFromVector3(this.snapRotation(this.edges.rotation.toVector3()));
+        this.game.cube.object.rotation.copy(this.edges.rotation);
         callback();
 
       },
-    } );
+    });
 
   }
 
-  selectLayer( layer ) {
+  selectLayer(layer) {
 
-    this.group.rotation.set( 0, 0, 0 );
-    this.movePieces( layer, this.game.cube.object, this.group );
+    this.group.rotation.set(0, 0, 0);
+    this.movePieces(layer, this.game.cube.object, this.group);
     this.flipLayer = layer;
 
   }
 
-  deselectLayer( layer ) {
+  deselectLayer(layer) {
 
-    this.movePieces( layer, this.group, this.game.cube.object );
+    this.movePieces(layer, this.group, this.game.cube.object);
     this.flipLayer = null;
 
   }
 
-  movePieces( layer, from, to ) {
+  movePieces(layer, from, to) {
 
     from.updateMatrixWorld();
     to.updateMatrixWorld();
 
-    layer.forEach( index => {
+    layer.forEach(index => {
 
-      const piece = this.game.cube.pieces[ index ];
+      const piece = this.game.cube.pieces[index];
 
-      piece.applyMatrix( from.matrixWorld );
-      from.remove( piece );
-      piece.applyMatrix( new THREE.Matrix4().getInverse( to.matrixWorld ) );
-      to.add( piece );
+      piece.applyMatrix(from.matrixWorld);
+      from.remove(piece);
+      piece.applyMatrix(new THREE.Matrix4().getInverse(to.matrixWorld));
+      to.add(piece);
 
-    } );
+    });
 
   }
 
-  getLayer( position ) {
+  getLayer(position) {
 
-    const scalar = { 2: 6, 3: 3, 4: 4, 5: 3 }[ this.game.cube.size ];
+    const scalar = { 2: 6, 3: 3, 4: 4, 5: 3 }[this.game.cube.size];
     const layer = [];
 
     let axis;
 
-    if ( position === false ) {
+    if (position === false) {
 
       const piece = this.dragIntersect.object.parent;
 
-      axis = this.getMainAxis( this.flipAxis );
-      position = piece.position.clone() .multiplyScalar( scalar ) .round();
+      axis = this.getMainAxis(this.flipAxis);
+      position = piece.position.clone().multiplyScalar(scalar).round();
 
     } else {
 
-      axis = this.getMainAxis( position );
+      axis = this.getMainAxis(position);
 
     }
 
-    this.game.cube.pieces.forEach( piece => {
+    this.game.cube.pieces.forEach(piece => {
 
-      const piecePosition = piece.position.clone().multiplyScalar( scalar ).round();
+      const piecePosition = piece.position.clone().multiplyScalar(scalar).round();
 
-      if ( piecePosition[ axis ] == position[ axis ] ) layer.push( piece.name );
+      if (piecePosition[axis] == position[axis]) layer.push(piece.name);
 
-    } );
+    });
 
     return layer;
 
   }
 
-  keyboardMove( type, move, callback ) {
+  keyboardMove(type, move, callback) {
 
-    if ( this.state !== STILL ) return;
-    if ( this.enabled !== true ) return;
+    if (this.state !== STILL) return;
+    if (this.enabled !== true) return;
 
-    if ( type === 'LAYER' ) {
+    if (type === 'LAYER') {
 
-      const layer = this.getLayer( move.position );
+      const layer = this.getLayer(move.position);
 
       this.flipAxis = new THREE.Vector3();
-      this.flipAxis[ move.axis ] = 1;
+      this.flipAxis[move.axis] = 1;
       this.state = ROTATING;
 
-      this.selectLayer( layer );
-      this.rotateLayer( move.angle, false, layer => {
+      this.selectLayer(layer);
+      this.rotateLayer(move.angle, false, layer => {
 
         this.game.storage.saveGame();
         this.state = STILL;
         this.checkIsSolved();
 
-      } );
+      });
 
-    } else if ( type === 'CUBE' ) {
+    } else if (type === 'CUBE') {
 
       this.flipAxis = new THREE.Vector3();
-      this.flipAxis[ move.axis ] = 1;
+      this.flipAxis[move.axis] = 1;
       this.state = ROTATING;
 
-      this.rotateCube( move.angle, () => {
+      this.rotateCube(move.angle, () => {
 
         this.state = STILL;
 
-      } );
+      });
 
     }
 
@@ -1637,26 +1638,26 @@ class Controls {
 
   scrambleCube() {
 
-    if ( this.scramble == null ) {
+    if (this.scramble == null) {
 
       this.scramble = this.game.scrambler;
-      this.scramble.callback = ( typeof callback !== 'function' ) ? () => {} : callback;
+      this.scramble.callback = (typeof callback !== 'function') ? () => { } : callback;
 
     }
 
     const converted = this.scramble.converted;
-    const move = converted[ 0 ];
-    const layer = this.getLayer( move.position );
+    const move = converted[0];
+    const layer = this.getLayer(move.position);
 
     this.flipAxis = new THREE.Vector3();
-    this.flipAxis[ move.axis ] = 1;
+    this.flipAxis[move.axis] = 1;
 
-    this.selectLayer( layer );
-    this.rotateLayer( move.angle, true, () => {
+    this.selectLayer(layer);
+    this.rotateLayer(move.angle, true, () => {
 
       converted.shift();
 
-      if ( converted.length > 0 ) {
+      if (converted.length > 0) {
 
         this.scrambleCube();
 
@@ -1667,56 +1668,56 @@ class Controls {
 
       }
 
-    } );
+    });
 
   }
 
-  getIntersect( position, object, multiple ) {
+  getIntersect(position, object, multiple) {
 
     this.raycaster.setFromCamera(
-      this.draggable.convertPosition( position.clone() ),
+      this.draggable.convertPosition(position.clone()),
       this.game.world.camera
     );
 
-    const intersect = ( multiple )
-      ? this.raycaster.intersectObjects( object )
-      : this.raycaster.intersectObject( object );
+    const intersect = (multiple)
+      ? this.raycaster.intersectObjects(object)
+      : this.raycaster.intersectObject(object);
 
-    return ( intersect.length > 0 ) ? intersect[ 0 ] : false;
+    return (intersect.length > 0) ? intersect[0] : false;
 
   }
 
-  getMainAxis( vector ) {
+  getMainAxis(vector) {
 
-    return Object.keys( vector ).reduce(
-      ( a, b ) => Math.abs( vector[ a ] ) > Math.abs( vector[ b ] ) ? a : b
+    return Object.keys(vector).reduce(
+      (a, b) => Math.abs(vector[a]) > Math.abs(vector[b]) ? a : b
     );
 
   }
 
-  detach( child, parent ) {
+  detach(child, parent) {
 
-    child.applyMatrix( parent.matrixWorld );
-    parent.remove( child );
-    this.game.world.scene.add( child );
-
-  }
-
-  attach( child, parent ) {
-
-    child.applyMatrix( new THREE.Matrix4().getInverse( parent.matrixWorld ) );
-    this.game.world.scene.remove( child );
-    parent.add( child );
+    child.applyMatrix(parent.matrixWorld);
+    parent.remove(child);
+    this.game.world.scene.add(child);
 
   }
 
-  addMomentumPoint( delta ) {
+  attach(child, parent) {
+
+    child.applyMatrix(new THREE.Matrix4().getInverse(parent.matrixWorld));
+    this.game.world.scene.remove(child);
+    parent.add(child);
+
+  }
+
+  addMomentumPoint(delta) {
 
     const time = Date.now();
 
-    this.momentum = this.momentum.filter( moment => time - moment.time < 500 );
+    this.momentum = this.momentum.filter(moment => time - moment.time < 500);
 
-    if ( delta !== false ) this.momentum.push( { delta, time } );
+    if (delta !== false) this.momentum.push({ delta, time });
 
   }
 
@@ -1725,31 +1726,31 @@ class Controls {
     const points = this.momentum.length;
     const momentum = new THREE.Vector2();
 
-    this.addMomentumPoint( false );
+    this.addMomentumPoint(false);
 
-    this.momentum.forEach( ( point, index ) => {
+    this.momentum.forEach((point, index) => {
 
-      momentum.add( point.delta.multiplyScalar( index / points ) );
+      momentum.add(point.delta.multiplyScalar(index / points));
 
-    } );
+    });
 
     return momentum;
 
   }
 
-  roundAngle( angle ) {
+  roundAngle(angle) {
 
     const round = Math.PI / 2;
-    return Math.sign( angle ) * Math.round( Math.abs( angle) / round ) * round;
+    return Math.sign(angle) * Math.round(Math.abs(angle) / round) * round;
 
   }
 
-  snapRotation( angle ) {
+  snapRotation(angle) {
 
     return angle.set(
-      this.roundAngle( angle.x ),
-      this.roundAngle( angle.y ),
-      this.roundAngle( angle.z )
+      this.roundAngle(angle.x),
+      this.roundAngle(angle.y),
+      this.roundAngle(angle.z)
     );
 
   }
@@ -1761,26 +1762,26 @@ class Controls {
     let solved = true;
     const sides = { 'x-': [], 'x+': [], 'y-': [], 'y+': [], 'z-': [], 'z+': [] };
 
-    this.game.cube.edges.forEach( edge => {
+    this.game.cube.edges.forEach(edge => {
 
       const position = edge.parent
-        .localToWorld( edge.position.clone() )
-        .sub( this.game.cube.object.position );
+        .localToWorld(edge.position.clone())
+        .sub(this.game.cube.object.position);
 
-      const mainAxis = this.getMainAxis( position );
-      const mainSign = position.multiplyScalar( 2 ).round()[ mainAxis ] < 1 ? '-' : '+';
+      const mainAxis = this.getMainAxis(position);
+      const mainSign = position.multiplyScalar(2).round()[mainAxis] < 1 ? '-' : '+';
 
-      sides[ mainAxis + mainSign ].push( edge.name );
+      sides[mainAxis + mainSign].push(edge.name);
 
-    } );
+    });
 
-    Object.keys( sides ).forEach( side => {
+    Object.keys(sides).forEach(side => {
 
-      if ( ! sides[ side ].every( value => value === sides[ side ][ 0 ] ) ) solved = false;
+      if (!sides[side].every(value => value === sides[side][0])) solved = false;
 
-    } );
+    });
 
-    if ( solved ) this.onSolved();
+    if (solved) this.onSolved();
 
   }
 
@@ -1788,17 +1789,17 @@ class Controls {
 
 class Scrambler {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
     this.dificulty = 0;
 
     this.scrambleLength = {
-      2: [ 7, 9, 11 ],
-      3: [ 20, 25, 30 ],
-      4: [ 30, 40, 50 ],
-      5: [ 40, 60, 80 ],
+      2: [7, 9, 11],
+      3: [20, 25, 30],
+      4: [30, 40, 50],
+      5: [40, 60, 80],
     };
 
     this.moves = [];
@@ -1807,73 +1808,73 @@ class Scrambler {
 
   }
 
-  scramble( scramble ) {
+  scramble(scramble) {
 
     let count = 0;
-    this.moves = ( typeof scramble !== 'undefined' ) ? scramble.split( ' ' ) : [];
+    this.moves = (typeof scramble !== 'undefined') ? scramble.split(' ') : [];
 
-    if ( this.moves.length < 1 ) {
+    if (this.moves.length < 1) {
 
-      const scrambleLength = this.scrambleLength[ this.game.cube.size ][ this.dificulty ];
+      const scrambleLength = this.scrambleLength[this.game.cube.size][this.dificulty];
 
       const faces = this.game.cube.size < 4 ? 'UDLRFB' : 'UuDdLlRrFfBb';
-      const modifiers = [ "", "'", "2" ];
-      const total = ( typeof scramble === 'undefined' ) ? scrambleLength : scramble;
+      const modifiers = ["", "'", "2"];
+      const total = (typeof scramble === 'undefined') ? scrambleLength : scramble;
 
-      while ( count < total ) {
+      while (count < total) {
 
         const move =
-          faces[ Math.floor( Math.random() * faces.length ) ] +
-          modifiers[ Math.floor( Math.random() * 3 ) ];
+          faces[Math.floor(Math.random() * faces.length)] +
+          modifiers[Math.floor(Math.random() * 3)];
 
-        if ( count > 0 && move.charAt( 0 ) == this.moves[ count - 1 ].charAt( 0 ) ) continue;
-        if ( count > 1 && move.charAt( 0 ) == this.moves[ count - 2 ].charAt( 0 ) ) continue;
+        if (count > 0 && move.charAt(0) == this.moves[count - 1].charAt(0)) continue;
+        if (count > 1 && move.charAt(0) == this.moves[count - 2].charAt(0)) continue;
 
-        this.moves.push( move );
-        count ++;
+        this.moves.push(move);
+        count++;
 
       }
 
     }
 
-    this.callback = () => {};
+    this.callback = () => { };
     this.convert();
-    this.print = this.moves.join( ' ' );
+    this.print = this.moves.join(' ');
 
     return this;
 
   }
 
-  convert( moves ) {
+  convert(moves) {
 
     this.converted = [];
 
-    this.moves.forEach( move => {
+    this.moves.forEach(move => {
 
-      const convertedMove = this.convertMove( move );
-      const modifier = move.charAt( 1 );
+      const convertedMove = this.convertMove(move);
+      const modifier = move.charAt(1);
 
-      this.converted.push( convertedMove );
-      if ( modifier == "2" ) this.converted.push( convertedMove );
+      this.converted.push(convertedMove);
+      if (modifier == "2") this.converted.push(convertedMove);
 
-    } );
+    });
 
   }
 
-  convertMove( move ) {
+  convertMove(move) {
 
-    const face = move.charAt( 0 );
-    const modifier = move.charAt( 1 );
+    const face = move.charAt(0);
+    const modifier = move.charAt(1);
 
-    const axis = { D: 'y', U: 'y', L: 'x', R: 'x', F: 'z', B: 'z' }[ face.toUpperCase() ];
-    let row = { D: -1, U: 1, L: -1, R: 1, F: 1, B: -1 }[ face.toUpperCase() ];
+    const axis = { D: 'y', U: 'y', L: 'x', R: 'x', F: 'z', B: 'z' }[face.toUpperCase()];
+    let row = { D: -1, U: 1, L: -1, R: 1, F: 1, B: -1 }[face.toUpperCase()];
 
-    if ( this.game.cube.size > 3 && face !== face.toLowerCase() ) row = row * 2;
+    if (this.game.cube.size > 3 && face !== face.toLowerCase()) row = row * 2;
 
     const position = new THREE.Vector3();
-    position[ { D: 'y', U: 'y', L: 'x', R: 'x', F: 'z', B: 'z' }[ face.toUpperCase() ] ] = row;
+    position[{ D: 'y', U: 'y', L: 'x', R: 'x', F: 'z', B: 'z' }[face.toUpperCase()]] = row;
 
-    const angle = ( Math.PI / 2 ) * - row * ( ( modifier == "'" ) ? - 1 : 1 );
+    const angle = (Math.PI / 2) * - row * ((modifier == "'") ? - 1 : 1);
 
     return { position, axis, angle, name: move };
 
@@ -1883,7 +1884,7 @@ class Scrambler {
 
 class Transition {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
@@ -1919,14 +1920,14 @@ class Transition {
 
   }
 
-  buttons( show, hide ) {
+  buttons(show, hide) {
 
-    const buttonTween = ( button, show ) => {
+    const buttonTween = (button, show) => {
 
-      return new Tween( {
+      return new Tween({
         target: button.style,
         duration: 300,
-        easing: show ? Easing.Power.Out( 2 ) : Easing.Power.In( 3 ),
+        easing: show ? Easing.Power.Out(2) : Easing.Power.In(3),
         from: { opacity: show ? 0 : 1 },
         to: { opacity: show ? 1 : 0 },
         onUpdate: tween => {
@@ -1936,61 +1937,61 @@ class Transition {
 
         },
         onComplete: () => button.style.pointerEvents = show ? 'all' : 'none'
-      } );
+      });
 
     };
 
-    hide.forEach( button =>
-      this.tweens.buttons[ button ] = buttonTween( this.game.dom.buttons[ button ], false )
+    hide.forEach(button =>
+      this.tweens.buttons[button] = buttonTween(this.game.dom.buttons[button], false)
     );
 
-    setTimeout( () => show.forEach( button => {
+    setTimeout(() => show.forEach(button => {
 
-      this.tweens.buttons[ button ] = buttonTween( this.game.dom.buttons[ button ], true );
+      this.tweens.buttons[button] = buttonTween(this.game.dom.buttons[button], true);
 
-    } ), hide ? 500 : 0 );
+    }), hide ? 500 : 0);
 
   }
 
-  cube( show, theming = false ) {
+  cube(show, theming = false) {
 
     this.activeTransitions++;
 
-    try { this.tweens.cube.stop(); } catch(e) {}
+    try { this.tweens.cube.stop(); } catch (e) { }
     const currentY = this.game.cube.animator.position.y;
     const currentRotation = this.game.cube.animator.rotation.x;
 
-    this.tweens.cube = new Tween( {
+    this.tweens.cube = new Tween({
       duration: show ? 3000 : 1250,
-      easing: show ? Easing.Elastic.Out( 0.8, 0.6 ) : Easing.Back.In( 1 ),
+      easing: show ? Easing.Elastic.Out(0.8, 0.6) : Easing.Back.In(1),
       onUpdate: tween => {
 
         this.game.cube.animator.position.y = show
-          ? ( theming ? 0.9 + ( 1 - tween.value ) * 3.5 : ( 1 - tween.value ) * 4 )
+          ? (theming ? 0.9 + (1 - tween.value) * 3.5 : (1 - tween.value) * 4)
           : currentY + tween.value * 4;
 
         this.game.cube.animator.rotation.x = show
-          ? ( 1 - tween.value ) * Math.PI / 3
+          ? (1 - tween.value) * Math.PI / 3
           : currentRotation + tween.value * - Math.PI / 3;
 
       },
-    } );
+    });
 
-    if ( theming ) {
+    if (theming) {
 
-      if ( show ) {
+      if (show) {
 
         this.game.world.camera.zoom = 0.75;
         this.game.world.camera.updateProjectionMatrix();
 
       } else {
 
-        setTimeout( () => {
+        setTimeout(() => {
 
           this.game.world.camera.zoom = this.data.cameraZoom;
           this.game.world.camera.updateProjectionMatrix();
 
-        }, 1500 );
+        }, 1500);
 
       }
 
@@ -1998,20 +1999,20 @@ class Transition {
 
     this.durations.cube = show ? 1500 : 1500;
 
-    setTimeout( () => this.activeTransitions--, this.durations.cube );
+    setTimeout(() => this.activeTransitions--, this.durations.cube);
 
   }
 
   float() {
 
-    try { this.tweens.float.stop(); } catch(e) {}
-    this.tweens.float = new Tween( {
+    try { this.tweens.float.stop(); } catch (e) { }
+    this.tweens.float = new Tween({
       duration: 1500,
       easing: Easing.Sine.InOut(),
       yoyo: true,
       onUpdate: tween => {
 
-        this.game.cube.holder.position.y = (- 0.02 + tween.value * 0.04); 
+        this.game.cube.holder.position.y = (- 0.02 + tween.value * 0.04);
         this.game.cube.holder.rotation.x = 0.005 - tween.value * 0.01;
         this.game.cube.holder.rotation.z = - this.game.cube.holder.rotation.x;
         this.game.cube.holder.rotation.y = this.game.cube.holder.rotation.x;
@@ -2020,198 +2021,198 @@ class Transition {
           this.game.cube.holder.position.y + this.game.cube.object.position.y;
 
       },
-    } );
+    });
 
   }
 
-  zoom( play, time ) {
+  zoom(play, time) {
 
     this.activeTransitions++;
 
-    const zoom = ( play ) ? 1 : this.data.cameraZoom;
-    const duration = ( time > 0 ) ? Math.max( time, 1500 ) : 1500;
-    const rotations = ( time > 0 ) ? Math.round( duration / 1500 ) : 1;
-    const easing = Easing.Power.InOut( ( time > 0 ) ? 2 : 3 );
+    const zoom = (play) ? 1 : this.data.cameraZoom;
+    const duration = (time > 0) ? Math.max(time, 1500) : 1500;
+    const rotations = (time > 0) ? Math.round(duration / 1500) : 1;
+    const easing = Easing.Power.InOut((time > 0) ? 2 : 3);
 
-    this.tweens.zoom = new Tween( {
+    this.tweens.zoom = new Tween({
       target: this.game.world.camera,
       duration: duration,
       easing: easing,
       to: { zoom: zoom },
       onUpdate: () => { this.game.world.camera.updateProjectionMatrix(); },
-    } );
+    });
 
-    this.tweens.rotate = new Tween( {
+    this.tweens.rotate = new Tween({
       target: this.game.cube.animator.rotation,
       duration: duration,
       easing: easing,
       to: { y: - Math.PI * 2 * rotations },
       onComplete: () => { this.game.cube.animator.rotation.y = 0; },
-    } );
+    });
 
     this.durations.zoom = duration;
 
-    setTimeout( () => this.activeTransitions--, this.durations.zoom );
+    setTimeout(() => this.activeTransitions--, this.durations.zoom);
 
   }
 
-  elevate( complete ) {
+  elevate(complete) {
 
     this.activeTransitions++;
 
-    const cubeY = 
+    const cubeY =
 
-    this.tweens.elevate = new Tween( {
-      target: this.game.cube.object.position,
-      duration: complete ? 1500 : 0,
-      easing: Easing.Power.InOut( 3 ),
-      to: { y: complete ? -0.05 : this.data.cubeY }
-    } );
+      this.tweens.elevate = new Tween({
+        target: this.game.cube.object.position,
+        duration: complete ? 1500 : 0,
+        easing: Easing.Power.InOut(3),
+        to: { y: complete ? -0.05 : this.data.cubeY }
+      });
 
     this.durations.elevate = 1500;
 
-    setTimeout( () => this.activeTransitions--, this.durations.elevate );
+    setTimeout(() => this.activeTransitions--, this.durations.elevate);
 
   }
 
-  complete( show, best ) {
+  complete(show, best) {
 
     this.activeTransitions++;
 
     const text = best ? this.game.dom.texts.best : this.game.dom.texts.complete;
 
-    if ( text.querySelector( 'span i' ) === null )
-      text.querySelectorAll( 'span' ).forEach( span => this.splitLetters( span ) );
+    if (text.querySelector('span i') === null)
+      text.querySelectorAll('span').forEach(span => this.splitLetters(span));
 
-    const letters = text.querySelectorAll( '.icon, i' );
+    const letters = text.querySelectorAll('.icon, i');
 
-    this.flipLetters( best ? 'best' : 'complete', letters, show );
+    this.flipLetters(best ? 'best' : 'complete', letters, show);
 
     text.style.opacity = 1;
 
-    const duration = this.durations[ best ? 'best' : 'complete' ];
+    const duration = this.durations[best ? 'best' : 'complete'];
 
-    if ( ! show ) setTimeout( () => this.game.dom.texts.timer.style.transform = '', duration );
+    if (!show) setTimeout(() => this.game.dom.texts.timer.style.transform = '', duration);
 
-    setTimeout( () => this.activeTransitions--, duration );
+    setTimeout(() => this.activeTransitions--, duration);
 
-  } 
+  }
 
-  stats( show ) {
+  stats(show) {
 
-    if ( show ) this.game.scores.calcStats();
+    if (show) this.game.scores.calcStats();
 
     this.activeTransitions++;
 
-    this.tweens.stats.forEach( tween => { tween.stop(); tween = null; } );
+    this.tweens.stats.forEach(tween => { tween.stop(); tween = null; });
 
     let tweenId = -1;
 
-    const stats = this.game.dom.stats.querySelectorAll( '.stats' );
-    const easing = show ? Easing.Power.Out( 2 ) : Easing.Power.In( 3 );
+    const stats = this.game.dom.stats.querySelectorAll('.stats');
+    const easing = show ? Easing.Power.Out(2) : Easing.Power.In(3);
 
-    stats.forEach( ( stat, index ) => {
+    stats.forEach((stat, index) => {
 
-      const delay = index * ( show ? 80 : 60 );
+      const delay = index * (show ? 80 : 60);
 
-      this.tweens.stats[ tweenId++ ] = new Tween( {
+      this.tweens.stats[tweenId++] = new Tween({
         delay: delay,
         duration: 400,
         easing: easing,
         onUpdate: tween => {
 
-          const translate = show ? ( 1 - tween.value ) * 2 : tween.value;
-          const opacity = show ? tween.value : ( 1 - tween.value );
+          const translate = show ? (1 - tween.value) * 2 : tween.value;
+          const opacity = show ? tween.value : (1 - tween.value);
 
           stat.style.transform = `translate3d(0, ${translate}em, 0)`;
           stat.style.opacity = opacity;
 
         }
-      } );
+      });
 
-    } );
+    });
 
     this.durations.stats = 0;
 
-    setTimeout( () => this.activeTransitions--, this.durations.stats );
+    setTimeout(() => this.activeTransitions--, this.durations.stats);
 
   }
 
-  preferences( show ) {
+  preferences(show) {
 
-    this.ranges( this.game.dom.prefs.querySelectorAll( '.range' ), 'prefs', show );
-
-  }
-
-  theming( show ) {
-
-    this.ranges( this.game.dom.theme.querySelectorAll( '.range' ), 'prefs', show );
+    this.ranges(this.game.dom.prefs.querySelectorAll('.range'), 'prefs', show);
 
   }
 
-  ranges( ranges, type, show ) {
+  theming(show) {
+
+    this.ranges(this.game.dom.theme.querySelectorAll('.range'), 'prefs', show);
+
+  }
+
+  ranges(ranges, type, show) {
 
     this.activeTransitions++;
 
-    this.tweens[ type ].forEach( tween => { tween.stop(); tween = null; } );
+    this.tweens[type].forEach(tween => { tween.stop(); tween = null; });
 
     const easing = show ? Easing.Power.Out(2) : Easing.Power.In(3);
 
     let tweenId = -1;
     let listMax = 0;
 
-    ranges.forEach( ( range, rangeIndex ) => {
-    
-      const label = range.querySelector( '.range__label' );
-      const track = range.querySelector( '.range__track-line' );
-      const handle = range.querySelector( '.range__handle' );
-      const list = range.querySelectorAll( '.range__list div' );
+    ranges.forEach((range, rangeIndex) => {
 
-      const delay = rangeIndex * ( show ? 120 : 100 );
+      const label = range.querySelector('.range__label');
+      const track = range.querySelector('.range__track-line');
+      const handle = range.querySelector('.range__handle');
+      const list = range.querySelectorAll('.range__list div');
+
+      const delay = rangeIndex * (show ? 120 : 100);
 
       label.style.opacity = show ? 0 : 1;
       track.style.opacity = show ? 0 : 1;
       handle.style.opacity = show ? 0 : 1;
       handle.style.pointerEvents = show ? 'all' : 'none';
 
-      this.tweens[ type ][ tweenId++ ] = new Tween( {
+      this.tweens[type][tweenId++] = new Tween({
         delay: show ? delay : delay,
         duration: 400,
         easing: easing,
         onUpdate: tween => {
 
-          const translate = show ? ( 1 - tween.value ) : tween.value;
-          const opacity = show ? tween.value : ( 1 - tween.value );
+          const translate = show ? (1 - tween.value) : tween.value;
+          const opacity = show ? tween.value : (1 - tween.value);
 
           label.style.transform = `translate3d(0, ${translate}em, 0)`;
           label.style.opacity = opacity;
 
         }
-      } );
+      });
 
-      this.tweens[ type ][ tweenId++ ] = new Tween( {
+      this.tweens[type][tweenId++] = new Tween({
         delay: show ? delay + 100 : delay,
         duration: 400,
         easing: easing,
         onUpdate: tween => {
 
-          const translate = show ? ( 1 - tween.value ) : tween.value;
-          const scale = show ? tween.value : ( 1 - tween.value );
+          const translate = show ? (1 - tween.value) : tween.value;
+          const scale = show ? tween.value : (1 - tween.value);
           const opacity = scale;
 
           track.style.transform = `translate3d(0, ${translate}em, 0) scale3d(${scale}, 1, 1)`;
           track.style.opacity = opacity;
 
         }
-      } );
+      });
 
-      this.tweens[ type ][ tweenId++ ] = new Tween( {
+      this.tweens[type][tweenId++] = new Tween({
         delay: show ? delay + 100 : delay,
         duration: 400,
         easing: easing,
         onUpdate: tween => {
 
-          const translate = show ? ( 1 - tween.value ) : tween.value;
+          const translate = show ? (1 - tween.value) : tween.value;
           const opacity = 1 - translate;
           const scale = 0.5 + opacity * 0.5;
 
@@ -2219,74 +2220,74 @@ class Transition {
           handle.style.opacity = opacity;
 
         }
-      } );
+      });
 
-      list.forEach( ( listItem, labelIndex ) => {
+      list.forEach((listItem, labelIndex) => {
 
         listItem.style.opacity = show ? 0 : 1;
 
-        this.tweens[ type ][ tweenId++ ] = new Tween( {
+        this.tweens[type][tweenId++] = new Tween({
           delay: show ? delay + 200 + labelIndex * 50 : delay,
           duration: 400,
           easing: easing,
           onUpdate: tween => {
 
-            const translate = show ? ( 1 - tween.value ) : tween.value;
-            const opacity = show ? tween.value : ( 1 - tween.value );
+            const translate = show ? (1 - tween.value) : tween.value;
+            const opacity = show ? tween.value : (1 - tween.value);
 
             listItem.style.transform = `translate3d(0, ${translate}em, 0)`;
             listItem.style.opacity = opacity;
 
           }
-        } );
+        });
 
-      } );
+      });
 
       listMax = list.length > listMax ? list.length - 1 : listMax;
 
       range.style.opacity = 1;
 
-    } );
+    });
 
-    this.durations[ type ] = show
-      ? ( ( ranges.length - 1 ) * 100 ) + 200 + listMax * 50 + 400
-      : ( ( ranges.length - 1 ) * 100 ) + 400;
+    this.durations[type] = show
+      ? ((ranges.length - 1) * 100) + 200 + listMax * 50 + 400
+      : ((ranges.length - 1) * 100) + 400;
 
-    setTimeout( () => this.activeTransitions--, this.durations[ type ] ); 
+    setTimeout(() => this.activeTransitions--, this.durations[type]);
 
   }
 
-  title( show ) {
+  title(show) {
 
     this.activeTransitions++;
 
     const title = this.game.dom.texts.title;
 
-    if ( title.querySelector( 'span i' ) === null )
-      title.querySelectorAll( 'span' ).forEach( span => this.splitLetters( span ) );
+    if (title.querySelector('span i') === null)
+      title.querySelectorAll('span').forEach(span => this.splitLetters(span));
 
-    const letters = title.querySelectorAll( 'i' );
+    const letters = title.querySelectorAll('i');
 
-    this.flipLetters( 'title', letters, show );
+    this.flipLetters('title', letters, show);
 
     title.style.opacity = 1;
 
     const note = this.game.dom.texts.note;
 
-    this.tweens.title[ letters.length ] = new Tween( {
+    this.tweens.title[letters.length] = new Tween({
       target: note.style,
       easing: Easing.Sine.InOut(),
       duration: show ? 800 : 400,
       yoyo: show ? true : null,
-      from: { opacity: show ? 0 : ( parseFloat( getComputedStyle( note ).opacity ) ) },
+      from: { opacity: show ? 0 : (parseFloat(getComputedStyle(note).opacity)) },
       to: { opacity: show ? 1 : 0 },
-    } );
+    });
 
-    setTimeout( () => this.activeTransitions--, this.durations.title );
+    setTimeout(() => this.activeTransitions--, this.durations.title);
 
   }
 
-  timer( show ) {
+  timer(show) {
 
     this.activeTransitions++;
 
@@ -2296,58 +2297,58 @@ class Transition {
     this.game.timer.convert();
     this.game.timer.setText();
 
-    this.splitLetters( timer );
-    const letters = timer.querySelectorAll( 'i' );
-    this.flipLetters( 'timer', letters, show );
+    this.splitLetters(timer);
+    const letters = timer.querySelectorAll('i');
+    this.flipLetters('timer', letters, show);
 
     timer.style.opacity = 1;
 
-    setTimeout( () => this.activeTransitions--, this.durations.timer );
+    setTimeout(() => this.activeTransitions--, this.durations.timer);
 
   }
 
-  splitLetters( element ) {
+  splitLetters(element) {
 
     const text = element.innerHTML;
 
     element.innerHTML = '';
 
-    text.split( '' ).forEach( letter => {
+    text.split('').forEach(letter => {
 
-      const i = document.createElement( 'i' );
+      const i = document.createElement('i');
 
       i.innerHTML = letter;
 
-      element.appendChild( i );
+      element.appendChild(i);
 
-    } );
+    });
 
   }
 
-  flipLetters( type, letters, show ) {
+  flipLetters(type, letters, show) {
 
-    try { this.tweens[ type ].forEach( tween => tween.stop() ); } catch(e) {}
-    letters.forEach( ( letter, index ) => {
+    try { this.tweens[type].forEach(tween => tween.stop()); } catch (e) { }
+    letters.forEach((letter, index) => {
 
       letter.style.opacity = show ? 0 : 1;
 
-      this.tweens[ type ][ index ] = new Tween( {
+      this.tweens[type][index] = new Tween({
         easing: Easing.Sine.Out(),
         duration: show ? 800 : 400,
         delay: index * 50,
         onUpdate: tween => {
 
-          const rotation = show ? ( 1 - tween.value ) * -80 : tween.value * 80;
+          const rotation = show ? (1 - tween.value) * -80 : tween.value * 80;
 
           letter.style.transform = `rotate3d(0, 1, 0, ${rotation}deg)`;
-          letter.style.opacity = show ? tween.value : ( 1 - tween.value );
+          letter.style.opacity = show ? tween.value : (1 - tween.value);
 
         },
-      } );
+      });
 
-    } );
+    });
 
-    this.durations[ type ] = ( letters.length - 1 ) * 50 + ( show ? 800 : 400 );
+    this.durations[type] = (letters.length - 1) * 50 + (show ? 800 : 400);
 
   }
 
@@ -2355,18 +2356,18 @@ class Transition {
 
 class Timer extends Animation {
 
-  constructor( game ) {
+  constructor(game) {
 
-    super( false );
+    super(false);
 
     this.game = game;
     this.reset();
-    
+
   }
 
-  start( continueGame ) {
+  start(continueGame) {
 
-    this.startTime = continueGame ? ( Date.now() - this.deltaTime ) : Date.now();
+    this.startTime = continueGame ? (Date.now() - this.deltaTime) : Date.now();
     this.deltaTime = 0;
     this.converted = this.convert();
 
@@ -2403,9 +2404,9 @@ class Timer extends Animation {
     this.deltaTime = this.currentTime - this.startTime;
     this.convert();
 
-    if ( this.converted != old ) {
+    if (this.converted != old) {
 
-      localStorage.setItem( 'theCube_time', this.deltaTime );
+      localStorage.setItem('theCube_time', this.deltaTime);
       this.setText();
 
     }
@@ -2414,10 +2415,10 @@ class Timer extends Animation {
 
   convert() {
 
-    const seconds = parseInt( ( this.deltaTime / 1000 ) % 60 );
-    const minutes = parseInt( ( this.deltaTime / ( 1000 * 60 ) ) );
+    const seconds = parseInt((this.deltaTime / 1000) % 60);
+    const minutes = parseInt((this.deltaTime / (1000 * 60)));
 
-    this.converted = minutes + ':' + ( seconds < 10 ? '0' : '' ) + seconds;
+    this.converted = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 
   }
 
@@ -2432,67 +2433,67 @@ class Timer extends Animation {
 const RangeHTML = [
 
   '<div class="range">',
-    '<div class="range__label"></div>',
-    '<div class="range__track">',
-      '<div class="range__track-line"></div>',
-      '<div class="range__handle"><div></div></div>',
-    '</div>',
-    '<div class="range__list"></div>',
+  '<div class="range__label"></div>',
+  '<div class="range__track">',
+  '<div class="range__track-line"></div>',
+  '<div class="range__handle"><div></div></div>',
+  '</div>',
+  '<div class="range__list"></div>',
   '</div>',
 
-].join( '\n' );
+].join('\n');
 
-document.querySelectorAll( 'range' ).forEach( el => {
+document.querySelectorAll('range').forEach(el => {
 
-  const temp = document.createElement( 'div' );
+  const temp = document.createElement('div');
   temp.innerHTML = RangeHTML;
 
-  const range = temp.querySelector( '.range' );
-  const rangeLabel = range.querySelector( '.range__label' );
-  const rangeList = range.querySelector( '.range__list' );
+  const range = temp.querySelector('.range');
+  const rangeLabel = range.querySelector('.range__label');
+  const rangeList = range.querySelector('.range__list');
 
-  range.setAttribute( 'name', el.getAttribute( 'name' ) );
-  rangeLabel.innerHTML = el.getAttribute( 'title' );
+  range.setAttribute('name', el.getAttribute('name'));
+  rangeLabel.innerHTML = el.getAttribute('title');
 
-  if ( el.hasAttribute( 'color' ) ) {
+  if (el.hasAttribute('color')) {
 
-    range.classList.add( 'range--type-color' );
-    range.classList.add( 'range--color-' + el.getAttribute( 'name' ) );
+    range.classList.add('range--type-color');
+    range.classList.add('range--color-' + el.getAttribute('name'));
 
   }
 
-  if ( el.hasAttribute( 'list' ) ) {
+  if (el.hasAttribute('list')) {
 
-    el.getAttribute( 'list' ).split( ',' ).forEach( listItemText => {
+    el.getAttribute('list').split(',').forEach(listItemText => {
 
-      const listItem = document.createElement( 'div' );
+      const listItem = document.createElement('div');
       listItem.innerHTML = listItemText;
-      rangeList.appendChild( listItem );
+      rangeList.appendChild(listItem);
 
-    } );
+    });
 
   }
 
-  el.parentNode.replaceChild( range, el );
+  el.parentNode.replaceChild(range, el);
 
-} );
+});
 
 class Range {
 
-  constructor( name, options ) {
+  constructor(name, options) {
 
-    options = Object.assign( {
-      range: [ 0, 1 ],
+    options = Object.assign({
+      range: [0, 1],
       value: 0,
       step: 0,
-      onUpdate: () => {},
-      onComplete: () => {},
-    }, options || {} );
+      onUpdate: () => { },
+      onComplete: () => { },
+    }, options || {});
 
-    this.element = document.querySelector( '.range[name="' + name + '"]' );
-    this.track = this.element.querySelector( '.range__track' );
-    this.handle = this.element.querySelector( '.range__handle' );
-    this.list = [].slice.call( this.element.querySelectorAll( '.range__list div' ) );
+    this.element = document.querySelector('.range[name="' + name + '"]');
+    this.track = this.element.querySelector('.range__track');
+    this.handle = this.element.querySelector('.range__handle');
+    this.list = [].slice.call(this.element.querySelectorAll('.range__list div'));
 
     this.value = options.value;
     this.min = options.range[0];
@@ -2502,15 +2503,15 @@ class Range {
     this.onUpdate = options.onUpdate;
     this.onComplete = options.onComplete;
 
-    this.setValue( this.value );
+    this.setValue(this.value);
 
     this.initDraggable();
 
   }
 
-  setValue( value ) {
+  setValue(value) {
 
-    this.value = this.round( this.limitValue( value ) );
+    this.value = this.round(this.limitValue(value));
     this.setHandlePosition();
 
   }
@@ -2519,77 +2520,77 @@ class Range {
 
     let current;
 
-    this.draggable = new Draggable( this.handle, { calcDelta: true } );
+    this.draggable = new Draggable(this.handle, { calcDelta: true });
 
     this.draggable.onDragStart = position => {
 
-      current = this.positionFromValue( this.value );
+      current = this.positionFromValue(this.value);
       this.handle.style.left = current + 'px';
 
     };
 
     this.draggable.onDragMove = position => {
 
-      current = this.limitPosition( current + position.delta.x );
-      this.value = this.round( this.valueFromPosition( current ) );
+      current = this.limitPosition(current + position.delta.x);
+      this.value = this.round(this.valueFromPosition(current));
       this.setHandlePosition();
-      
-      this.onUpdate( this.value );
+
+      this.onUpdate(this.value);
 
     };
 
     this.draggable.onDragEnd = position => {
 
-      this.onComplete( this.value );
+      this.onComplete(this.value);
 
     };
 
   }
 
-  round( value ) {
+  round(value) {
 
-    if ( this.step < 1 ) return value;
+    if (this.step < 1) return value;
 
-    return Math.round( ( value - this.min ) / this.step ) * this.step + this.min;
-
-  }
-
-  limitValue( value ) {
-
-    const max = Math.max( this.max, this.min );
-    const min = Math.min( this.max, this.min );
-
-    return Math.min( Math.max( value, min ), max );
+    return Math.round((value - this.min) / this.step) * this.step + this.min;
 
   }
 
-  limitPosition( position ) {
+  limitValue(value) {
 
-    return Math.min( Math.max( position, 0 ), this.track.offsetWidth );
+    const max = Math.max(this.max, this.min);
+    const min = Math.min(this.max, this.min);
 
-  }
-
-  percentsFromValue( value ) {
-
-    return ( value - this.min ) / ( this.max - this.min );
+    return Math.min(Math.max(value, min), max);
 
   }
 
-  valueFromPosition( position ) {
+  limitPosition(position) {
 
-    return this.min + ( this.max - this.min ) * ( position / this.track.offsetWidth );
+    return Math.min(Math.max(position, 0), this.track.offsetWidth);
 
   }
 
-  positionFromValue( value ) {
+  percentsFromValue(value) {
 
-    return this.percentsFromValue( value ) * this.track.offsetWidth;
+    return (value - this.min) / (this.max - this.min);
+
+  }
+
+  valueFromPosition(position) {
+
+    return this.min + (this.max - this.min) * (position / this.track.offsetWidth);
+
+  }
+
+  positionFromValue(value) {
+
+    return this.percentsFromValue(value) * this.track.offsetWidth;
 
   }
 
   setHandlePosition() {
 
-    this.handle.style.left = this.percentsFromValue( this.value ) * 100 + '%';
+    this.handle.style.left = this.percentsFromValue(this.value) * 100 + '%';
 
   }
 
@@ -2597,7 +2598,7 @@ class Range {
 
 class Preferences {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
@@ -2607,27 +2608,27 @@ class Preferences {
 
     this.ranges = {
 
-      size: new Range( 'size', {
+      size: new Range('size', {
         value: this.game.cube.size,
-        range: [ 2, 5 ],
+        range: [2, 5],
         step: 1,
         onUpdate: value => {
 
           this.game.cube.size = value;
 
-          this.game.preferences.ranges.scramble.list.forEach( ( item, i ) => {
+          this.game.preferences.ranges.scramble.list.forEach((item, i) => {
 
-            item.innerHTML = this.game.scrambler.scrambleLength[ this.game.cube.size ][ i ];
+            item.innerHTML = this.game.scrambler.scrambleLength[this.game.cube.size][i];
 
-          } );
+          });
 
         },
         onComplete: () => this.game.storage.savePreferences(),
-      } ),
+      }),
 
-      flip: new Range( 'flip', {
+      flip: new Range('flip', {
         value: this.game.controls.flipConfig,
-        range: [ 0, 2 ],
+        range: [0, 2],
         step: 1,
         onUpdate: value => {
 
@@ -2635,11 +2636,11 @@ class Preferences {
 
         },
         onComplete: () => this.game.storage.savePreferences(),
-      } ),
+      }),
 
-      scramble: new Range( 'scramble', {
+      scramble: new Range('scramble', {
         value: this.game.scrambler.dificulty,
-        range: [ 0, 2 ],
+        range: [0, 2],
         step: 1,
         onUpdate: value => {
 
@@ -2647,11 +2648,11 @@ class Preferences {
 
         },
         onComplete: () => this.game.storage.savePreferences()
-      } ),
+      }),
 
-      fov: new Range( 'fov', {
+      fov: new Range('fov', {
         value: this.game.world.fov,
-        range: [ 2, 45 ],
+        range: [2, 45],
         onUpdate: value => {
 
           this.game.world.fov = value;
@@ -2659,57 +2660,57 @@ class Preferences {
 
         },
         onComplete: () => this.game.storage.savePreferences()
-      } ),
+      }),
 
-      theme: new Range( 'theme', {
-        value: { cube: 0, erno: 1, dust: 2, camo: 3, rain: 4 }[ this.game.themes.theme ],
-        range: [ 0, 4 ],
+      theme: new Range('theme', {
+        value: { cube: 0, erno: 1, dust: 2, camo: 3, rain: 4 }[this.game.themes.theme],
+        range: [0, 4],
         step: 1,
         onUpdate: value => {
 
-          const theme = [ 'cube', 'erno', 'dust', 'camo', 'rain' ][ value ];
-          this.game.themes.setTheme( theme );
+          const theme = ['cube', 'erno', 'dust', 'camo', 'rain'][value];
+          this.game.themes.setTheme(theme);
 
         },
         onComplete: () => this.game.storage.savePreferences()
-      } ),
+      }),
 
-      hue: new Range( 'hue', {
+      hue: new Range('hue', {
         value: 0,
-        range: [ 0, 360 ],
+        range: [0, 360],
         onUpdate: value => this.game.themeEditor.updateHSL(),
         onComplete: () => this.game.storage.savePreferences(),
-      } ),
+      }),
 
-      saturation: new Range( 'saturation', {
+      saturation: new Range('saturation', {
         value: 100,
-        range: [ 0, 100 ],
+        range: [0, 100],
         onUpdate: value => this.game.themeEditor.updateHSL(),
         onComplete: () => this.game.storage.savePreferences(),
-      } ),
+      }),
 
-      lightness: new Range( 'lightness', {
+      lightness: new Range('lightness', {
         value: 50,
-        range: [ 0, 100 ],
+        range: [0, 100],
         onUpdate: value => this.game.themeEditor.updateHSL(),
         onComplete: () => this.game.storage.savePreferences(),
-      } ),
+      }),
 
     };
 
-    this.ranges.scramble.list.forEach( ( item, i ) => {
+    this.ranges.scramble.list.forEach((item, i) => {
 
-      item.innerHTML = this.game.scrambler.scrambleLength[ this.game.cube.size ][ i ];
+      item.innerHTML = this.game.scrambler.scrambleLength[this.game.cube.size][i];
 
-    } );
-    
+    });
+
   }
 
 }
 
 class Confetti {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
     this.started = 0;
@@ -2718,61 +2719,61 @@ class Confetti {
       speed: { min: 0.0011, max: 0.0022 },
       revolution: { min: 0.01, max: 0.05 },
       size: { min: 0.1, max: 0.15 },
-      colors: [ 0x41aac8, 0x82ca38, 0xffef48, 0xef3923, 0xff8c0a ],
+      colors: [0x41aac8, 0x82ca38, 0xffef48, 0xef3923, 0xff8c0a],
     };
 
-    this.geometry = new THREE.PlaneGeometry( 1, 1 );
-    this.material = new THREE.MeshLambertMaterial( { side: THREE.DoubleSide } );
+    this.geometry = new THREE.PlaneGeometry(1, 1);
+    this.material = new THREE.MeshLambertMaterial({ side: THREE.DoubleSide });
 
     this.holders = [
-      new ConfettiStage( this.game, this, 1, 20 ),
-      new ConfettiStage( this.game, this, -1, 30 ),
+      new ConfettiStage(this.game, this, 1, 20),
+      new ConfettiStage(this.game, this, -1, 30),
     ];
 
   }
 
   start() {
 
-    if ( this.started > 0 ) return;
+    if (this.started > 0) return;
 
-    this.holders.forEach( holder => {
+    this.holders.forEach(holder => {
 
-      this.game.world.scene.add( holder.holder );
+      this.game.world.scene.add(holder.holder);
       holder.start();
-      this.started ++;
+      this.started++;
 
-    } );
+    });
 
   }
 
   stop() {
 
-    if ( this.started == 0 ) return;
+    if (this.started == 0) return;
 
-    this.holders.forEach( holder => {
+    this.holders.forEach(holder => {
 
-      holder.stop( () => {
+      holder.stop(() => {
 
-        this.game.world.scene.remove( holder.holder );
-        this.started --;
+        this.game.world.scene.remove(holder.holder);
+        this.started--;
 
-      } );
+      });
 
-    } );
+    });
 
   }
 
-  updateColors( colors ) {
+  updateColors(colors) {
 
-    this.holders.forEach( holder => {
+    this.holders.forEach(holder => {
 
-      holder.options.colors.forEach( ( color, index ) => {
+      holder.options.colors.forEach((color, index) => {
 
-        holder.options.colors[ index ] = colors[ [ 'D', 'F', 'R', 'B', 'L' ][ index ] ];
+        holder.options.colors[index] = colors[['D', 'F', 'R', 'B', 'L'][index]];
 
-      } );
+      });
 
-    } );
+    });
 
   }
 
@@ -2780,9 +2781,9 @@ class Confetti {
 
 class ConfettiStage extends Animation {
 
-  constructor( game, parent, distance, count ) {
+  constructor(game, parent, distance, count) {
 
-    super( false );
+    super(false);
 
     this.game = game;
     this.parent = parent;
@@ -2793,14 +2794,14 @@ class ConfettiStage extends Animation {
     this.particles = [];
 
     this.holder = new THREE.Object3D();
-    this.holder.rotation.copy( this.game.world.camera.rotation );
+    this.holder.rotation.copy(this.game.world.camera.rotation);
 
     this.object = new THREE.Object3D();
-    this.holder.add( this.object );
+    this.holder.add(this.object);
 
-    this.resizeViewport = this.resizeViewport.bind( this );
-    this.game.world.onResize.push( this.resizeViewport );
-    this.resizeViewport();    
+    this.resizeViewport = this.resizeViewport.bind(this);
+    this.game.world.onResize.push(this.resizeViewport);
+    this.resizeViewport();
 
     this.geometry = this.parent.geometry;
     this.material = this.parent.material;
@@ -2808,7 +2809,7 @@ class ConfettiStage extends Animation {
     this.options = this.parent.options;
 
     let i = this.count;
-    while ( i-- ) this.particles.push( new Particle( this ) );
+    while (i--) this.particles.push(new Particle(this));
 
   }
 
@@ -2818,13 +2819,13 @@ class ConfettiStage extends Animation {
     this.playing = true;
 
     let i = this.count;
-    while ( i-- ) this.particles[ i ].reset();
+    while (i--) this.particles[i].reset();
 
     super.start();
 
   }
 
-  stop( callback ) {
+  stop(callback) {
 
     this.playing = false;
     this.completed = 0;
@@ -2848,10 +2849,10 @@ class ConfettiStage extends Animation {
 
     let i = this.count;
 
-    while ( i-- )
-      if ( ! this.particles[ i ].completed ) this.particles[ i ].update( delta );
+    while (i--)
+      if (!this.particles[i].completed) this.particles[i].update(delta);
 
-    if ( ! this.playing && this.completed == this.count ) this.reset();
+    if (!this.playing && this.completed == this.count) this.reset();
 
   }
 
@@ -2859,7 +2860,7 @@ class ConfettiStage extends Animation {
 
     const fovRad = this.game.world.camera.fov * THREE.Math.DEG2RAD;
 
-    this.height = 2 * Math.tan( fovRad / 2 ) * ( this.game.world.camera.position.length() - this.distanceFromCube );
+    this.height = 2 * Math.tan(fovRad / 2) * (this.game.world.camera.position.length() - this.distanceFromCube);
     this.width = this.height * this.game.world.camera.aspect;
 
     const scale = 1 / this.game.transition.data.cameraZoom;
@@ -2871,12 +2872,12 @@ class ConfettiStage extends Animation {
     this.object.position.y = this.height / 2;
 
   }
-  
+
 }
 
 class Particle {
 
-  constructor( confetti ) {
+  constructor(confetti) {
 
     this.confetti = confetti;
     this.options = this.confetti.options;
@@ -2884,49 +2885,49 @@ class Particle {
     this.velocity = new THREE.Vector3();
     this.force = new THREE.Vector3();
 
-    this.mesh = new THREE.Mesh( this.confetti.geometry, this.confetti.material.clone() );
-    this.confetti.object.add( this.mesh );
+    this.mesh = new THREE.Mesh(this.confetti.geometry, this.confetti.material.clone());
+    this.confetti.object.add(this.mesh);
 
-    this.size = THREE.Math.randFloat( this.options.size.min, this.options.size.max );
-    this.mesh.scale.set( this.size, this.size, this.size );
+    this.size = THREE.Math.randFloat(this.options.size.min, this.options.size.max);
+    this.mesh.scale.set(this.size, this.size, this.size);
 
     return this;
 
   }
 
-  reset( randomHeight = true ) {
+  reset(randomHeight = true) {
 
     this.completed = false;
 
-    this.color = new THREE.Color( this.options.colors[ Math.floor( Math.random() * this.options.colors.length ) ] );
-    this.mesh.material.color.set( this.color );
+    this.color = new THREE.Color(this.options.colors[Math.floor(Math.random() * this.options.colors.length)]);
+    this.mesh.material.color.set(this.color);
 
-    this.speed = THREE.Math.randFloat( this.options.speed.min, this.options.speed.max ) * - 1;
-    this.mesh.position.x = THREE.Math.randFloat( - this.confetti.width / 2, this.confetti.width / 2 );
-    this.mesh.position.y = ( randomHeight )
-      ? THREE.Math.randFloat( this.size, this.confetti.height + this.size )
+    this.speed = THREE.Math.randFloat(this.options.speed.min, this.options.speed.max) * - 1;
+    this.mesh.position.x = THREE.Math.randFloat(- this.confetti.width / 2, this.confetti.width / 2);
+    this.mesh.position.y = (randomHeight)
+      ? THREE.Math.randFloat(this.size, this.confetti.height + this.size)
       : this.size;
 
-    this.revolutionSpeed = THREE.Math.randFloat( this.options.revolution.min, this.options.revolution.max );
-    this.revolutionAxis = [ 'x', 'y', 'z' ][ Math.floor( Math.random() * 3 ) ];
-    this.mesh.rotation.set( Math.random() * Math.PI / 3, Math.random() * Math.PI / 3, Math.random() * Math.PI / 3 );
+    this.revolutionSpeed = THREE.Math.randFloat(this.options.revolution.min, this.options.revolution.max);
+    this.revolutionAxis = ['x', 'y', 'z'][Math.floor(Math.random() * 3)];
+    this.mesh.rotation.set(Math.random() * Math.PI / 3, Math.random() * Math.PI / 3, Math.random() * Math.PI / 3);
 
   }
 
   stop() {
 
     this.completed = true;
-    this.confetti.completed ++;
+    this.confetti.completed++;
 
   }
 
-  update( delta ) {
+  update(delta) {
 
     this.mesh.position.y += this.speed * delta;
-    this.mesh.rotation[ this.revolutionAxis ] += this.revolutionSpeed;
+    this.mesh.rotation[this.revolutionAxis] += this.revolutionSpeed;
 
-    if ( this.mesh.position.y < - this.confetti.height - this.size )
-      ( this.confetti.playing ) ? this.reset( false ) : this.stop();
+    if (this.mesh.position.y < - this.confetti.height - this.size)
+      (this.confetti.playing) ? this.reset(false) : this.stop();
 
   }
 
@@ -2934,7 +2935,7 @@ class Particle {
 
 class Scores {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
@@ -2967,25 +2968,25 @@ class Scores {
 
   }
 
-  addScore( time ) {
+  addScore(time) {
 
-    const data = this.data[ this.game.cube.sizeGenerated ];
+    const data = this.data[this.game.cube.sizeGenerated];
 
-    data.scores.push( time );
+    data.scores.push(time);
     data.solves++;
 
-    if ( data.scores.lenght > 100 ) data.scores.shift();
+    if (data.scores.lenght > 100) data.scores.shift();
 
-    let bestTime = false;    
+    let bestTime = false;
 
-    if ( time < data.best || data.best === 0 ) {
+    if (time < data.best || data.best === 0) {
 
       data.best = time;
       bestTime = true;
 
     }
 
-    if ( time > data.worst ) data.worst = time;
+    if (time > data.worst) data.worst = time;
 
     this.game.storage.saveScores();
 
@@ -2996,44 +2997,44 @@ class Scores {
   calcStats() {
 
     const s = this.game.cube.sizeGenerated;
-    const data = this.data[ s ];
+    const data = this.data[s];
 
-    this.setStat( 'cube-size', `${s}<i>x</i>${s}<i>x</i>${s}` );
-    this.setStat( 'total-solves', data.solves );
-    this.setStat( 'best-time', this.convertTime( data.best ) );
-    this.setStat( 'worst-time', this.convertTime( data.worst ) );
-    this.setStat( 'average-5', this.getAverage( 5 ) );
-    this.setStat( 'average-12', this.getAverage( 12 ) );
-    this.setStat( 'average-25', this.getAverage( 25 ) );
-
-  }
-
-  setStat( name, value ) {
-
-    if ( value === 0 ) value = '-';
-
-    this.game.dom.stats.querySelector( `.stats[name="${name}"] b` ).innerHTML = value;
+    this.setStat('cube-size', `${s}<i>x</i>${s}<i>x</i>${s}`);
+    this.setStat('total-solves', data.solves);
+    this.setStat('best-time', this.convertTime(data.best));
+    this.setStat('worst-time', this.convertTime(data.worst));
+    this.setStat('average-5', this.getAverage(5));
+    this.setStat('average-12', this.getAverage(12));
+    this.setStat('average-25', this.getAverage(25));
 
   }
 
-  getAverage( count ) {
+  setStat(name, value) {
 
-    const data = this.data[ this.game.cube.sizeGenerated ];
+    if (value === 0) value = '-';
 
-    if ( data.scores.length < count ) return 0;
-
-    return this.convertTime( data.scores.slice( -count ).reduce( ( a, b ) => a + b, 0 ) / count );
+    this.game.dom.stats.querySelector(`.stats[name="${name}"] b`).innerHTML = value;
 
   }
 
-  convertTime( time ) {
+  getAverage(count) {
 
-    if ( time <= 0 ) return 0;
+    const data = this.data[this.game.cube.sizeGenerated];
 
-    const seconds = parseInt( ( time / 1000 ) % 60 );
-    const minutes = parseInt( ( time / ( 1000 * 60 ) ) );
+    if (data.scores.length < count) return 0;
 
-    return minutes + ':' + ( seconds < 10 ? '0' : '' ) + seconds;
+    return this.convertTime(data.scores.slice(-count).reduce((a, b) => a + b, 0) / count);
+
+  }
+
+  convertTime(time) {
+
+    if (time <= 0) return 0;
+
+    const seconds = parseInt((time / 1000) % 60);
+    const minutes = parseInt((time / (1000 * 60)));
+
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 
   }
 
@@ -3041,18 +3042,18 @@ class Scores {
 
 class Storage {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
-    const userVersion = localStorage.getItem( 'theCube_version' );
+    const userVersion = localStorage.getItem('theCube_version');
 
-    if ( ! userVersion || userVersion !== window.gameVersion ) {
+    if (!userVersion || userVersion !== window.gameVersion) {
 
       this.clearGame();
       this.clearPreferences();
       this.migrateScores();
-      localStorage.setItem( 'theCube_version', window.gameVersion );
+      localStorage.setItem('theCube_version', window.gameVersion);
 
     }
 
@@ -3069,23 +3070,23 @@ class Storage {
 
     try {
 
-      const gameInProgress = localStorage.getItem( 'theCube_playing' ) === 'true';
+      const gameInProgress = localStorage.getItem('theCube_playing') === 'true';
 
-      if ( ! gameInProgress ) throw new Error();
+      if (!gameInProgress) throw new Error();
 
-      const gameCubeData = JSON.parse( localStorage.getItem( 'theCube_savedState' ) );
-      const gameTime = parseInt( localStorage.getItem( 'theCube_time' ) );
+      const gameCubeData = JSON.parse(localStorage.getItem('theCube_savedState'));
+      const gameTime = parseInt(localStorage.getItem('theCube_time'));
 
-      if ( ! gameCubeData || gameTime === null ) throw new Error();
-      if ( gameCubeData.size !== this.game.cube.sizeGenerated ) throw new Error();
+      if (!gameCubeData || gameTime === null) throw new Error();
+      if (gameCubeData.size !== this.game.cube.sizeGenerated) throw new Error();
 
-      this.game.cube.loadFromData( gameCubeData );
+      this.game.cube.loadFromData(gameCubeData);
 
       this.game.timer.deltaTime = gameTime;
 
       this.game.saved = true;
 
-    } catch( e ) {
+    } catch (e) {
 
       this.game.saved = false;
 
@@ -3101,25 +3102,25 @@ class Storage {
 
     gameCubeData.size = this.game.cube.sizeGenerated;
 
-    this.game.cube.pieces.forEach( piece => {
+    this.game.cube.pieces.forEach(piece => {
 
-      gameCubeData.names.push( piece.name );
-      gameCubeData.positions.push( piece.position );
-      gameCubeData.rotations.push( piece.rotation.toVector3() );
+      gameCubeData.names.push(piece.name);
+      gameCubeData.positions.push(piece.position);
+      gameCubeData.rotations.push(piece.rotation.toVector3());
 
-    } );
+    });
 
-    localStorage.setItem( 'theCube_playing', gameInProgress );
-    localStorage.setItem( 'theCube_savedState', JSON.stringify( gameCubeData ) );
-    localStorage.setItem( 'theCube_time', gameTime );
+    localStorage.setItem('theCube_playing', gameInProgress);
+    localStorage.setItem('theCube_savedState', JSON.stringify(gameCubeData));
+    localStorage.setItem('theCube_time', gameTime);
 
   }
 
   clearGame() {
 
-    localStorage.removeItem( 'theCube_playing' );
-    localStorage.removeItem( 'theCube_savedState' );
-    localStorage.removeItem( 'theCube_time' );
+    localStorage.removeItem('theCube_playing');
+    localStorage.removeItem('theCube_savedState');
+    localStorage.removeItem('theCube_time');
 
   }
 
@@ -3127,13 +3128,13 @@ class Storage {
 
     try {
 
-      const scoresData = JSON.parse( localStorage.getItem( 'theCube_scores' ) );
+      const scoresData = JSON.parse(localStorage.getItem('theCube_scores'));
 
-      if ( ! scoresData ) throw new Error();
+      if (!scoresData) throw new Error();
 
       this.game.scores.data = scoresData;
 
-    } catch( e ) {}
+    } catch (e) { }
 
   }
 
@@ -3141,13 +3142,13 @@ class Storage {
 
     const scoresData = this.game.scores.data;
 
-    localStorage.setItem( 'theCube_scores', JSON.stringify( scoresData ) );
+    localStorage.setItem('theCube_scores', JSON.stringify(scoresData));
 
   }
 
   clearScores() {
 
-    localStorage.removeItem( 'theCube_scores' );
+    localStorage.removeItem('theCube_scores');
 
   }
 
@@ -3155,24 +3156,24 @@ class Storage {
 
     try {
 
-      const scoresData = JSON.parse( localStorage.getItem( 'theCube_scoresData' ) );
-      const scoresBest = parseInt( localStorage.getItem( 'theCube_scoresBest' ) );
-      const scoresWorst = parseInt( localStorage.getItem( 'theCube_scoresWorst' ) );
-      const scoresSolves = parseInt( localStorage.getItem( 'theCube_scoresSolves' ) );
+      const scoresData = JSON.parse(localStorage.getItem('theCube_scoresData'));
+      const scoresBest = parseInt(localStorage.getItem('theCube_scoresBest'));
+      const scoresWorst = parseInt(localStorage.getItem('theCube_scoresWorst'));
+      const scoresSolves = parseInt(localStorage.getItem('theCube_scoresSolves'));
 
-      if ( ! scoresData || ! scoresBest || ! scoresSolves || ! scoresWorst ) return false;
+      if (!scoresData || !scoresBest || !scoresSolves || !scoresWorst) return false;
 
-      this.game.scores.data[ 3 ].scores = scoresData;
-      this.game.scores.data[ 3 ].best = scoresBest;
-      this.game.scores.data[ 3 ].solves = scoresSolves;
-      this.game.scores.data[ 3 ].worst = scoresWorst;
+      this.game.scores.data[3].scores = scoresData;
+      this.game.scores.data[3].best = scoresBest;
+      this.game.scores.data[3].solves = scoresSolves;
+      this.game.scores.data[3].worst = scoresWorst;
 
-      localStorage.removeItem( 'theCube_scoresData' );
-      localStorage.removeItem( 'theCube_scoresBest' );
-      localStorage.removeItem( 'theCube_scoresWorst' );
-      localStorage.removeItem( 'theCube_scoresSolves' );
+      localStorage.removeItem('theCube_scoresData');
+      localStorage.removeItem('theCube_scoresBest');
+      localStorage.removeItem('theCube_scoresWorst');
+      localStorage.removeItem('theCube_scoresSolves');
 
-    } catch( e ) {}
+    } catch (e) { }
 
   }
 
@@ -3180,19 +3181,19 @@ class Storage {
 
     try {
 
-      const preferences = JSON.parse( localStorage.getItem( 'theCube_preferences' ) );
+      const preferences = JSON.parse(localStorage.getItem('theCube_preferences'));
 
-      if ( ! preferences ) throw new Error();
+      if (!preferences) throw new Error();
 
-      this.game.cube.size = parseInt( preferences.cubeSize );
-      this.game.controls.flipConfig = parseInt( preferences.flipConfig );
-      this.game.scrambler.dificulty = parseInt( preferences.dificulty );
+      this.game.cube.size = parseInt(preferences.cubeSize);
+      this.game.controls.flipConfig = parseInt(preferences.flipConfig);
+      this.game.scrambler.dificulty = parseInt(preferences.dificulty);
 
-      this.game.world.fov = parseFloat( preferences.fov );
+      this.game.world.fov = parseFloat(preferences.fov);
       this.game.world.resize();
 
       this.game.themes.colors = preferences.colors;
-      this.game.themes.setTheme( preferences.theme );
+      this.game.themes.setTheme(preferences.theme);
 
       return true;
 
@@ -3205,7 +3206,7 @@ class Storage {
       this.game.world.fov = 10;
       this.game.world.resize();
 
-      this.game.themes.setTheme( 'cube' );
+      this.game.themes.setTheme('cube');
 
       this.savePreferences();
 
@@ -3226,13 +3227,13 @@ class Storage {
       colors: this.game.themes.colors,
     };
 
-    localStorage.setItem( 'theCube_preferences', JSON.stringify( preferences ) );
+    localStorage.setItem('theCube_preferences', JSON.stringify(preferences));
 
   }
 
   clearPreferences() {
 
-    localStorage.removeItem( 'theCube_preferences' );
+    localStorage.removeItem('theCube_preferences');
 
   }
 
@@ -3240,7 +3241,7 @@ class Storage {
 
 class Themes {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
     this.theme = null;
@@ -3298,32 +3299,32 @@ class Themes {
       },
     };
 
-    this.colors = JSON.parse( JSON.stringify( this.defaults ) );
+    this.colors = JSON.parse(JSON.stringify(this.defaults));
 
   }
 
   getColors() {
 
-    return this.colors[ this.theme ];
+    return this.colors[this.theme];
 
   }
 
-  setTheme( theme = false, force = false ) {
+  setTheme(theme = false, force = false) {
 
-    if ( theme === this.theme && force === false ) return;
-    if ( theme !== false ) this.theme = theme;
+    if (theme === this.theme && force === false) return;
+    if (theme !== false) this.theme = theme;
 
     const colors = this.getColors();
 
-    this.game.dom.prefs.querySelectorAll( '.range__handle div' ).forEach( range => {
+    this.game.dom.prefs.querySelectorAll('.range__handle div').forEach(range => {
 
       range.style.background = '#' + colors.R.toString(16).padStart(6, '0');
 
-    } );
+    });
 
-    this.game.cube.updateColors( colors );
+    this.game.cube.updateColors(colors);
 
-    this.game.confetti.updateColors( colors );
+    this.game.confetti.updateColors(colors);
 
     this.game.dom.back.style.background = '#' + colors.G.toString(16).padStart(6, '0');
 
@@ -3333,67 +3334,67 @@ class Themes {
 
 class ThemeEditor {
 
-  constructor( game ) {
+  constructor(game) {
 
     this.game = game;
 
     this.editColor = 'R';
 
-    this.getPieceColor = this.getPieceColor.bind( this );
+    this.getPieceColor = this.getPieceColor.bind(this);
 
   }
 
-  colorFromHSL( h, s, l ) {
+  colorFromHSL(h, s, l) {
 
-    h = Math.round( h );
-    s = Math.round( s );
-    l = Math.round( l );
+    h = Math.round(h);
+    s = Math.round(s);
+    l = Math.round(l);
 
-    return new THREE.Color( `hsl(${h}, ${s}%, ${l}%)` );
+    return new THREE.Color(`hsl(${h}, ${s}%, ${l}%)`);
 
   }
 
-  setHSL( color = null, animate = false ) {
+  setHSL(color = null, animate = false) {
 
-    this.editColor = ( color === null) ? 'R' : color;
+    this.editColor = (color === null) ? 'R' : color;
 
-    const hsl = new THREE.Color( this.game.themes.getColors()[ this.editColor ] );
+    const hsl = new THREE.Color(this.game.themes.getColors()[this.editColor]);
 
-    const { h, s, l } = hsl.getHSL( hsl );
+    const { h, s, l } = hsl.getHSL(hsl);
     const { hue, saturation, lightness } = this.game.preferences.ranges;
 
-    if ( animate ) {
+    if (animate) {
 
       const ho = hue.value / 360;
       const so = saturation.value / 100;
       const lo = lightness.value / 100;
 
-      const colorOld = this.colorFromHSL( hue.value, saturation.value, lightness.value );
+      const colorOld = this.colorFromHSL(hue.value, saturation.value, lightness.value);
 
-      if ( this.tweenHSL ) this.tweenHSL.stop();
+      if (this.tweenHSL) this.tweenHSL.stop();
 
-      this.tweenHSL = new Tween( {
+      this.tweenHSL = new Tween({
         duration: 200,
         easing: Easing.Sine.Out(),
         onUpdate: tween => {
 
-          hue.setValue( ( ho + ( h - ho ) * tween.value ) * 360 );
-          saturation.setValue( ( so + ( s - so ) * tween.value ) * 100 );
-          lightness.setValue( ( lo + ( l - lo ) * tween.value ) * 100 );
+          hue.setValue((ho + (h - ho) * tween.value) * 360);
+          saturation.setValue((so + (s - so) * tween.value) * 100);
+          lightness.setValue((lo + (l - lo) * tween.value) * 100);
 
-          const colorTween = colorOld.clone().lerp( hsl, tween.value );
+          const colorTween = colorOld.clone().lerp(hsl, tween.value);
 
           const colorTweenStyle = colorTween.getStyle();
-          const colorTweenHex = colorTween.getHSL( colorTween );
+          const colorTweenHex = colorTween.getHSL(colorTween);
 
           hue.handle.style.color = colorTweenStyle;
           saturation.handle.style.color = colorTweenStyle;
           lightness.handle.style.color = colorTweenStyle;
 
           saturation.track.style.color =
-            this.colorFromHSL( colorTweenHex.h * 360, 100, 50 ).getStyle();
+            this.colorFromHSL(colorTweenHex.h * 360, 100, 50).getStyle();
           lightness.track.style.color =
-            this.colorFromHSL( colorTweenHex.h * 360, colorTweenHex.s * 100, 50 ).getStyle();
+            this.colorFromHSL(colorTweenHex.h * 360, colorTweenHex.s * 100, 50).getStyle();
 
           this.game.dom.theme.style.display = 'none';
           this.game.dom.theme.offsetHeight;
@@ -3406,13 +3407,13 @@ class ThemeEditor {
           this.game.storage.savePreferences();
 
         },
-      } );
+      });
 
     } else {
 
-      hue.setValue( h * 360 );
-      saturation.setValue( s * 100 );
-      lightness.setValue( l * 100 );
+      hue.setValue(h * 360);
+      saturation.setValue(s * 100);
+      lightness.setValue(l * 100);
 
       this.updateHSL();
       this.game.storage.savePreferences();
@@ -3429,14 +3430,14 @@ class ThemeEditor {
     const s = saturation.value;
     const l = lightness.value;
 
-    const color = this.colorFromHSL( h, s, l ).getStyle();
+    const color = this.colorFromHSL(h, s, l).getStyle();
 
     hue.handle.style.color = color;
     saturation.handle.style.color = color;
     lightness.handle.style.color = color;
 
-    saturation.track.style.color = this.colorFromHSL( h, 100, 50 ).getStyle();
-    lightness.track.style.color = this.colorFromHSL( h, s, 50 ).getStyle();
+    saturation.track.style.color = this.colorFromHSL(h, 100, 50).getStyle();
+    lightness.track.style.color = this.colorFromHSL(h, s, 50).getStyle();
 
     this.game.dom.theme.style.display = 'none';
     this.game.dom.theme.offsetHeight;
@@ -3444,64 +3445,64 @@ class ThemeEditor {
 
     const theme = this.game.themes.theme;
 
-    this.game.themes.colors[ theme ][ this.editColor ] = this.colorFromHSL( h, s, l ).getHex();
+    this.game.themes.colors[theme][this.editColor] = this.colorFromHSL(h, s, l).getHex();
     this.game.themes.setTheme();
 
   }
 
-  colorPicker( enable ) {
+  colorPicker(enable) {
 
-    if ( enable ) {
+    if (enable) {
 
-      this.game.dom.game.addEventListener( 'click', this.getPieceColor, false );
+      this.game.dom.game.addEventListener('click', this.getPieceColor, false);
 
     } else {
 
-      this.game.dom.game.removeEventListener( 'click', this.getPieceColor, false );
+      this.game.dom.game.removeEventListener('click', this.getPieceColor, false);
 
     }
 
   }
 
-  getPieceColor( event ) {
+  getPieceColor(event) {
 
     const clickEvent = event.touches
-      ? ( event.touches[ 0 ] || event.changedTouches[ 0 ] )
+      ? (event.touches[0] || event.changedTouches[0])
       : event;
 
-    const clickPosition = new THREE.Vector2( clickEvent.pageX, clickEvent.pageY );
+    const clickPosition = new THREE.Vector2(clickEvent.pageX, clickEvent.pageY);
 
-    let edgeIntersect = this.game.controls.getIntersect( clickPosition, this.game.cube.edges, true );
-    let pieceIntersect = this.game.controls.getIntersect( clickPosition, this.game.cube.cubes, true );
+    let edgeIntersect = this.game.controls.getIntersect(clickPosition, this.game.cube.edges, true);
+    let pieceIntersect = this.game.controls.getIntersect(clickPosition, this.game.cube.cubes, true);
 
-    if ( edgeIntersect !== false ) {
+    if (edgeIntersect !== false) {
 
       const edge = edgeIntersect.object;
 
       const position = edge.parent
-        .localToWorld( edge.position.clone() )
-        .sub( this.game.cube.object.position )
-        .sub( this.game.cube.animator.position );
+        .localToWorld(edge.position.clone())
+        .sub(this.game.cube.object.position)
+        .sub(this.game.cube.animator.position);
 
-      const mainAxis = this.game.controls.getMainAxis( position );
-      if ( position.multiplyScalar( 2 ).round()[ mainAxis ] < 1 ) edgeIntersect = false;
+      const mainAxis = this.game.controls.getMainAxis(position);
+      if (position.multiplyScalar(2).round()[mainAxis] < 1) edgeIntersect = false;
 
     }
 
     const name = edgeIntersect ? edgeIntersect.object.name : pieceIntersect ? 'P' : 'G';
 
-    this.setHSL( name, true );
+    this.setHSL(name, true);
 
   }
 
   resetTheme() {
 
-    this.game.themes.colors[ this.game.themes.theme ] =
-      JSON.parse( JSON.stringify( this.game.themes.defaults[ this.game.themes.theme ] ) );
+    this.game.themes.colors[this.game.themes.theme] =
+      JSON.parse(JSON.stringify(this.game.themes.defaults[this.game.themes.theme]));
 
     this.game.themes.setTheme();
 
-    this.setHSL( this.editColor, true );
+    this.setHSL(this.editColor, true);
 
   }
 
@@ -3510,35 +3511,35 @@ class ThemeEditor {
 const States = {
   3: {
     checkerboard: {
-      names: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 ],
+      names: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
       positions: [
-        { "x": 1/3, "y": -1/3, "z": 1/3 },
-        { "x": -1/3, "y": 1/3, "z": 0 },
-        { "x": 1/3, "y": -1/3, "z": -1/3 },
-        { "x": -1/3, "y": 0, "z": -1/3 },
-        { "x": 1/3, "y": 0, "z": 0 },
-        { "x": -1/3, "y": 0, "z": 1/3 },
-        { "x": 1/3, "y": 1/3, "z": 1/3 },
-        { "x": -1/3, "y": -1/3, "z": 0 },
-        { "x": 1/3, "y": 1/3, "z": -1/3 },
-        { "x": 0, "y": 1/3, "z": -1/3 },
-        { "x": 0, "y": -1/3, "z": 0 },
-        { "x": 0, "y": 1/3, "z": 1/3 },
-        { "x": 0, "y": 0, "z": 1/3 },
+        { "x": 1 / 3, "y": -1 / 3, "z": 1 / 3 },
+        { "x": -1 / 3, "y": 1 / 3, "z": 0 },
+        { "x": 1 / 3, "y": -1 / 3, "z": -1 / 3 },
+        { "x": -1 / 3, "y": 0, "z": -1 / 3 },
+        { "x": 1 / 3, "y": 0, "z": 0 },
+        { "x": -1 / 3, "y": 0, "z": 1 / 3 },
+        { "x": 1 / 3, "y": 1 / 3, "z": 1 / 3 },
+        { "x": -1 / 3, "y": -1 / 3, "z": 0 },
+        { "x": 1 / 3, "y": 1 / 3, "z": -1 / 3 },
+        { "x": 0, "y": 1 / 3, "z": -1 / 3 },
+        { "x": 0, "y": -1 / 3, "z": 0 },
+        { "x": 0, "y": 1 / 3, "z": 1 / 3 },
+        { "x": 0, "y": 0, "z": 1 / 3 },
         { "x": 0, "y": 0, "z": 0 },
-        { "x": 0, "y": 0, "z": -1/3 },
-        { "x": 0, "y": -1/3, "z": -1/3 },
-        { "x": 0, "y": 1/3, "z": 0 },
-        { "x": 0, "y": -1/3, "z": 1/3 },
-        { "x": -1/3, "y": -1/3, "z": 1/3 },
-        { "x": 1/3, "y": 1/3, "z": 0 },
-        { "x": -1/3, "y": -1/3, "z": -1/3 },
-        { "x": 1/3, "y": 0, "z": -1/3 },
-        { "x": -1/3, "y": 0, "z": 0 },
-        { "x": 1/3, "y": 0, "z": 1/3 },
-        { "x": -1/3, "y": 1/3, "z": 1/3 },
-        { "x": 1/3, "y": -1/3, "z": 0 },
-        { "x": -1/3, "y": 1/3, "z": -1/3 }
+        { "x": 0, "y": 0, "z": -1 / 3 },
+        { "x": 0, "y": -1 / 3, "z": -1 / 3 },
+        { "x": 0, "y": 1 / 3, "z": 0 },
+        { "x": 0, "y": -1 / 3, "z": 1 / 3 },
+        { "x": -1 / 3, "y": -1 / 3, "z": 1 / 3 },
+        { "x": 1 / 3, "y": 1 / 3, "z": 0 },
+        { "x": -1 / 3, "y": -1 / 3, "z": -1 / 3 },
+        { "x": 1 / 3, "y": 0, "z": -1 / 3 },
+        { "x": -1 / 3, "y": 0, "z": 0 },
+        { "x": 1 / 3, "y": 0, "z": 1 / 3 },
+        { "x": -1 / 3, "y": 1 / 3, "z": 1 / 3 },
+        { "x": 1 / 3, "y": -1 / 3, "z": 0 },
+        { "x": -1 / 3, "y": 1 / 3, "z": -1 / 3 }
       ],
       rotations: [
         { "x": -Math.PI, "y": 0, "z": Math.PI, },
@@ -3576,32 +3577,32 @@ const States = {
 
 class IconsConverter {
 
-  constructor( options ) {
+  constructor(options) {
 
-    options = Object.assign( {
+    options = Object.assign({
       tagName: 'icon',
       className: 'icon',
       styles: false,
       icons: {},
       observe: false,
       convert: false,
-    }, options || {} );
+    }, options || {});
 
     this.tagName = options.tagName;
     this.className = options.className;
     this.icons = options.icons;
 
-    this.svgTag = document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' );
-    this.svgTag.setAttribute( 'class', this.className );
+    this.svgTag = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    this.svgTag.setAttribute('class', this.className);
 
-    if ( options.styles ) this.addStyles();
-    if ( options.convert ) this.convertAllIcons();
+    if (options.styles) this.addStyles();
+    if (options.convert) this.convertAllIcons();
 
-    if ( options.observe ) {
+    if (options.observe) {
 
       const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-      this.observer = new MutationObserver( mutations => { this.convertAllIcons(); } );
-      this.observer.observe( document.documentElement, { childList: true, subtree: true } );
+      this.observer = new MutationObserver(mutations => { this.convertAllIcons(); });
+      this.observer.observe(document.documentElement, { childList: true, subtree: true });
 
     }
 
@@ -3611,39 +3612,39 @@ class IconsConverter {
 
   convertAllIcons() {
 
-    document.querySelectorAll( this.tagName ).forEach( icon => { this.convertIcon( icon ); } );
+    document.querySelectorAll(this.tagName).forEach(icon => { this.convertIcon(icon); });
 
   }
 
-  convertIcon( icon ) {
+  convertIcon(icon) {
 
-    const svgData = this.icons[ icon.attributes[0].localName ];
+    const svgData = this.icons[icon.attributes[0].localName];
 
-    if ( typeof svgData === 'undefined' ) return;
+    if (typeof svgData === 'undefined') return;
 
-    const svg = this.svgTag.cloneNode( true );
-    const viewBox = svgData.viewbox.split( ' ' );
+    const svg = this.svgTag.cloneNode(true);
+    const viewBox = svgData.viewbox.split(' ');
 
-    svg.setAttributeNS( null, 'viewBox', svgData.viewbox );
+    svg.setAttributeNS(null, 'viewBox', svgData.viewbox);
     svg.style.width = viewBox[2] / viewBox[3] + 'em';
     svg.style.height = '1em';
     svg.innerHTML = svgData.content;
 
-    icon.parentNode.replaceChild( svg, icon );
+    icon.parentNode.replaceChild(svg, icon);
 
   }
 
   addStyles() {
 
-    const style = document.createElement( 'style' );
+    const style = document.createElement('style');
     style.innerHTML = `.${this.className} { display: inline-block; font-size: inherit; overflow: visible; vertical-align: -0.125em; preserveAspectRatio: none; }`;
-    document.head.appendChild( style );
+    document.head.appendChild(style);
 
   }
 
 }
 
-const Icons = new IconsConverter( {
+const Icons = new IconsConverter({
 
   icons: {
     settings: {
@@ -3678,7 +3679,7 @@ const Icons = new IconsConverter( {
 
   convert: true,
 
-} );
+});
 
 const STATE = {
   Menu: 0,
@@ -3690,12 +3691,12 @@ const STATE = {
 };
 
 const BUTTONS = {
-  Menu: [ 'stats', 'prefs' ],
-  Playing: [ 'back' ],
+  Menu: ['stats', 'prefs'],
+  Playing: ['back'],
   Complete: [],
-  Stats: [ 'back' ],
-  Prefs: [ 'back', 'theme' ],
-  Theme: [ 'back', 'reset' ],
+  Stats: ['back'],
+  Prefs: ['back', 'theme'],
+  Theme: ['back', 'reset'],
   None: [],
 };
 
@@ -3707,41 +3708,41 @@ class Game {
   constructor() {
 
     this.dom = {
-      ui: document.querySelector( '.ui' ),
-      game: document.querySelector( '.ui__game' ),
-      back: document.querySelector( '.ui__background' ),
-      prefs: document.querySelector( '.ui__prefs' ),
-      theme: document.querySelector( '.ui__theme' ),
-      stats: document.querySelector( '.ui__stats' ),
+      ui: document.querySelector('.ui'),
+      game: document.querySelector('.ui__game'),
+      back: document.querySelector('.ui__background'),
+      prefs: document.querySelector('.ui__prefs'),
+      theme: document.querySelector('.ui__theme'),
+      stats: document.querySelector('.ui__stats'),
       texts: {
-        title: document.querySelector( '.text--title' ),
-        note: document.querySelector( '.text--note' ),
-        timer: document.querySelector( '.text--timer' ),
-        complete: document.querySelector( '.text--complete' ),
-        best: document.querySelector( '.text--best-time' ),
-        theme: document.querySelector( '.text--theme' ),
+        title: document.querySelector('.text--title'),
+        note: document.querySelector('.text--note'),
+        timer: document.querySelector('.text--timer'),
+        complete: document.querySelector('.text--complete'),
+        best: document.querySelector('.text--best-time'),
+        theme: document.querySelector('.text--theme'),
       },
       buttons: {
-        prefs: document.querySelector( '.btn--prefs' ),
-        back: document.querySelector( '.btn--back' ),
-        stats: document.querySelector( '.btn--stats' ),
-        reset: document.querySelector( '.btn--reset' ),
-        theme: document.querySelector( '.btn--theme' ),
+        prefs: document.querySelector('.btn--prefs'),
+        back: document.querySelector('.btn--back'),
+        stats: document.querySelector('.btn--stats'),
+        reset: document.querySelector('.btn--reset'),
+        theme: document.querySelector('.btn--theme'),
       },
     };
 
-    this.world = new World( this );
-    this.cube = new Cube( this );
-    this.controls = new Controls( this );
-    this.scrambler = new Scrambler( this );
-    this.transition = new Transition( this );
-    this.timer = new Timer( this );
-    this.preferences = new Preferences( this );
-    this.scores = new Scores( this );
-    this.storage = new Storage( this );
-    this.confetti = new Confetti( this );
-    this.themes = new Themes( this );
-    this.themeEditor = new ThemeEditor( this );
+    this.world = new World(this);
+    this.cube = new Cube(this);
+    this.controls = new Controls(this);
+    this.scrambler = new Scrambler(this);
+    this.transition = new Transition(this);
+    this.timer = new Timer(this);
+    this.preferences = new Preferences(this);
+    this.scores = new Scores(this);
+    this.storage = new Storage(this);
+    this.confetti = new Confetti(this);
+    this.themes = new Themes(this);
+    this.themeEditor = new ThemeEditor(this);
 
     this.initActions();
 
@@ -3757,15 +3758,15 @@ class Game {
     this.storage.loadGame();
     this.scores.calcStats();
 
-    setTimeout( () => {
+    setTimeout(() => {
 
       this.transition.float();
-      this.transition.cube( SHOW );
+      this.transition.cube(SHOW);
 
-      setTimeout( () => this.transition.title( SHOW ), 700 );
-      setTimeout( () => this.transition.buttons( BUTTONS.Menu, BUTTONS.None ), 1000 );
+      setTimeout(() => this.transition.title(SHOW), 700);
+      setTimeout(() => this.transition.buttons(BUTTONS.Menu, BUTTONS.None), 1000);
 
-    }, 500 );
+    }, 500);
 
   }
 
@@ -3773,26 +3774,26 @@ class Game {
 
     let tappedTwice = false;
 
-    this.dom.game.addEventListener( 'click', event => {
+    this.dom.game.addEventListener('click', event => {
 
-      if ( this.transition.activeTransitions > 0 ) return;
-      if ( this.state === STATE.Playing ) return;
+      if (this.transition.activeTransitions > 0) return;
+      if (this.state === STATE.Playing) return;
 
-      if ( this.state === STATE.Menu ) {
+      if (this.state === STATE.Menu) {
 
-        if ( ! tappedTwice ) {
+        if (!tappedTwice) {
 
           tappedTwice = true;
-          setTimeout( () => tappedTwice = false, 300 );
+          setTimeout(() => tappedTwice = false, 300);
           return false;
 
         }
 
-        this.game( SHOW );
+        this.game(SHOW);
 
-      } else if ( this.state === STATE.Complete ) {
+      } else if (this.state === STATE.Complete) {
 
-        this.complete( HIDE );
+        this.complete(HIDE);
 
       }
       // else if ( this.state === STATE.Stats ) {
@@ -3801,13 +3802,13 @@ class Game {
 
       // }
 
-    }, false );
+    }, false);
 
     this.controls.onMove = () => {
 
-      if ( this.newGame ) {
-        
-        this.timer.start( true );
+      if (this.newGame) {
+
+        this.timer.start(true);
         this.newGame = false;
 
       }
@@ -3816,23 +3817,23 @@ class Game {
 
     this.dom.buttons.back.onclick = event => {
 
-      if ( this.transition.activeTransitions > 0 ) return;
+      if (this.transition.activeTransitions > 0) return;
 
-      if ( this.state === STATE.Playing ) {
+      if (this.state === STATE.Playing) {
 
-        this.game( HIDE );
+        this.game(HIDE);
 
-      } else if ( this.state === STATE.Prefs ) {
+      } else if (this.state === STATE.Prefs) {
 
-        this.prefs( HIDE );
+        this.prefs(HIDE);
 
-      } else if ( this.state === STATE.Stats ) {
+      } else if (this.state === STATE.Stats) {
 
-        this.stats( HIDE );
+        this.stats(HIDE);
 
-      } else if ( this.state === STATE.Theme ) {
+      } else if (this.state === STATE.Theme) {
 
-        this.theme( HIDE );
+        this.theme(HIDE);
 
       }
 
@@ -3840,29 +3841,29 @@ class Game {
 
     this.dom.buttons.reset.onclick = event => {
 
-      if ( this.state === STATE.Theme ) {
+      if (this.state === STATE.Theme) {
 
         this.themeEditor.resetTheme();
 
       }
-      
+
     };
 
-    this.dom.buttons.prefs.onclick = event => this.prefs( SHOW );
+    this.dom.buttons.prefs.onclick = event => this.prefs(SHOW);
 
-    this.dom.buttons.theme.onclick = event => this.theme( SHOW );
+    this.dom.buttons.theme.onclick = event => this.theme(SHOW);
 
-    this.dom.buttons.stats.onclick = event => this.stats( SHOW );
+    this.dom.buttons.stats.onclick = event => this.stats(SHOW);
 
-    this.controls.onSolved = () => this.complete( SHOW );
+    this.controls.onSolved = () => this.complete(SHOW);
 
   }
 
-  game( show ) {
+  game(show) {
 
-    if ( show ) {
+    if (show) {
 
-      if ( ! this.saved ) {
+      if (!this.saved) {
 
         this.scrambler.scramble();
         this.controls.scrambleCube();
@@ -3871,43 +3872,43 @@ class Game {
       }
 
       const duration = this.saved ? 0 :
-        this.scrambler.converted.length * ( this.controls.flipSpeeds[0] + 10 );
+        this.scrambler.converted.length * (this.controls.flipSpeeds[0] + 10);
 
       this.state = STATE.Playing;
       this.saved = true;
 
-      this.transition.buttons( BUTTONS.None, BUTTONS.Menu );
+      this.transition.buttons(BUTTONS.None, BUTTONS.Menu);
 
-      this.transition.zoom( STATE.Playing, duration );
-      this.transition.title( HIDE );
+      this.transition.zoom(STATE.Playing, duration);
+      this.transition.title(HIDE);
 
-      setTimeout( () => {
+      setTimeout(() => {
 
-        this.transition.timer( SHOW );
-        this.transition.buttons( BUTTONS.Playing, BUTTONS.None );
+        this.transition.timer(SHOW);
+        this.transition.buttons(BUTTONS.Playing, BUTTONS.None);
 
-      }, this.transition.durations.zoom - 1000 );
+      }, this.transition.durations.zoom - 1000);
 
-      setTimeout( () => {
+      setTimeout(() => {
 
         this.controls.enable();
-        if ( ! this.newGame ) this.timer.start( true );
+        if (!this.newGame) this.timer.start(true);
 
-      }, this.transition.durations.zoom );
+      }, this.transition.durations.zoom);
 
     } else {
 
       this.state = STATE.Menu;
 
-      this.transition.buttons( BUTTONS.Menu, BUTTONS.Playing );
+      this.transition.buttons(BUTTONS.Menu, BUTTONS.Playing);
 
-      this.transition.zoom( STATE.Menu, 0 );
+      this.transition.zoom(STATE.Menu, 0);
 
       this.controls.disable();
-      if ( ! this.newGame ) this.timer.stop();
-      this.transition.timer( HIDE );
+      if (!this.newGame) this.timer.stop();
+      this.transition.timer(HIDE);
 
-      setTimeout( () => this.transition.title( SHOW ), this.transition.durations.zoom - 1000 );
+      setTimeout(() => this.transition.title(SHOW), this.transition.durations.zoom - 1000);
 
       this.playing = false;
       this.controls.disable();
@@ -3916,20 +3917,20 @@ class Game {
 
   }
 
-  prefs( show ) {
+  prefs(show) {
 
-    if ( show ) {
+    if (show) {
 
-      if ( this.transition.activeTransitions > 0 ) return;
+      if (this.transition.activeTransitions > 0) return;
 
       this.state = STATE.Prefs;
 
-      this.transition.buttons( BUTTONS.Prefs, BUTTONS.Menu );
+      this.transition.buttons(BUTTONS.Prefs, BUTTONS.Menu);
 
-      this.transition.title( HIDE );
-      this.transition.cube( HIDE );
+      this.transition.title(HIDE);
+      this.transition.cube(HIDE);
 
-      setTimeout( () => this.transition.preferences( SHOW ), 1000 );
+      setTimeout(() => this.transition.preferences(SHOW), 1000);
 
     } else {
 
@@ -3937,102 +3938,102 @@ class Game {
 
       this.state = STATE.Menu;
 
-      this.transition.buttons( BUTTONS.Menu, BUTTONS.Prefs );
+      this.transition.buttons(BUTTONS.Menu, BUTTONS.Prefs);
 
-      this.transition.preferences( HIDE );
+      this.transition.preferences(HIDE);
 
-      setTimeout( () => this.transition.cube( SHOW ), 500 );
-      setTimeout( () => this.transition.title( SHOW ), 1200 );
+      setTimeout(() => this.transition.cube(SHOW), 500);
+      setTimeout(() => this.transition.title(SHOW), 1200);
 
     }
 
   }
 
-  theme( show ) {
+  theme(show) {
 
-    this.themeEditor.colorPicker( show );
-    
-    if ( show ) {
+    this.themeEditor.colorPicker(show);
 
-      if ( this.transition.activeTransitions > 0 ) return;
+    if (show) {
 
-      this.cube.loadFromData( States[ '3' ][ 'checkerboard' ] );
+      if (this.transition.activeTransitions > 0) return;
 
-      this.themeEditor.setHSL( null, false );
+      this.cube.loadFromData(States['3']['checkerboard']);
+
+      this.themeEditor.setHSL(null, false);
 
       this.state = STATE.Theme;
 
-      this.transition.buttons( BUTTONS.Theme, BUTTONS.Prefs );
+      this.transition.buttons(BUTTONS.Theme, BUTTONS.Prefs);
 
-      this.transition.preferences( HIDE );
+      this.transition.preferences(HIDE);
 
-      setTimeout( () => this.transition.cube( SHOW, true ), 500 );
-      setTimeout( () => this.transition.theming( SHOW ), 1000 );
+      setTimeout(() => this.transition.cube(SHOW, true), 500);
+      setTimeout(() => this.transition.theming(SHOW), 1000);
 
     } else {
 
       this.state = STATE.Prefs;
 
-      this.transition.buttons( BUTTONS.Prefs, BUTTONS.Theme );
+      this.transition.buttons(BUTTONS.Prefs, BUTTONS.Theme);
 
-      this.transition.cube( HIDE, true );
-      this.transition.theming( HIDE );
+      this.transition.cube(HIDE, true);
+      this.transition.theming(HIDE);
 
-      setTimeout( () => this.transition.preferences( SHOW ), 1000 );
-      setTimeout( () => {
+      setTimeout(() => this.transition.preferences(SHOW), 1000);
+      setTimeout(() => {
 
-        const gameCubeData = JSON.parse( localStorage.getItem( 'theCube_savedState' ) );
+        const gameCubeData = JSON.parse(localStorage.getItem('theCube_savedState'));
 
-        if ( !gameCubeData ) {
+        if (!gameCubeData) {
 
-          this.cube.resize( true );
+          this.cube.resize(true);
           return;
 
         }
 
-        this.cube.loadFromData( gameCubeData );
+        this.cube.loadFromData(gameCubeData);
 
-      }, 1500 );
+      }, 1500);
 
     }
 
   }
 
-  stats( show ) {
+  stats(show) {
 
-    if ( show ) {
+    if (show) {
 
-      if ( this.transition.activeTransitions > 0 ) return;
+      if (this.transition.activeTransitions > 0) return;
 
       this.state = STATE.Stats;
 
-      this.transition.buttons( BUTTONS.Stats, BUTTONS.Menu );
+      this.transition.buttons(BUTTONS.Stats, BUTTONS.Menu);
 
-      this.transition.title( HIDE );
-      this.transition.cube( HIDE );
+      this.transition.title(HIDE);
+      this.transition.cube(HIDE);
 
-      setTimeout( () => this.transition.stats( SHOW ), 1000 );
+      setTimeout(() => this.transition.stats(SHOW), 1000);
 
     } else {
 
       this.state = STATE.Menu;
 
-      this.transition.buttons( BUTTONS.Menu, BUTTONS.Stats );
+      this.transition.buttons(BUTTONS.Menu, BUTTONS.Stats);
 
-      this.transition.stats( HIDE );
+      this.transition.stats(HIDE);
 
-      setTimeout( () => this.transition.cube( SHOW ), 500 );
-      setTimeout( () => this.transition.title( SHOW ), 1200 );
+      setTimeout(() => this.transition.cube(SHOW), 500);
+      setTimeout(() => this.transition.title(SHOW), 1200);
 
     }
 
   }
 
-  complete( show ) {
+  complete(show) {
 
-    if ( show ) {
+    if (show) {
 
-      this.transition.buttons( BUTTONS.Complete, BUTTONS.Playing );
+      this.transition.buttons(BUTTONS.Complete, BUTTONS.Playing);
 
       this.state = STATE.Complete;
       this.saved = false;
@@ -4041,37 +4042,37 @@ class Game {
       this.timer.stop();
       this.storage.clearGame();
 
-      this.bestTime = this.scores.addScore( this.timer.deltaTime );
+      this.bestTime = this.scores.addScore(this.timer.deltaTime);
 
-      this.transition.zoom( STATE.Menu, 0 );
-      this.transition.elevate( SHOW );
+      this.transition.zoom(STATE.Menu, 0);
+      this.transition.elevate(SHOW);
 
-      setTimeout( () => {
+      setTimeout(() => {
 
-        this.transition.complete( SHOW, this.bestTime );
+        this.transition.complete(SHOW, this.bestTime);
         this.confetti.start();
 
-      }, 1000 );
+      }, 1000);
 
     } else {
 
       this.state = STATE.Stats;
       this.saved = false;
 
-      this.transition.timer( HIDE );
-      this.transition.complete( HIDE, this.bestTime );
-      this.transition.cube( HIDE );
+      this.transition.timer(HIDE);
+      this.transition.complete(HIDE, this.bestTime);
+      this.transition.cube(HIDE);
       this.timer.reset();
 
-      setTimeout( () => {
+      setTimeout(() => {
 
         this.cube.reset();
         this.confetti.stop();
 
-        this.transition.stats( SHOW );
-        this.transition.elevate( 0 );
+        this.transition.stats(SHOW);
+        this.transition.elevate(0);
 
-      }, 1000 );
+      }, 1000);
 
       return false;
 
@@ -4080,6 +4081,123 @@ class Game {
   }
 
 }
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM fully loaded and parsed');
+  init(); // Initialize Three.js when DOM is ready
+  handleCookieBlocking(); // Check for and handle third-party cookie blocking
+});
 
+let cube; // Global cube variable
+
+function handleKeyPress(event) {
+  console.log('Key pressed:', event.key); // Log the pressed key
+  switch (event.key) {
+    case 'ArrowLeft':
+      console.log('Left Arrow pressed');
+      rotateLeft();
+      break;
+    case 'ArrowUp':
+      console.log('Up Arrow pressed');
+      rotateUp();
+      break;
+    case 'ArrowRight':
+      console.log('Right Arrow pressed');
+      rotateRight();
+      break;
+    case 'ArrowDown':
+      console.log('Down Arrow pressed');
+      rotateDown();
+      break;
+    default:
+      console.log('Other key pressed:', event.key);
+      break;
+  }
+}
+
+function rotateUp() {
+  console.log('Rotate up function called');
+  if (cube) {
+    var axis = new THREE.Vector3(1, 0, 0); // Rotate around the x-axis
+    var angle = Math.PI / 2; // Rotate by 90 degrees
+    cube.rotateOnAxis(axis, angle);
+  }
+}
+
+function rotateDown() {
+  console.log('Rotate down function called');
+  if (cube) {
+    var axis = new THREE.Vector3(1, 0, 0); // Rotate around the x-axis
+    var angle = -Math.PI / 2; // Rotate by -90 degrees
+    cube.rotateOnAxis(axis, angle);
+  }
+}
+
+function rotateLeft() {
+  console.log('Rotate left function called');
+  if (cube) {
+    var axis = new THREE.Vector3(0, 1, 0); // Rotate around the y-axis
+    var angle = Math.PI / 2; // Rotate by 90 degrees
+    cube.rotateOnAxis(axis, angle);
+  }
+}
+
+function rotateRight() {
+  console.log('Rotate right function called');
+  if (cube) {
+    var axis = new THREE.Vector3(0, 1, 0); // Rotate around the y-axis
+    var angle = -Math.PI / 2; // Rotate by -90 degrees
+    cube.rotateOnAxis(axis, angle);
+  }
+}
+
+function init() {
+  console.log('Initializing Three.js');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  camera.position.z = 5;
+
+  const animate = function () {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  };
+
+  animate();
+}
+
+function handleCookieBlocking() {
+  console.log('Checking for third-party cookie blocking');
+  // Implement your logic to check and handle third-party cookie blocking
+}
+
+// Adding CSS dynamically
+const head = document.head || document.getElementsByTagName('head')[0];
+if (head) {
+  const style = document.createElement('style');
+  style.textContent = `
+    /* Your CSS rules here */
+  `;
+  head.appendChild(style);
+} else {
+  console.error('Head element not found');
+}
+
+function initThreeJS() {
+  console.log('Initializing Three.js');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window)
+}
 window.version = '0.99.2';
-window.game = new Game();
+window.game = new Game(); // Assuming Game() is defined elsewhere
+
+
+
+
