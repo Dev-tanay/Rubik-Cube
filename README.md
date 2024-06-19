@@ -1,4 +1,4 @@
-<h1>Rubik-Cube</h1>
+# <p align="center">✨Rubik-Cube✨</p>
 
 <p align="center">
  
@@ -18,10 +18,9 @@
     <img src="https://img.shields.io/website?style=for-the-badge&down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fdev-tanay.github.io%2FRubik-Cube%2F" alt="Website status">
   </a>
 </p>
-<h2>Link to Game Demo</h2>
-<a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev-tanay.github.io/Rubik-Cube/</a>
 
-<img src="images/home.png" width="350">
+
+<img src="images/home.png" height="500" width="1200">
 
 <h2>About the Game</h2>
 <p>This is a simple and elegant game where you can play Rubik's Cube from your own web browser.</p>
@@ -34,18 +33,34 @@
 </ul>
 <p>The 26 pieces are "scrambled" to have different colors on each face.</p>
 
+
+<h4>Link to Game Demo</h4>
+<a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev-tanay.github.io/Rubik-Cube/</a>
+
+
 <h2>How to Play</h2>
 <p>The objective of this game is to get each face of the cube to have a single color.</p>
 <p>This can be done in two ways:</p>
 <ol type="i">
   <li>Twisting the segments</li>
-  <p>This can be done by dragging the cursor over the segment you want to rotate.</p>
+  <p>This can be done by dragging the cursor over the segment you want to rotate or letters(r l u b d f) for the move(Hold Shift for prime/anticlockwise moves)</li>
+  </p>
   <img src="images/twist1.png" width="300">
   <img src="images/twist2.png" width="300">
   <li>Changing the view of the cube</li>
-  <p>This can be done by dragging the cursor in an arrow around the cube.</p>
+  <p>This can be done by dragging the cursor in an arrow or arrowkeys (up,down,right,left) around the cube.</p> 
   <img src="images/changeview.png" width="300">
 </ol>
+
+
+<h2>Technology Used</h2>
+
+<p>
+  <a href="https://www.w3schools.com/html/"> <img src="https://img.icons8.com/color/70/000000/html-5--v1.png" alt="HTML" /></a>
+  <a href="https://www.w3schools.com/css/"> <img src="https://img.icons8.com/color/70/000000/css3.png" alt="CSS" /></a>
+   <a href="https://www.w3schools.com/js/"> <img src="https://img.icons8.com/?size=70&id=PXTY4q2Sq2lG&format=png&color=000000" alt="js" /></a>
+</p>
+
 
 <h2>Installation</h2>
 <ol type="i">

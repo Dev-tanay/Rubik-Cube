@@ -176,6 +176,32 @@ class World extends Animation {
 
 }
 
+// script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+  const themeSelector = document.getElementById('theme');
+
+  // Load saved theme from localStorage if it exists
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.body.classList.add(`${savedTheme}-theme`);
+    themeSelector.value = savedTheme;
+  } else {
+    document.body.classList.add('default-theme');
+  }
+
+  // Change theme when the user selects a different option
+  themeSelector.addEventListener('change', (event) => {
+    document.body.className = ''; // Remove all existing classes
+    const selectedTheme = event.target.value;
+    document.body.classList.add(`${selectedTheme}-theme`);
+
+    // Save selected theme to localStorage
+    localStorage.setItem('theme', selectedTheme);
+  });
+});
+
+
 function RoundedBoxGeometry(size, radius, radiusSegments) {
 
   THREE.BufferGeometry.call(this);
@@ -1108,7 +1134,7 @@ class Draggable {
 
       start: (event) => {
 
-        if (event.type == 'mousedown' && event.which != 1) return;
+        if (event.type == 'mousedown' && !(event.which == 1 || event.which == 3)) return;
         if (event.type == 'touchstart' && event.touches.length > 1) return;
 
         this.getPositionCurrent(event);
@@ -1127,7 +1153,7 @@ class Draggable {
 
         window.addEventListener((this.touch) ? 'touchmove' : 'mousemove', this.drag.move, false);
         window.addEventListener((this.touch) ? 'touchend' : 'mouseup', this.drag.end, false);
-
+        window.addEventListener("contextmenu", (event) => { event.preventDefault() });
       },
 
       move: (event) => {
@@ -1298,7 +1324,7 @@ class Controls {
 
       }
 
-      if (edgeIntersect !== false && this.dragIntersect !== false) {
+      if (edgeIntersect !== false && this.dragIntersect !== false && event.which != 3) {
 
         this.dragNormal = edgeIntersect.face.normal.round();
         this.flipType = 'layer';
@@ -1392,9 +1418,7 @@ class Controls {
           this.edges.rotateOnWorldAxis(this.flipAxis, rotation);
           this.game.cube.object.rotation.copy(this.edges.rotation);
           this.flipAngle += rotation;
-
         }
-
       }
 
     };
@@ -3707,6 +3731,7 @@ class Game {
 
   constructor() {
 
+    this.audio = document.getElementById('background-music');
     this.dom = {
       ui: document.querySelector('.ui'),
       game: document.querySelector('.ui__game'),
@@ -4057,6 +4082,7 @@ class Game {
     } else {
 
       this.state = STATE.Stats;
+      this.transition.buttons(BUTTONS.Stats, BUTTONS.Complete);
       this.saved = false;
 
       this.transition.timer(HIDE);
@@ -4081,10 +4107,163 @@ class Game {
   }
 
 }
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM fully loaded and parsed');
-  init(); // Initialize Three.js when DOM is ready
-  handleCookieBlocking(); // Check for and handle third-party cookie blocking
+// Volume button functionality
+const musicButton = document.getElementById('play-btn');
+const music = document.getElementById('background-music');
+
+musicButton.addEventListener('click', () => {
+  if (music.paused) {
+    music.play();
+    musicButton.classList.remove('fa-volume-xmark');
+    musicButton.classList.add('fa-volume-high');
+  } else {
+    music.pause();
+    musicButton.classList.remove('fa-volume-high');
+    musicButton.classList.add('fa-volume-xmark');
+  }
+});
+
+//rotation functions
+function rotateU() {
+  const move = { axis: 'y', angle: -Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateUPrime() {
+  const move = { axis: 'y', angle: Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateR() {
+  const move = { axis: 'x', angle: -Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateRPrime() {
+  const move = { axis: 'x', angle: Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateF() {
+  const move = { axis: 'z', angle: -Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, 1), axis: move.axis, angle: move.angle });
+}
+
+function rotateFPrime() {
+  const move = { axis: 'z', angle: Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, 1), axis: move.axis, angle: move.angle });
+}
+
+function rotateL() {
+  const move = { axis: 'x', angle: Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(-1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateLPrime() {
+  const move = { axis: 'x', angle: -Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(-1, 0, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateD() {
+  const move = { axis: 'y', angle: Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, -1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateDPrime() {
+  const move = { axis: 'y', angle: -Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, -1, 0), axis: move.axis, angle: move.angle });
+}
+
+function rotateB() {
+  const move = { axis: 'z', angle: Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, -1), axis: move.axis, angle: move.angle });
+}
+
+function rotateBPrime() {
+  const move = { axis: 'z', angle: -Math.PI / 2 };
+  game.controls.keyboardMove('LAYER', { position: new THREE.Vector3(0, 0, -1), axis: move.axis, angle: move.angle });
+}
+
+// Function to handle view rotation based on direction
+function rotateView(direction, isPrime = false) {
+  const move = {
+    'up': { axis: 'x', angle: isPrime ? Math.PI / 2 : -Math.PI / 2 },
+    'down': { axis: 'x', angle: isPrime ? -Math.PI / 2 : Math.PI / 2 },
+    'left': { axis: 'y', angle: isPrime ? -Math.PI / 2 : Math.PI / 2 },
+    'right': { axis: 'y', angle: isPrime ? Math.PI / 2 : -Math.PI / 2 }
+  }[direction];
+  if (move) {
+    game.controls.keyboardMove('CUBE', move);
+  }
+}
+
+let isPaused = false;
+
+function togglePause() {
+  if (isPaused) {
+    game.timer.start(true);
+    game.controls.enable();
+    console.log('Game resumed');
+  } else {
+    game.timer.stop();
+    game.controls.disable();
+    console.log('Game paused');
+  }
+  isPaused = !isPaused;
+}
+
+// Add event listener for keydown
+document.addEventListener('keydown', function (event) {
+  const isPrime = event.shiftKey;
+  const key = event.key.toLowerCase();
+
+  if (event.key === 'p') {
+    togglePause();
+    return;
+  }
+
+  if (isPaused) return;
+
+  switch (key) {
+    case 'arrowup':
+      rotateView('up', isPrime);
+      break;
+    case 'arrowdown':
+      rotateView('down', isPrime);
+      break;
+    case 'arrowleft':
+      rotateView('left', isPrime);
+      break;
+    case 'arrowright':
+      rotateView('right', isPrime);
+      break;
+    case 'u':
+      isPrime ? rotateUPrime() : rotateU();
+      break;
+    case 'r':
+      isPrime ? rotateRPrime() : rotateR();
+      break;
+    case 'f':
+      isPrime ? rotateFPrime() : rotateF();
+      break;
+    case 'l':
+      isPrime ? rotateLPrime() : rotateL();
+      break;
+    case 'd':
+      isPrime ? rotateDPrime() : rotateD();
+      break;
+    case 'b':
+      isPrime ? rotateBPrime() : rotateB();
+      break;
+    default:
+      break;
+  }
+});
+
+document.addEventListener('mousemove', function () {
+  if (isPaused) {
+    togglePause();
+  }
 });
 
 let cube; // Global cube variable
@@ -4196,8 +4375,4 @@ function initThreeJS() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window)
 }
 window.version = '0.99.2';
-window.game = new Game(); // Assuming Game() is defined elsewhere
-
-
-
-
+window.game = new Game();
