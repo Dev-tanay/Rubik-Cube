@@ -1,0 +1,154 @@
+/* Reset some default styles */
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    /* Use a clean, modern font */
+    font-size: 16px;
+    /* Base font size */
+    color: #333;
+    /* Dark gray text for readability */
+    background-color: #f4f4f4;
+    /* Light gray background */
+    padding: 20px;
+    line-height: 1.6;
+}
+
+
+/* Header styles */
+
+.header {
+    background-color: #007bff;
+    /* Blue background for the header */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.header a:hover {
+    text-decoration: underline;
+}
+
+
+/* Profile menu styles */
+
+.profile-menu {
+    position: relative;
+}
+
+.profile-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-image: url('images/profilepic.jpg');
+    background-size: cover;
+    /* Cover the entire button */
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-pic {
+    background-image: url('images/profilepic.jpg');
+    background-size: cover;
+    /* Cover the entire button */
+    background-position: center;
+}
+
+
+/* Dropdown menu */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+    width: 200px;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Display dropdown on hover */
+
+.profile-menu:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Progress container styles */
+
+.progress-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.progress-stats div {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    /* Set a reasonable font size for stats */
+}
+
+#no-progress{
+    color: red;
+}
+
+/* List styles for recent solves */
+
+#recent-solves {
+    list-style: none;
+    padding: 0;
+}
+
+#recent-solves li {
+    background: #eeeeee;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
+/* Responsive adjustments */
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .progress-container {
+        margin: 10px;
+    }
+}

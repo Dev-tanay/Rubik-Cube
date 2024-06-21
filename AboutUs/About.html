@@ -4,27 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About The Game - Rubik Cube</title>
-  <link rel="stylesheet" href="about.css">
+  <link rel="icon" type="image/x-icon" href="/images/icon.png">
+  <link rel="stylesheet" href="About.css">
+   <!--Link form FontAwesome for volume icon, info icon, left arrow icon-->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <header class="header">
-    <a href="index.html" class="btn--about">Back to Game</a>
+    <a href="../index.html"><i class="fa-solid fa-arrow-left btn btn--bg"></i></a>
+    <a href="https://github.com/Dev-tanay/Rubik-Cube"><i class="fa-brands fa-github btn btn--gh"></i></a>
   </header>
 
   <div class="content"
   <h1 class="text--title" style="text-align: center;">
-    <span>About The Game</span>
+    <div class="banner"></div>
+    <span class="subheading">About The Game</span>
   </h1>
 </div>
 
   <div class="content">
     <div class="text">
       <div class="about-text--content">
-        <p>This website is dedicated to providing you with the best Rubik's Cube solving experience. Our team is passionate about puzzles and games, and we strive to create tools and resources that enhance your enjoyment and skill development.</p>
+        <p>Welcome to our website dedicated to providing you with the best Rubik's Cube solving experience! Our team is passionate about puzzles and games, and we strive to create tools and resources that enhance your enjoyment and skill development.</p>
         <p>Whether you're a beginner or an experienced solver, we hope you find our website helpful and enjoyable. Feel free to explore the various features and settings of our Rubik's Cube solver and let us know if you have any feedback or suggestions!</p>
-        <h1>About Rubik's Cubes</h1>
-
-        <p>Welcome to the "About" page for Rubik's Cubes! Here, you'll find comprehensive information about Rubik's Cubes, including their history, basic concepts, solving methods, and more.</p>
+        <p>Our project is open source, and we are proud to collaborate with a diverse group of contributors. Here is the list of our amazing contributors who have made this project possible:</p>
+        <h2 class="subheading">Contributors</h2>
+    <ul id="contributors">
+        <!-- Contributors will be listed here -->
+    </ul>
 
         <h2 class="subheading">History</h2>
         <p>The Rubik's Cube, invented by Ernő Rubik in 1974, is a 3D combination puzzle that has fascinated millions of people worldwide. Originally called the "Magic Cube," it gained immense popularity after being licensed to the Ideal Toy Corporation in 1980 and rebranded as the "Rubik's Cube."</p>
@@ -75,9 +82,16 @@
         <p>Formula: <code>R U2 R' U' R U R' U' R U' R'</code></p>
       </div>
   </div>
+  <hr/>
 
   <footer class="footer">
-    <p class="text--footer">© 2024 Rubik-Cube</p>
+    <p id="current-year" class="text--footer">© <span id="year"></span> Rubik-Cube</p>
   </footer>
+  
 </body>
+<script  src="./About.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </html>
