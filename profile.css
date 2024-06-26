@@ -67,7 +67,7 @@ body {
 #edit-profile-form {
   display: auto;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #faeac9;
   border-radius: 5px;
   max-width: 400px;
   margin: 20px auto;
@@ -86,6 +86,7 @@ body {
 #edit-profile-form input[type="file"] {
   width: 85%;
   padding: 8px;
+  background: #f1f1f1;
   margin-bottom: 10px;
   border: 1.5px solid #000000;
   transform: translateY(4px);
