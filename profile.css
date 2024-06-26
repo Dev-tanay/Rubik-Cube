@@ -1,94 +1,113 @@
 /* Your existing CSS styles */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+body {
+  font-family: "Space Grotesk", sans-serif;
+}
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    color: #333;
-    z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  z-index: 10;
 }
 
 .profile-menu {
-    position: relative;
-    display: inline-block;
-    z-index: 11;
+  position: relative;
+  display: inline-block;
+  z-index: 11;
 }
 
 .profile-btn {
-    background-color: transparent;
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    outline: none;
-    width: 3rem;
-    height: 3rem;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  width: 3rem;
+  height: 3rem;
 }
 
 .profile-pic {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 12;
-    border-radius: 5px;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 12;
+  border-radius: 5px;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .profile-menu:hover .dropdown-content {
-    display: block;
+  display: block;
 }
-
 
 /* Styles for the edit profile form */
 
 #edit-profile-form {
-    display: auto;
-    padding: 20px;
-    background-color: #d2c7e5;
-    border-radius: 5px;
-    max-width: 400px;
-    margin: 20px auto;
+  display: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 20px auto;
+  border: 2px solid #264143;
+  border-radius: 20px;
+  box-shadow: 10px 8px 0px 2px #e94c4c;
 }
 
 #edit-profile-form label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 #edit-profile-form input[type="text"],
 #edit-profile-form input[type="file"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+  width: 85%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1.5px solid #000000;
+  transform: translateY(4px);
+  box-shadow: 1px 2px 0px 0px #e99f4c;
+  border-radius: 3px;
 }
 
 #edit-profile-form button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: 1.5px solid #000000;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px 0px #e99f4c;
+}
+
+#edit-profile-form button:hover {
+  background-color: rgba(0, 123, 255, 0.8);
+  border: 1.5px solid #000000;
+  box-shadow: 6px 6px 0px 0px #e99f4c;
 }
