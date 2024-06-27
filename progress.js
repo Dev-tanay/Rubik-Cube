@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // This function should fetch data from your server or local storage
         // Here we simulate data fetching with a static example
         const progressData = {
-            totalSolves: 100,
-            bestTime: '1:23',
-            averageTime: '1:45',
-            cubeTypes: '3x3, 4x4',
+            totalSolves: 0,
+            bestTime: 'NA',
+            averageTime: 'NA',
+            cubeTypes: '3x3',
             recentSolves: [
-                { time: '1:30', cubeType: '3x3' },
-                { time: '2:15', cubeType: '4x4' }
+                // { time: '1:30', cubeType: '3x3' },
+                // { time: '2:15', cubeType: '4x4' }
             ]
         };
 
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('average-time').textContent = data.averageTime;
         document.getElementById('cube-types').textContent = data.cubeTypes;
 
+        if(data.totalSolves == 0) document.getElementById('no-progress').textContent = "Please attempt atleast once to display the progress!!"
         const recentSolvesList = document.getElementById('recent-solves');
         recentSolvesList.innerHTML = ''; // Clear previous entries
         data.recentSolves.forEach(solve => {

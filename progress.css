@@ -122,6 +122,9 @@ body {
     /* Set a reasonable font size for stats */
 }
 
+#no-progress{
+    color: red;
+}
 
 /* List styles for recent solves */
 
