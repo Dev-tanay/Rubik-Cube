@@ -176,6 +176,9 @@ class World extends Animation {
 
 }
 
+
+function RoundedBoxGeometry( size, radius, radiusSegments ) {
+=======
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -203,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function RoundedBoxGeometry(size, radius, radiusSegments) {
+
 
   THREE.BufferGeometry.call(this);
 

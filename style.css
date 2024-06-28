@@ -1,3 +1,4 @@
+
 /* styles.css */
 
 /* Default theme */
@@ -31,7 +32,6 @@ body.colorful-theme {
   right: 10px;
   z-index: 1000;
 }
-
 
 @font-face {
   font-family: "BungeeFont";
