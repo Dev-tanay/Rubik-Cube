@@ -177,8 +177,6 @@ class World extends Animation {
 }
 
 
-function RoundedBoxGeometry( size, radius, radiusSegments ) {
-=======
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
