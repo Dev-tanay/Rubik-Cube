@@ -80,7 +80,7 @@ body {
   padding: 0;
   outline: none;
   font-size: inherit;
-  font-family: inherit;
+  font-family: emoji;
   font-weight: inherit;
   font-style: inherit;
   text-transform: uppercase;
@@ -122,7 +122,7 @@ body {
 }
 
 .subheading {
-  font-size: 1.5em;
+  font-size: 2rem;
   color: #444;
 }
 
