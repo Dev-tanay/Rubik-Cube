@@ -1,3 +1,38 @@
+
+/* styles.css */
+
+/* Default theme */
+body.default-theme {
+  background-color: white;
+  color: black;
+}
+
+/* Dark theme */
+body.dark-theme {
+  background-color: #333;
+  color: white;
+}
+
+/* Light theme */
+body.light-theme {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Colorful theme */
+body.colorful-theme {
+  background: linear-gradient(45deg, #ff6f69, #ffcc5c, #ffeead, #88d8b0, #96ceb4);
+  color: #333;
+}
+
+/* Style for the theme selector */
+.theme-selector {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
 @font-face {
   font-family: "BungeeFont";
   font-weight: normal;
@@ -8,6 +43,7 @@
 *,
 *:before,
 *:after {
+
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -21,6 +57,7 @@
   font-weight: inherit;
   font-style: inherit;
   text-transform: uppercase;
+
 }
 
 *:focus {
@@ -39,6 +76,7 @@ html {
 }
 
 body {
+
   font-family: "BungeeFont", sans-serif;
   font-weight: normal;
   font-style: normal;
@@ -47,6 +85,7 @@ body {
   overflow: hidden;
   height: 100%;
   font-size: 5rem;
+
 }
 
 .icon {
@@ -155,6 +194,7 @@ body {
 
 .range--type-color .range__handle>div {
   background: currentColor !important;
+
 }
 
 .range--type-color .range__track-line {
@@ -221,6 +261,7 @@ body {
 }
 
 .stats>i {
+
   display: block;
   color: rgba(0, 0, 0, 0.5);
   font-size: 0.9em;
@@ -233,6 +274,7 @@ body {
 
 .stats>b>i {
   font-size: 0.75em;
+
 }
 
 .stats[name=worst-time] {
@@ -305,9 +347,16 @@ body {
 
 
 
+
 .btn:hover {
   color: rgba(0, 0, 0, 0.5);
   transition: color 400ms ease-out;
+=======
+.btn:hover {
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 400ms ease-out;
+}
+
 
 .btn:after {
   cursor: pointer;
@@ -321,8 +370,16 @@ body {
   margin-top: -1.5em;
   border-radius: 100%;
 
+
+}
+
+
+/*The back button was changed to bottom because it interrupts the info button.*/
+
+
 .btn--tl {
-  top: 1.2em;
+  bottom: 1.2em;
+  left: 1.2em;
   left: 1.2em;
 }
 
@@ -340,6 +397,37 @@ body {
   bottom: 0.8em;
   left: calc(50% - 0.5em);
 }
+
+
+
+/* For volume button */
+
+.btn--tr {
+  top: 1.2em;
+  right: 1.2em;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* For info button */
+
+.btn--in {
+  top: 1.2em;
+  left: 1.2em;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+  color: #333;
+  z-index: 10;
+}
+
 
 .btn svg {
   display: block;
@@ -420,9 +508,148 @@ body {
   z-index: 5;
 }
 
+/* Replace -ms-high-constrast styling with the new Forced Colors Mode standard */
+
+/* Original styling */
+
+
+/* Updated styling for Forced Colors Mode */
+@media (forced-colors: active) {
+  /* Apply styling for Forced Colors Mode */
+  @media (forced-colors: active) {
+
+    /* Update styles accordingly */
+    *,
+    *:before,
+    *:after {
+      color: ButtonText;
+      background-color: ButtonFace;
+      /* Add other properties as needed */
+    }
+  }
+
+  /* Apply styling for high contrast mode in Microsoft Edge */
+  @media screen and (-ms-high-constrast: active),
+  (-ms-high-constrast: none) {
+
+    /* Update styles accordingly */
+    *,
+    *:before,
+    *:after {
+      -webkit-text-fill-color: WindowText;
+      -webkit-background-color: Window;
+      color: WindowText;
+      background-color: Window;
+      /* Add other properties as needed */
+    }
+  }
+
+  /* Styling for Google Sign-in button */
+  .g_id_signin {
+    margin-top: 20px;
+  }
+
+  /* Styles for Forced Colors Mode */
+  /* Update styles accordingly */
+}
 
 /* styling element for the goggle login option to be placed at the top right corner of the webpage. */
 
 .g_id_signin {
   margin-top: 20px;
+}
+
+.profile-menu {
+  position: relative;
+  display: inline-block;
+  z-index: 11;
+  margin-left: auto;
+}
+
+.profile-btn {
+  /* Blue background for the button */
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  /* Make the button circular */
+  cursor: pointer;
+  outline: none;
+  /* Optional: add a border */
+  width: 10rem;
+  /* Set the width of the button */
+  height: 10rem;
+  /* Set the height of the button */
+  background-image: url('images/profilepic.jpg');
+  background-size: cover;
+  /* Cover the entire button */
+  background-position: center;
+  /* Center the background image */
+  border-radius: 50%;
+  /* Makes the button circular */
+  cursor: pointer;
+  margin-right: 25rem;
+  margin-top: 7rem;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* Ensure the profile picture is circular */
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* Ensures the image inside is circular */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 12;
+  border-radius: 3px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.profile-menu:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 430px) {
+  #ui_texts {
+    font-size: 3.5rem;
+  }
+
+  #theme_selector_id {
+    font-size: 3rem;
+  }
+
+  .profile-btn {
+    margin-right: 14rem;
+    margin-top: 12rem;
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .btn--tr {
+    top: 1.8em;
+    right: 0.5em;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
