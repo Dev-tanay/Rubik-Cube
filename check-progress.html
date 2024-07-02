@@ -28,16 +28,31 @@
         <h1>Your Rubik's Cube Progress</h1>
         <div id="no-progress"></div><br>
         <div class="progress-stats">
-            <div>Total Solves: <span id="total-solves">--</span></div>
-            <div>Best Time: <span id="best-time">--</span></div>
-            <div>Average Time: <span id="average-time">--</span></div>
-            <div>Types of Cubes Solved: <span id="cube-types">3x3, 4x4, 5x5</span></div>
-            <div>Latest Solves:</div>
-            <ul id="recent-solves">
-                <!-- List of recent solves will be inserted here -->
-            </ul>
+            <div class="progress-box">
+                <h3>Total Solves</h3>
+                <p id="total-solves">0</p>
+            </div>
+            <div class="progress-box">
+                <h3>Best Time</h3>
+                <p id="best-time">NA</p>
+            </div>
+            <div class="progress-box">
+                <h3>Average Time</h3>
+                <p id="average-time">NA</p>
+            </div>
+            <div class="progress-box">
+                <h3>Types of Cubes Solved</h3>
+                <p id="cube-types">3x3</p>
+            </div>
+            <div class="progress-box">
+                <h3>Latest Solves</h3>
+                <ul id="recent-solves">
+                    <!-- List of recent solves will be inserted here -->
+                </ul>
+            </div>
         </div>
     </div>
+    
 
     <script src="progress.js"></script>
 </body>
