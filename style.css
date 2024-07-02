@@ -342,12 +342,21 @@ body {
   font-size: 1.5em;
   color: rgba(0, 0, 0, 0.25);
   opacity: 0;
+  cursor: pointer;
 }
+
+
+
 
 .btn:hover {
   color: rgba(0, 0, 0, 0.5);
   transition: color 400ms ease-out;
+=======
+.btn:hover {
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 400ms ease-out;
 }
+
 
 .btn:after {
   cursor: pointer;
@@ -360,10 +369,13 @@ body {
   margin-left: -1.5em;
   margin-top: -1.5em;
   border-radius: 100%;
+
+
 }
 
 
 /*The back button was changed to bottom because it interrupts the info button.*/
+
 
 .btn--tl {
   bottom: 1.2em;
@@ -385,6 +397,7 @@ body {
   bottom: 0.8em;
   left: calc(50% - 0.5em);
 }
+
 
 
 /* For volume button */
@@ -414,6 +427,7 @@ body {
   color: #333;
   z-index: 10;
 }
+
 
 .btn svg {
   display: block;
