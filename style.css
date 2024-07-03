@@ -33,6 +33,13 @@ body.colorful-theme {
   z-index: 1000;
 }
 
+#play-btn {
+  position: fixed;
+  top: 85px;
+  right: 50px; /* Adjust as necessary to avoid overlap */
+  z-index: 10001; /* Higher than the theme selector */
+}
+
 @font-face {
   font-family: "BungeeFont";
   font-weight: normal;
@@ -550,6 +557,7 @@ body {
   display: inline-block;
   z-index: 11;
   margin-left: auto;
+  top: 40px; /* Move lower by 10px */
 }
 
 .profile-btn {
