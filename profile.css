@@ -1,11 +1,12 @@
 /* Your existing CSS styles */
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
+/* General Styles */
 body {
   font-family: "Space Grotesk", sans-serif;
   background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210728/pngtree-purple-rubiks-cube-holographic-floating-geometric-abstract-background-image_752595.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-position: center;
   margin: 0;
   padding: 0;
@@ -15,6 +16,7 @@ body {
   align-items: center;
 }
 
+/* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -31,7 +33,6 @@ body {
   left: 0;
 }
 
-/* Button style for About Us link */
 .header a {
   display: inline-block;
   padding: 10px 20px;
@@ -85,11 +86,12 @@ body {
   display: none;
   position: absolute;
   right: 0;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 12;
   border-radius: 5px;
   margin-right: 30px;
+  transition: all 0.3s ease-in-out;
 }
 
 .dropdown-content a {
@@ -107,25 +109,35 @@ body {
   display: block;
 }
 
-/* Styles for the edit profile form */
-
+/* Edit Profile Form Styles */
 #edit-profile-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  opacity: 0.6;
+  opacity: 0.9;
   background-image: url("https://t4.ftcdn.net/jpg/03/30/27/41/360_F_330274196_C6mjMdPaTggBr4Jg45faWAwViexh7DoA.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 5px;
-  max-width: 400px;
-  margin-top: 180px; /* Adjust margin-top to create space below the header */
-  border: 2px solid #0a0b0b;
   border-radius: 20px;
+  max-width: 400px;
+  margin-top: 120px;
+  border: 2px solid #0a0b0b;
   box-shadow: 10px 8px 0px 2px #0a0808;
   backdrop-filter: blur(10px);
+}
+
+#edit-profile-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+#edit-profile-form p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333333;
 }
 
 #edit-profile-form label {
@@ -136,7 +148,10 @@ body {
 }
 
 #edit-profile-form input[type="text"],
-#edit-profile-form input[type="file"] {
+#edit-profile-form input[type="email"],
+#edit-profile-form input[type="tel"],
+#edit-profile-form input[type="file"],
+#edit-profile-form textarea {
   width: 85%;
   padding: 8px;
   background: #ebedf0;
@@ -146,6 +161,13 @@ body {
   box-shadow: 1px 2px 0px 0px #080604;
   color: #000000;
   border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+#edit-profile-form input:focus,
+#edit-profile-form textarea:focus {
+  outline: none;
+  border-color: #2d8ef6;
 }
 
 #edit-profile-form button {
@@ -158,11 +180,47 @@ body {
   margin-top: 15px;
   font-weight: 800;
   box-shadow: 3px 3px 0px 0px #0f0b07;
+  transition: all 0.3s ease-in-out;
 }
 
 #edit-profile-form button:hover {
   background-color: rgba(4, 4, 4, 0.8);
   color: white;
-  border: 1.5px solid #000000;
   box-shadow: 6px 6px 0px 0px #0f0b05;
+}
+
+#edit-profile-form button:active {
+  transform: translateY(2px);
+  box-shadow: 1px 1px 0px 0px #0f0b05;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .header a {
+    margin-right: 10px;
+    font-size: 14px;
+  }
+
+  .profile-btn {
+    margin-right: 20px;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .dropdown-content a {
+    padding: 8px 20px;
+  }
+
+  #edit-profile-form {
+    width: 90%;
+    margin-top: 100px;
+  }
+
+  #edit-profile-form input[type="text"],
+  #edit-profile-form input[type="email"],
+  #edit-profile-form input[type="tel"],
+  #edit-profile-form input[type="file"],
+  #edit-profile-form textarea {
+    width: 95%;
+  }
 }
