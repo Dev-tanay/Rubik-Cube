@@ -1,3 +1,31 @@
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color:#FF9900;
+	background-image: -webkit-linear-gradient(45deg,
+	                                          rgba(255, 255, 255, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, .2) 50%,
+											  rgba(255, 255, 255, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
+
+
 html {
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
@@ -230,4 +258,55 @@ body {
     top: 0.5em;
     right: 1em;
   }
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 25px;
+}
+
+.icons .icon i {
+  margin-top: 15px;
+  font-size: 30px;
+  transition: all 0.9s ease;
+}
+
+.icons .icon:hover i {
+  transform: scale(1.2);
+}
+
+.icons .icon:hover .fab.fa-facebook {
+  color: #3b5998;
+}
+
+.icons .icon:hover .fab.fa-twitter {
+  color: #090e11;
+}
+
+.icons .icon:hover .fab.fa-instagram {
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  background-clip: text;
+  border-radius: 20%;
+  transform: scale(1.5);
+  color: transparent;
+}
+
+.icons .icon:hover .fab.fa-youtube {
+  color: #c31a1e;
+}
+.icons .icon:hover .fab.fa-github {
+  color: #333;
+}
+.icons .icon:hover .fab.fa-linkedin {
+  color: #0077b5;
 }

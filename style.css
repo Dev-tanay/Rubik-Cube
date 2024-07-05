@@ -1,3 +1,4 @@
+
 /* styles.css */
 
 /* Default theme */
@@ -32,6 +33,12 @@ body.colorful-theme {
   z-index: 1000;
 }
 
+#play-btn {
+  position: fixed;
+  top: 85px;
+  right: 50px; /* Adjust as necessary to avoid overlap */
+  z-index: 10001; /* Higher than the theme selector */
+}
 
 @font-face {
   font-family: "BungeeFont";
@@ -550,6 +557,7 @@ body {
   display: inline-block;
   z-index: 11;
   margin-left: auto;
+  top: 40px; /* Move lower by 10px */
 }
 
 .profile-btn {
@@ -614,4 +622,28 @@ body {
 
 .profile-menu:hover .dropdown-content {
   display: block;
+}
+
+@media screen and (max-width: 430px) {
+  #ui_texts {
+    font-size: 3.5rem;
+  }
+
+  #theme_selector_id {
+    font-size: 3rem;
+  }
+
+  .profile-btn {
+    margin-right: 14rem;
+    margin-top: 12rem;
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .btn--tr {
+    top: 1.8em;
+    right: 0.5em;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }

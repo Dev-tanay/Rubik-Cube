@@ -1,154 +1,162 @@
-/* Reset some default styles */
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* Body styling */
 body {
-    font-family: 'Arial', sans-serif;
-    /* Use a clean, modern font */
-    font-size: 16px;
-    /* Base font size */
-    color: #333;
-    /* Dark gray text for readability */
-    background-color: #f4f4f4;
-    /* Light gray background */
-    padding: 20px;
-    line-height: 1.6;
+  font-family: "Space Grotesk", sans-serif;
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210728/pngtree-purple-rubiks-cube-holographic-floating-geometric-abstract-background-image_752595.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-/* Header styles */
-
+/* Header styling */
 .header {
-    background-color: #007bff;
-    /* Blue background for the header */
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  z-index: 10;
+  background-color: rgba(194, 190, 190, 0.4);
+  width: 100%;
+  height: 60px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
+/* Button style for About Us link */
 .header a {
-    color: white;
-    text-decoration: none;
-    margin-right: 15px;
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(rgb(231, 231, 246), rgb(180, 180, 249));
+  color: rgb(7, 6, 6);
+  text-decoration: none;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 3px 3px 0px 0px #b3aaf7;
 }
 
 .header a:hover {
-    text-decoration: underline;
+  background-color: #2b74bc;
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0px 0px #090915;
 }
 
+.header a:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0px 0px #e99f4c;
+}
 
-/* Profile menu styles */
-
+/* Profile menu styling */
 .profile-menu {
-    position: relative;
+  position: relative;
+  display: inline-block;
+  z-index: 11;
 }
 
 .profile-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    background-image: url('images/profilepic.jpg');
-    background-size: cover;
-    /* Cover the entire button */
-    background-position: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  background-color: transparent;
+  border: none;
+  color: rgb(10, 10, 10);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  width: 4rem;
+  height: 4rem;
+  margin-right: 80px;
 }
 
 .profile-pic {
-    background-image: url('images/profilepic.jpg');
-    background-size: cover;
-    /* Cover the entire button */
-    background-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
-
-/* Dropdown menu */
-
 .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    z-index: 1;
-    width: 200px;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 12;
+  border-radius: 5px;
+  margin-right: 30px;
 }
 
 .dropdown-content a {
-    color: #333;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 10px 30px;
+  text-decoration: none;
+  display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
-
-
-/* Display dropdown on hover */
 
 .profile-menu:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
-
-/* Progress container styles */
-
+/* Progress container styling */
 .progress-container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+  opacity: 0.6;
+  background-image: url("https://t4.ftcdn.net/jpg/03/30/27/41/360_F_330274196_C6mjMdPaTggBr4Jg45faWAwViexh7DoA.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 150px;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  width: 50%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.progress-container:hover {
+  opacity: 0.9;
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+}
+
+.progress-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #0b0a0a;
+}
+
+.progress-stats {
+  font-size: 1.2em;
+  color: #080606;
 }
 
 .progress-stats div {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    /* Set a reasonable font size for stats */
+  margin-bottom: 10px;
 }
 
-#no-progress{
-    color: red;
+.progress-stats ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-/* List styles for recent solves */
-
-#recent-solves {
-    list-style: none;
-    padding: 0;
-}
-
-#recent-solves li {
-    background: #eeeeee;
-    margin-top: 5px;
-    padding: 10px;
-    border-radius: 4px;
-}
-
-
-/* Responsive adjustments */
-
-@media (max-width: 600px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .progress-container {
-        margin: 10px;
-    }
+.progress-stats ul li {
+  background: rgba(231, 231, 246, 0.8);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
