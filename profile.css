@@ -100,7 +100,11 @@ body {
 }
 
 .dropdown-content a:hover {
+
+    background-color: #2f302d;
+
   background-color: #f1f1f1;
+
 }
 
 .profile-menu:hover .dropdown-content {
@@ -149,6 +153,14 @@ body {
 }
 
 #edit-profile-form button {
+
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: rgb(75, 231, 8);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+
   padding: 10px 20px;
   background-color: #2d8ef6;
   border: 1.5px solid #000000;
@@ -165,4 +177,5 @@ body {
   color: white;
   border: 1.5px solid #000000;
   box-shadow: 6px 6px 0px 0px #0f0b05;
+
 }
