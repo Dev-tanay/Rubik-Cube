@@ -43,12 +43,21 @@
 <p>This can be done in two ways:</p>
 <ol type="i">
   <li>Twisting the segments</li>
-  <p>This can be done by dragging the cursor over the segment you want to rotate.</p>
+  <p>This can be done by dragging the cursor over the segment you want to rotate or letters(r l u b d f) for the move(Hold Shift for prime/anticlockwise moves)</li>
+  </p>
   <img src="images/twist1.png" width="300">
   <img src="images/twist2.png" width="300">
   <li>Changing the view of the cube</li>
-  <p>This can be done by dragging the cursor in an arrow around the cube.</p>
+  <p>This can be done by dragging the cursor in an arrow or arrowkeys (up,down,right,left) around the cube.</p> 
   <img src="images/changeview.png" width="300">
+  <li>Using keyboard shortcuts</li>
+  <p>You can also use keyboard shortcuts to rotate the cube:</p>
+  <ul>
+    <li>Press <strong>w</strong> or <strong>Arrow Up</strong> to rotate the cube upwards.</li>
+    <li>Press <strong>s</strong> or <strong>Arrow Down</strong> to rotate the cube downwards.</li>
+    <li>Press <strong>a</strong> or <strong>Arrow Left</strong> to rotate the cube to the left.</li>
+    <li>Press <strong>d</strong> or <strong>Arrow Right</strong> to rotate the cube to the right.</li>
+  </ul>
 </ol>
 
 
