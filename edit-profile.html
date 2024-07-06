@@ -1,118 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Profile Dropdown and Edit Profile</title>
-    <link rel="stylesheet" href="profile.css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Include SweetAlert2 library -->
-  </head>
-
-  <body>
-    <header class="header">
-      <a href="index.html">About Us</a>
-      <div class="profile-menu">
-        <button class="profile-btn">
-          <img
-            src="./images/profilepic.jpg"
-            class="profile-pic"
-            id="main-profile-pic"
-          />
-        </button>
-        <div class="dropdown-content">
-          <a href="edit-profile.html" id="edit-profile-link">Edit Profile</a>
-          <a href="#" id="dropdown-settings-link">Settings</a>
-          <a href="check-progress.html" id="check-progress">Check Progress</a>
-          <a href="#">Exit</a>
-          <a href="#">Sign Out</a>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Dropdown and Edit Profile</title>
+  <link rel="stylesheet" href="profile.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Include SweetAlert2 library -->
+</head>
+<body>
+  <header class="header">
+    <a href="index.html">About Us</a>
+    <div class="profile-menu">
+      <button class="profile-btn">
+        <img src="./images/profilepic.jpg" class="profile-pic" id="main-profile-pic">
+      </button>
+      <div class="dropdown-content">
+        <a href="edit-profile.html" id="edit-profile-link">Edit Profile</a>
+        <a href="#" id="dropdown-settings-link">Settings</a>
+        <a href="check-progress.html" id="check-progress">Check Progress</a>
+        <a href="#">Exit</a>
+        <a href="#">Sign Out</a>
       </div>
-    </header>
-
-    <!-- Edit Profile Form -->
-    <div id="edit-profile-form">
-      <h1>Edit Profile</h1>
-      <p>You are playing as a guest now, add details to identify you.</p>
-      <form id="edit-profile">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" />
-
-        <label for="profile-pic">Profile Picture:</label>
-        <input
-          type="file"
-          id="profile-pic"
-          name="profile-pic"
-          accept="image/*"
-        />
-
-        <button type="submit">Save</button>
-      </form>
     </div>
+  </header>
 
-    <script>
-      function submitProfile(event) {
-        event.preventDefault(); // Prevent default form submission
+  <!-- Edit Profile Form -->
+  <div id="edit-profile-form">
+    <h1>Edit Profile</h1>
+    <p>You are playing as a guest now, add details to identify you.</p>
+    <form id="edit-profile">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
 
-        // Get form elements
-        var name = document.getElementById("name").value.trim();
-        var profilePic = document.getElementById("profile-pic").files[0];
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
 
-        // Check if the name is empty
-        if (name === "") {
-          // Show a SweetAlert error modal
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please enter your name before submitting.",
-            customClass: {
-              popup: "swal-popup",
-              title: "swal-title",
-              content: "swal-content",
-              confirmButton: "swal-confirm-button",
-            },
-          });
-          return; // Exit the function if the name is empty
-        }
+      <label for="additional-info">Additional Info:</label>
+      <textarea type="text" id="additional-info" name="additional-info"></textarea>
 
-        // Check if a profile picture is selected
-        if (!profilePic) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please select a profile picture before submitting.",
-            customClass: {
-              popup: "swal-popup",
-              title: "swal-title",
-              content: "swal-content",
-              confirmButton: "swal-confirm-button",
-            },
-          });
-          return;
-        }
+      <label for="profile-pic">Profile Picture:</label>
+      <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
 
-        // Show a success message
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+  <script>
+    function submitProfile(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get form elements
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var additionalInfo = document.getElementById("additional-info").value.trim();
+      var profilePic = document.getElementById("profile-pic").files[0];
+
+      // Validate input fields
+      if (name === "" || email === "" || additionalInfo === "") {
+        // Show a SweetAlert error modal
         Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Your profile has been updated.",
+          icon: "error",
+          title: "Oops...",
+          text: "Please complete all fields before submitting.",
           customClass: {
             popup: "swal-popup",
             title: "swal-title",
             content: "swal-content",
             confirmButton: "swal-confirm-button",
           },
-        }).then((result) => {
-          // Clear the profile form after the user acknowledges the success modal
-          if (result.isConfirmed || result.isDismissed) {
-            document.getElementById("edit-profile").reset();
-          }
         });
+        return; // Exit the function if any field is empty
       }
 
-      // Attach the submitProfile function to the form's submit event
-      document
-        .getElementById("edit-profile")
-        .addEventListener("submit", submitProfile);
-    </script>
-  </body>
+      // Check if a profile picture is selected
+      if (!profilePic) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please select a profile picture before submitting.",
+          customClass: {
+            popup: "swal-popup",
+            title: "swal-title",
+            content: "swal-content",
+            confirmButton: "swal-confirm-button",
+          },
+        });
+        return;
+      }
+
+      // Save user profile to local storage
+      const userProfile = {
+        name: name,
+        email: email,
+        additionalInfo: additionalInfo,
+        profilePic: URL.createObjectURL(profilePic) // Save the URL of the profile picture
+      };
+      localStorage.setItem("userProfile", JSON.stringify(userProfile));
+
+      // Show a success message
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Your profile has been updated.",
+        customClass: {
+          popup: "swal-popup",
+          title: "swal-title",
+          content: "swal-content",
+          confirmButton: "swal-confirm-button",
+        },
+      }).then((result) => {
+        // Clear the profile form after the user acknowledges the success modal
+        if (result.isConfirmed || result.isDismissed) {
+          document.getElementById("edit-profile").reset();
+          // Update the main profile picture in the header
+          document.getElementById("main-profile-pic").src = userProfile.profilePic;
+        }
+      });
+    }
+
+    // Attach the submitProfile function to the form's submit event
+    document.getElementById("edit-profile").addEventListener("submit", submitProfile);
+  </script>
+</body>
 </html>
