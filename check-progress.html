@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Check Progress</title>
-    <link rel="stylesheet" href="progress.css">
-</head>
+    <link rel="stylesheet" href="progress.css" />
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <a href="about.html" class="btn--about">About Us</a>
-        <div class="profile-menu">
-            <button class="profile-btn">
-                <img src="profilepic.jpg" class="profile-pic">
-            </button>
-            <div class="dropdown-content">
-                <a href="edit-profile.html">Edit Profile</a>
-                <a href="check-progress.html">Check Progress</a>
-                <a href="settings.html">Settings</a>
-                <a href="index.html">Exit</a>
-                <a href="#">Sign Out</a>
-            </div>
+      <a href="About.html" class="btn--about">About Us</a>
+      <div class="profile-menu">
+        <button class="profile-btn">
+          <img
+            src="./images/profilepic.jpg"
+            class="profile-pic"
+            id="main-profile-pic"
+          />
+        </button>
+        <div class="dropdown-content">
+          <a href="edit-profile.html">Edit Profile</a>
+          <a href="check-progress.html">Check Progress</a>
+          <a href="settings.html">Settings</a>
+          <a href="index.html">Exit</a>
+          <a href="#">Sign Out</a>
         </div>
+      </div>
     </header>
 
     <div class="progress-container">
+
         <h1>Your Rubik's Cube Progress</h1>
         <div id="no-progress"></div><br>
         <div class="progress-stats">
@@ -50,11 +54,25 @@
                     <!-- List of recent solves will be inserted here -->
                 </ul>
             </div>
+
+      <h1>Your Rubik's Cube Progress</h1>
+      <div id="no-progress"></div>
+      <br />
+      <div class="progress-stats">
+        <div>Total Solves: <span id="total-solves">--</span></div>
+        <div>Best Time: <span id="best-time">--</span></div>
+        <div>Average Time: <span id="average-time">--</span></div>
+        <div>
+          Types of Cubes Solved: <span id="cube-types">3x3, 4x4, 5x5</span>
         </div>
+        <div>Latest Solves:</div>
+        <ul id="recent-solves">
+          <!-- List of recent solves will be inserted here -->
+        </ul>
+      </div>
     </div>
     
 
     <script src="progress.js"></script>
-</body>
-
+  </body>
 </html>
