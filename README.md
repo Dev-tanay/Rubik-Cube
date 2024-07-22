@@ -1,5 +1,8 @@
 # Rubik-Cube
 
+# <p align="center">✨Rubik-Cube✨</p>
+ 
+
 <p align="center">
   <a href="https://github.com/Dev-tanay/Rubik-Cube/issues">
     <img src="https://img.shields.io/github/issues/Dev-tanay/Rubik-Cube?style=for-the-badge" alt="GitHub issues">
@@ -17,12 +20,17 @@
     <img src="https://img.shields.io/website?style=for-the-badge&down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fdev-tanay.github.io%2FRubik-Cube%2F" alt="Website status">
   </a>
 </p>
+ 
 
 ## 🌐 Link to Game Demo
 <a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev-tanay.github.io/Rubik-Cube/</a>
 
-<img src="images/home.png" width="350">
+ 
 
+
+<img src="images/home.png" height="500" width="1200">
+
+ 
 ## 📖 About the Game
 This is a simple and elegant game where you can play Rubik's Cube from your own web browser.
 
@@ -97,6 +105,69 @@ Enjoy your Rubik-Cube game! 🕹️✨
 
 ## 🧭 Navigating the Game Screen
 - **Home**
+
+<h2>About the Game</h2>
+<p>This is a simple and elegant game where you can play Rubik's Cube from your own web browser.</p>
+<p>Each of the six faces of the Rubik's cube is in one of the six colors - red, green, yellow, blue, white, and orange.</p>
+<p>The visible part of the cube is divided into 26 pieces:</p>
+<ul>
+  <li>6 central pieces (one colored side)</li>
+  <li>12 edge pieces (two colored sides)</li>
+  <li>8 corner pieces (three colored sides)</li>
+</ul>
+<p>The 26 pieces are "scrambled" to have different colors on each face.</p>
+
+
+<h4>Link to Game Demo</h4>
+<a href="https://dev-tanay.github.io/Rubik-Cube/">https://dev-tanay.github.io/Rubik-Cube/</a>
+
+
+<h2>How to Play</h2>
+<p>The objective of this game is to get each face of the cube to have a single color.</p>
+<p>This can be done in two ways:</p>
+<ol type="i">
+  <li>Twisting the segments</li>
+  <p>This can be done by dragging the cursor over the segment you want to rotate or letters(r l u b d f) for the move(Hold Shift for prime/anticlockwise moves)</li>
+  </p>
+  <img src="images/twist1.png" width="300">
+  <img src="images/twist2.png" width="300">
+  <li>Changing the view of the cube</li>
+  <p>This can be done by dragging the cursor in an arrow or arrowkeys (up,down,right,left) around the cube.</p> 
+  <img src="images/changeview.png" width="300">
+  <li>Using keyboard shortcuts</li>
+  <p>You can also use keyboard shortcuts to rotate the cube:</p>
+  <ul>
+    <li>Press <strong>w</strong> or <strong>Arrow Up</strong> to rotate the cube upwards.</li>
+    <li>Press <strong>s</strong> or <strong>Arrow Down</strong> to rotate the cube downwards.</li>
+    <li>Press <strong>a</strong> or <strong>Arrow Left</strong> to rotate the cube to the left.</li>
+    <li>Press <strong>d</strong> or <strong>Arrow Right</strong> to rotate the cube to the right.</li>
+  </ul>
+</ol>
+
+
+<h2>Technology Used</h2>
+
+<p>
+  <a href="https://www.w3schools.com/html/"> <img src="https://img.icons8.com/color/70/000000/html-5--v1.png" alt="HTML" /></a>
+  <a href="https://www.w3schools.com/css/"> <img src="https://img.icons8.com/color/70/000000/css3.png" alt="CSS" /></a>
+   <a href="https://www.w3schools.com/js/"> <img src="https://img.icons8.com/?size=70&id=PXTY4q2Sq2lG&format=png&color=000000" alt="js" /></a>
+</p>
+
+
+<h2>Installation</h2>
+<ol type="i">
+  <li>Clone the repository</li>
+  <pre><code>git clone https://github.com/Dev-tanay/Rubik-Cube.git</code></pre>
+  <li>Navigate to the cloned repository</li>
+  <pre><code>cd Rubik-Cube</code></pre>
+  <li>Open the <code>index.html</code> file in a web browser</li>
+</ol>
+<p>There, you've opened the game screen!</p>
+
+<h2>Navigating the Game Screen</h2>
+<ul>
+  <li>Home</li>
+ 
   <img src="images/home1.png" width="300">
   - You'll see two icons at the bottom corners of the screen: (1) Leaderboard and (2) Preferences.
   - You can start the game by double-clicking on the text "DOUBLE TAP TO START".
