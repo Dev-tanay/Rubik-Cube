@@ -192,8 +192,9 @@ body {
 }
 
 .btn:hover {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgb(245, 245, 245);
   transition: color 400ms ease-out;
+  background-color: #541a8be7;
 }
 
 .btn:after {
@@ -204,8 +205,8 @@ body {
   height: 3.5em;
   left: 50%;
   top: 50%;
-  margin-left: -1.75em;
-  margin-top: -1.75em;
+  margin-left: 1.75em;
+  margin-top: 1.75em;
   border-radius: 100%;
 }
 
@@ -214,6 +215,13 @@ body {
   left: 1.2em;
   opacity: 1;
   pointer-events: auto;
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #541a8b24;
+  padding-left: 11px;
+  padding-top: 9px;
 }
 
 .btn--gh {
@@ -221,6 +229,13 @@ body {
   right: 1.2em;
   opacity: 1;
   pointer-events: auto;
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #541a8b24;
+  padding-left: 10px;
+  padding-top: 9px;
 }
 
 @media screen and (max-width: 768px) {
