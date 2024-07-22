@@ -7,6 +7,14 @@
   <link rel="icon" type="image/x-icon" href="images\icon.png">
  
   <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" src="style.css">
+</head>
+
+<body>
+
+<img id="bulp" src="BulpOn.png" onclick="changeImage()">
+<div class="ui">
+
   <style>
 .con {
     width          : 600px;
@@ -163,6 +171,14 @@
       <range name="lightness" title="Lightness" color></range>
     </div>
 
+  <div class="ui__prefs">
+    <range class="p1" name="size" title="Cube Size" list="2,3,4,5"></range>
+    <range class="p2" name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
+    <range class="p3" name="scramble" title="Scramble Length" list="20,25,30"></range>
+    <range class="p4" name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
+    <range class="p5" name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
+  </div>
+
     <div class="ui__stats">
 
       <div class="stats" name="cube-size">
@@ -187,6 +203,27 @@
         <i>Average of 25:</i><b>-</b>
       </div>
 
+  <div class="ui__stats">
+    <div class="stats" name="cube-size">
+      <i class="t1">Cube:</i><b>3x3x3</b>
+    </div>
+    <div class="stats" name="total-solves">
+      <i class="t2">Total solves:</i><b>-</b>
+    </div>
+    <div class="stats" name="best-time">
+      <i class="t3">Best time:</i><b>-</b>
+    </div>
+    <div class="stats" name="worst-time">
+      <i class="t4">Worst time:</i><b>-</b>
+    </div>
+    <div class="stats" name="average-5">
+      <i class="t5">Average of 5:</i><b>-</b>
+    </div>
+    <div class="stats" name="average-12">
+      <i class="t6">Average of 12:</i><b>-</b>
+    </div>
+    <div class="stats" name="average-25">
+      <i class="t7">Average of 25:</i><b>-</b>
     </div>
 
     <div class="ui__buttons">
@@ -266,19 +303,21 @@
 
 
   <div class="ui__buttons">
-    <button class="btn btn--bl btn--stats">
+    <button id="b1" class="btn btn--bl btn--stats">
       <icon trophy></icon>
     </button>
-    <button class="btn btn--br btn--prefs">
+    <button id="b2" class="btn btn--br btn--prefs">
       <icon settings></icon>
     </button>
+    <button id="b3" class="btn btn--bl btn--back">
+
     <button class="btn btn--tl btn--back">
       <icon back></icon>
     </button>
-    <button class="btn btn--br btn--theme">
+    <button id="b4" class="btn btn--br btn--theme">
       <icon theme></icon>
     </button>
-    <button class="btn btn--br btn--reset">
+    <button id="b5" class="btn btn--br btn--reset">
       <icon reset></icon>
     </button>
 <div class="main_B">
@@ -458,6 +497,8 @@
 </div>
  
 <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="script.js"></script>
+
   <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
   <script>
     window.addEventListener("load", () => {
