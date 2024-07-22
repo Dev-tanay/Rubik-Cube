@@ -50,6 +50,11 @@ const animationEngine = (() => {
 
       if (index < 0) return;
 
+ 
+      this.ids.splice( index, 1 );
+      delete this.animations[ animation.id ];
+      animation =newGame;
+
       this.ids.splice(index, 1);
       delete this.animations[animation.id];
       animation = null;
@@ -176,6 +181,7 @@ class World extends Animation {
 
 }
 
+
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -203,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function RoundedBoxGeometry(size, radius, radiusSegments) {
+
 
   THREE.BufferGeometry.call(this);
 
@@ -4152,6 +4159,15 @@ musicButton.addEventListener('click', () => {
   }
 });
 
+ feature/shortcut-keys
+////Add keyboard shortcuts
+function rotateView(direction) {
+  const move = {
+    'up': { axis: 'x', angle: -Math.PI / 2 },
+    'down': { axis: 'x', angle: Math.PI / 2 },
+    'left': { axis: 'y', angle: Math.PI / 2 },
+    'right': { axis: 'y', angle: -Math.PI / 2 }
+
 //rotation functions
 function rotateU() {
   const move = { axis: 'y', angle: -Math.PI / 2 };
@@ -4220,11 +4236,32 @@ function rotateView(direction, isPrime = false) {
     'down': { axis: 'x', angle: isPrime ? -Math.PI / 2 : Math.PI / 2 },
     'left': { axis: 'y', angle: isPrime ? -Math.PI / 2 : Math.PI / 2 },
     'right': { axis: 'y', angle: isPrime ? Math.PI / 2 : -Math.PI / 2 }
+
   }[direction];
   if (move) {
     game.controls.keyboardMove('CUBE', move);
   }
 }
+
+ feature/shortcut-keys
+document.addEventListener('keydown', function(event) {
+  const key = event.key.toLowerCase();
+  switch (key) {
+    case 'w':
+    case 'arrowup':
+      rotateView('up');
+      break;
+    case 's':
+    case 'arrowdown':
+      rotateView('down');
+      break;
+    case 'a':
+    case 'arrowleft':
+      rotateView('left');
+      break;
+    case 'd':
+    case 'arrowright':
+      rotateView('right');
 
 let isPaused = false;
 
@@ -4283,11 +4320,14 @@ document.addEventListener('keydown', function (event) {
       break;
     case 'b':
       isPrime ? rotateBPrime() : rotateB();
+ main
       break;
     default:
       break;
   }
 });
+
+ feature/shortcut-keys
 
 document.addEventListener('mousemove', function () {
   if (isPaused) {
@@ -4403,5 +4443,6 @@ function initThreeJS() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window)
 }
+      
 window.version = '0.99.2';
 window.game = new Game();
