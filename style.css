@@ -66,7 +66,7 @@ body.colorful-theme {
   -moz-user-select: none;
   user-select: none;
   box-sizing: border-box;
-  cursor: inherit;
+  cursor:pointer;
   margin: 0;
   padding: 0;
   outline: none;
@@ -80,6 +80,7 @@ body.colorful-theme {
 
 *:focus {
   outline: none;
+  cursor:pointer;
 }
 
 html {
@@ -99,7 +100,7 @@ body {
   font-weight: normal;
   font-style: normal;
   line-height: 1;
-  cursor: default;
+  cursor: pointer;
   overflow: hidden;
   height: 100%;
   font-size: 5rem;
@@ -107,6 +108,7 @@ body {
 }
 
 .icon {
+  cursor:pointer;
   display: inline-block;
   font-size: inherit;
   overflow: visible;
@@ -115,6 +117,7 @@ body {
 }
 
 .range {
+  cursor:pointer;
   position: relative;
   width: 14em;
   z-index: 1;
@@ -126,6 +129,7 @@ body {
 }
 
 .range__label {
+  cursor:pointer;
   position: relative;
   font-size: 0.9em;
   line-height: 0.75em;
@@ -134,6 +138,7 @@ body {
 }
 
 .range__track {
+  cursor:pointer;
   position: relative;
   height: 1em;
   margin-left: 0.5em;
@@ -142,6 +147,7 @@ body {
 }
 
 .range__track-line {
+  cursor:pointer;
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
   height: 2px;
@@ -153,6 +159,7 @@ body {
 }
 
 .range__handle {
+  cursor:pointer;
   position: absolute;
   width: 0;
   height: 0;
@@ -163,6 +170,7 @@ body {
 }
 
 .range__handle div {
+  cursor:pointer;
   transition: background 500ms ease;
   position: absolute;
   left: 0;
@@ -192,6 +200,7 @@ body {
 }
 
 .range__list {
+  cursor:pointer;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -227,6 +236,7 @@ body {
   height: 100%;
   content: "";
   opacity: 0.5;
+  cursor:pointer;
 }
 
 .range--color-hue .range__handle {
@@ -275,8 +285,10 @@ body {
 }
 
 .stats {
+  cursor:pointer;
   position: relative;
   width: 14em;
+  cursor:pointer;
   z-index: 1;
   display: flex;
   justify-content: space-between;
@@ -313,6 +325,7 @@ body {
 }
 
 .text {
+  cursor:pointer;
   position: absolute;
   left: 0;
   right: 0;
@@ -371,13 +384,18 @@ body {
   border-radius: 0;
   border-width: 0;
   position: absolute;
-  pointer-events: none;
+  pointer-events:none;
+  cursor: pointer;
   font-size: 1.5em;
   color: rgba(0, 0, 0, 0.25);
   opacity: 0;
 }
 
 .btn:hover {
+  color: rgba(203, 18, 18, 0.5);
+  transition: color 400ms ease-out;
+  cursor:pointer;
+
   color: rgb(245, 245, 245);
   transition: color 400ms ease-out;
   background-color: #541a8be7;

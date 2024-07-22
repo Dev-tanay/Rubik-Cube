@@ -50,6 +50,11 @@ const animationEngine = (() => {
 
       if (index < 0) return;
 
+ 
+      this.ids.splice( index, 1 );
+      delete this.animations[ animation.id ];
+      animation =newGame;
+
       this.ids.splice(index, 1);
       delete this.animations[animation.id];
       animation = null;
