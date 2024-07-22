@@ -2396,12 +2396,14 @@ class Timer extends Animation {
 
   }
 
-  start(continueGame) {
 
-    this.startTime = continueGame ? (Date.now() - this.deltaTime) : Date.now();
+  start( continueGame = false) {
+
+    this.startTime = continueGame ? ( Date.now() - this.deltaTime ) : Date.now();
+    this.isRunning = true;
+
     this.deltaTime = 0;
     this.converted = this.convert();
-
     super.start();
 
   }
@@ -2412,19 +2414,18 @@ class Timer extends Animation {
     this.currentTime = 0;
     this.deltaTime = 0;
     this.converted = '0:00';
-
+    this.isRunning = false;
+    this.setText();
   }
 
   stop() {
-
-    this.currentTime = Date.now();
-    this.deltaTime = this.currentTime - this.startTime;
-    this.convert();
-
-    super.stop();
-
-    return { time: this.converted, millis: this.deltaTime };
-
+    if (this.isRunning) {
+      this.currentTime = Date.now();
+      this.deltaTime = this.currentTime - this.startTime;
+      this.convert();
+      this.isRunning = false;
+      super.stop();
+    }
   }
 
   update() {
@@ -2447,9 +2448,8 @@ class Timer extends Animation {
   convert() {
 
     const seconds = parseInt((this.deltaTime / 1000) % 60);
-    const minutes = parseInt((this.deltaTime / (1000 * 60)));
-
-    this.converted = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+    const minutes = parseInt(this.deltaTime / (1000 * 60));
+    this.converted = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 
   }
 
@@ -3722,8 +3722,10 @@ const STATE = {
 };
 
 const BUTTONS = {
-  Menu: ['stats', 'prefs'],
-  Playing: ['back'],
+
+  Menu: [ 'stats', 'prefs' ],
+  Playing: [ 'back','button3' ],
+
   Complete: [],
   Stats: ['back'],
   Prefs: ['back', 'theme'],
@@ -3755,11 +3757,14 @@ class Game {
         theme: document.querySelector('.text--theme'),
       },
       buttons: {
-        prefs: document.querySelector('.btn--prefs'),
-        back: document.querySelector('.btn--back'),
-        stats: document.querySelector('.btn--stats'),
-        reset: document.querySelector('.btn--reset'),
-        theme: document.querySelector('.btn--theme'),
+
+        prefs: document.querySelector( '.btn--prefs' ),
+        back: document.querySelector( '.btn--back' ),
+        button3: document.querySelector('.btn--button3'),
+        stats: document.querySelector( '.btn--stats' ),
+        reset: document.querySelector( '.btn--reset' ),
+        theme: document.querySelector( '.btn--theme' ),
+
       },
     };
 
@@ -3847,6 +3852,14 @@ class Game {
 
     };
 
+    this.dom.buttons.button3.onclick = event => {
+      // Handle button3 click event
+      this.timer.stop(); 
+      this.timer.reset();
+      this.timer.start();
+      this.dom.buttons.button1.innerText = 'Pause';
+    };
+
     this.dom.buttons.back.onclick = event => {
 
       if (this.transition.activeTransitions > 0) return;
@@ -3900,6 +3913,10 @@ class Game {
         this.scrambler.scramble();
         this.controls.scrambleCube();
         this.newGame = true;
+        this.transition.buttons(BUTTONS.None, BUTTONS.Playing.concat(BUTTONS.Menu));
+
+        // Show additional buttons
+        this.showPlayingButtons();
 
       }
 
@@ -3935,6 +3952,8 @@ class Game {
       this.transition.buttons(BUTTONS.Menu, BUTTONS.Playing);
 
       this.transition.zoom(STATE.Menu, 0);
+
+      this.hidePlayingButtons();
 
       this.controls.disable();
       if (!this.newGame) this.timer.stop();
@@ -4111,6 +4130,16 @@ class Game {
 
     }
 
+  }
+
+  showPlayingButtons() {
+    if (this.state === STATE.Playing) {
+      this.dom.buttons.button3.style.display = 'block';
+    }
+  }
+
+  hidePlayingButtons() {
+    this.dom.buttons.button3.style.display = 'none';
   }
 
 }
