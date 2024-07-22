@@ -1,0 +1,37 @@
+name: Feature Request 💡
+description: Have any new idea or new feature for RubikCube? Do suggest!
+title: "[Feature] <write a small description here>"
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the feature you'd like to see implemented.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Please add screenshots if applicable
+    validations:
+      required: false
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution (optional)"
+      description: "If you have a proposed solution for the documentation issue, please provide it here."
+  - type: checkboxes
+    id: terms_checklist_docs
+    attributes:
+      label: "Checklist"
+      description: "By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/Dev-tanay/Rubik-Cube/blob/main/CODE_OF_CONDUCT.md)"
+      options:
+        - label: "I have checked the existing [issues](https://github.com/Dev-tanay/Rubik-Cube/issues)"
+          required: true
+        - label: "I have read the [Contributing Guidelines](https://github.com/Dev-tanay/Rubik-Cube/blob/main/CONTRIBUTING.md)"
+          required: true
+        - label: "I am willing to work on this issue (optional)"
+          required: false
+  
