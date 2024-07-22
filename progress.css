@@ -3,6 +3,27 @@
 
 /* Body styling */
 body {
+ 
+    font-family: 'Arial', sans-serif;
+    /* Use a clean, modern font */
+    font-size: 30px;
+    /* Base font size */
+    color: #f7f4f4;
+    /* Dark gray text for readability */
+    background-color: #f4f4f4;
+    background-image:url('https://i2.pickpik.com/photos/502/642/517/rubik-s-cube-game-cube-strategy-13845d21bb0c925716567a8a3ee7a0fd.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* Light gray background */
+    padding: 20px;
+    line-height: 1.6;
+}
+
+
+/* Header styles */
+
+
   font-family: "Space Grotesk", sans-serif;
   background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210728/pngtree-purple-rubiks-cube-holographic-floating-geometric-abstract-background-image_752595.jpg");
   background-size: cover;
@@ -17,6 +38,7 @@ body {
 }
 
 /* Header styling */
+ 
 .header {
   display: flex;
   justify-content: space-between;
@@ -110,6 +132,72 @@ body {
   display: block;
 }
 
+ 
+
+/* Progress container styles */
+
+
+
+.progress-container {
+    
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    max-width: 900px; /* Set a maximum width */
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 20px;
+    margin: 0;
+    
+}
+
+.progress-box {
+    background-color: #f0e5e5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin:0;
+    
+}
+
+.progress-box h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #333;
+}
+
+.progress-box p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Additional styles for the layout of the two boxes below */
+.progress-stats .bottom-box {
+    grid-column: span 2; /* Span across two columns */
+}
+
+
+#no-progress{
+    color: red;
+
 /* Progress container styling */
 .progress-container {
   opacity: 0.6;
@@ -143,8 +231,15 @@ body {
   color: #080606;
 }
 
+#recent-solves li {
+    background: white;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 4px;
+
 .progress-stats div {
   margin-bottom: 10px;
+ 
 }
 
 .progress-stats ul {
