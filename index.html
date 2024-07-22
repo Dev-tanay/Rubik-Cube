@@ -5,14 +5,44 @@
   <meta charset="UTF-8">
   <title>Rubik Cube</title>
   <link rel="icon" type="image/x-icon" href="images\icon.png">
+ 
+  <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><link rel="stylesheet" href="./style.css">
+  <style>
+.con {
+    width          : 600px;
+    height         : 600px;
+    position       : absolute;
+    top            : 50%;
+    left           : 50%;
+    transform      : translate(-50%, -50%);
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    perspective    : 2000px;
+    z-index: 9999; 
+}
+.con--hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+.box--hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+  </style>
+
   <meta name="viewport"
     content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
   <link rel="stylesheet" href="./style.css">
  
 
+ 
 </head>
 
 <body>
+  <div class="con">
+    <img src="./images/icon.png" alt="" class="box" style="width: 30vw;height: 60vh;">
+  </div>
 
   <!--Link form FontAwesome for volume icon, info icon, left arrow icon-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -388,10 +418,35 @@
         <img src="changeview.png" height="150" width="240">
     </div>
 </div>
+ 
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+  const loader = document.querySelector(".box");
+
+  loader.classList.add("box--hidden");
+
+  loader.addEventListener("transitionend", () => {
+  document.body.removeChild(loader);
+  });
+  });
+  
+  window.addEventListener("load", () => {
+  const loader = document.querySelector(".con");
+
+  loader.classList.add("con--hidden");
 
 
 
 
+ 
+
+  loader.addEventListener("transitionend", () => {
+  document.body.removeChild(loader);
+  });
+  });
+  </script>
 </body>
 
 </html>
