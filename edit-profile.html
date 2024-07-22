@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Dropdown and Edit Profile</title>
+  <link rel="stylesheet" href="profile.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Include SweetAlert2 library -->
+</head>
+<body>
+  <header class="header">
+    <a href="index.html">About Us</a>
+    <div class="profile-menu">
+      <button class="profile-btn">
+        <img src="./images/profilepic.jpg" class="profile-pic" id="main-profile-pic">
+      </button>
+      <div class="dropdown-content">
+        <a href="edit-profile.html" id="edit-profile-link">Edit Profile</a>
+        <a href="#" id="dropdown-settings-link">Settings</a>
+        <a href="check-progress.html" id="check-progress">Check Progress</a>
+        <a href="#">Exit</a>
+        <a href="#">Sign Out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Edit Profile Form -->
+  <div id="edit-profile-form">
+    <h1>Edit Profile</h1>
+    <p>You are playing as a guest now, add details to identify you.</p>
+    <form id="edit-profile">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+
+      <label for="additional-info">Additional Info:</label>
+      <textarea type="text" id="additional-info" name="additional-info"></textarea>
+
+      <label for="profile-pic">Profile Picture:</label>
+      <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+
+</body>
+</html>
