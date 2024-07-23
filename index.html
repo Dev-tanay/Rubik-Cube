@@ -1,39 +1,112 @@
-
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Rubik Cube</title>
   <link rel="icon" type="image/x-icon" href="images\icon.png">
+ 
   <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><link rel="stylesheet" href="./style.css">
-    <!--Link form FontAwesome for volume icon, info icon, left arrow icon-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" src="style.css">
 </head>
 
 <body>
-  <!-- separate div element for the goggle sign-in/log-in element -->
-  <!-- g_id_onload is for automatic loading of the Google Identity Services. -->
-  <div id="g_id_onload"
-  data-client_id="1056580552736-gos4t0nvaco0o3eq9v5tdaa1425qhhdu.apps.googleusercontent.com"
-  
-  data-callback="handleCredentialResponse">
-</div>
-<!-- the data client id is the goggle o-auth secret client id. -->
-<!-- g_id_signin is for rendering the Google Sign-In button. -->
 
-<div class="g_id_signin" data-type="standard"></div>
-
-<!-- Adding the Google Identity Services script to your HTML file. -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-
-<!-- Added the script1.js file for initializing the Google Identity Services client and handle the sign-in process. -->
-<script src="script1.js"></script>
-
+<img id="bulp" src="BulpOn.png" onclick="changeImage()">
 <div class="ui">
 
-  <div class="ui__background"></div>
+  <style>
+.con {
+    width          : 600px;
+    height         : 600px;
+    position       : absolute;
+    top            : 50%;
+    left           : 50%;
+    transform      : translate(-50%, -50%);
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    perspective    : 2000px;
+    z-index: 9999; 
+}
+.con--hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+.box--hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+  </style>
 
-  <div class="ui__game"></div>
+  <meta name="viewport"
+    content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+ 
+
+ 
+</head>
+
+<body>
+  <div class="con">
+    <img src="./images/icon.png" alt="" class="box" style="width: 30vw;height: 60vh;">
+  </div>
+
+  <!--Link form FontAwesome for volume icon, info icon, left arrow icon-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+ 
+
+<body>
+  <header class="ui__header header">
+    <!-- Added "header" class -->
+    <a href="About.html" class="btn--about">About Us</a>
+    <!-- Profile dropdown button -->
+    <div class="profile-menu">
+      <button class="profile-btn" style="top: 10rem;">
+        <!-- <img src="./images/profilepic.jpg" alt="Profile Picture" class="profile-pic"> -->
+      </button>
+      <!-- Dropdown menu -->
+      <div class="dropdown-content">
+        <a href="edit-profile.html">Edit Profile</a>
+        <a href="check-progress.html">Check Progress</a>
+        <a href="#">Sign Out</a>
+      </div>
+    </div>
+  </header>
+  <!-- separate div element for the goggle sign-in/log-in element -->
+
+  <!-- g_id_onload is for automatic loading of the Google Identity Services. -->
+  <div id="g_id_onload" data-client_id="1056580552736-gos4t0nvaco0o3eq9v5tdaa1425qhhdu.apps.googleusercontent.com"
+    data-callback="handleCredentialResponse">
+  </div>
+  <!-- the data client id is the goggle o-auth secret client id. -->
+  <!-- g_id_signin is for rendering the Google Sign-In button. -->
+
+  <div class="g_id_signin" data-type="standard"></div>
+
+  <!-- Adding the Google Identity Services script to your HTML file. -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Added the script1.js file for initializing the Google Identity Services client and handle the sign-in process. -->
+  <script src="script1.js"></script>
+
+  <div class="ui">
+ 
+    <div class="navbar">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Leaderboard</a></li>
+        <li><a href="">Settings</a></li>
+        <li>
+          <div class="g_id_signin" data-type="standard"></div>
+        </li>
+      </ul>
+    </div>
+
+ 
+
+    <div class="ui__background"></div>
 
   <div class="ui__texts">
     <h1 class="text text--title">
@@ -43,72 +116,209 @@
     <div class="text text--note">
       Double tap to start
     </div>
-    <div class="text text--timer">
-      0:00
+    <div class="text text--timer">Time limit 
+      05:00
+
+    <div class="ui__game"></div>
+
+ 
+    <div class="ui__texts">
+      <h1 class="text text--title">
+        <span>Let's</span>
+        <span>Solve!</span>
+      </h1>
+      <div class="text text--note">
+        Double tap to start
+      </div>
+      <div class="text text--timer">
+
+    <div class="ui__texts" id="ui_texts">
+      <h1 class="text text--title">
+        <span>Let's</span>
+        <span>GO</span>
+      </h1>
+      <div class="text text--note">
+        Click here to start
+      </div>
+      
+      <div class="text text--timer">
+        <h1> TIME START NOW</h1> 
+ 
+        0:00
+      </div>
+      <div class="text text--complete">
+        <span>Complete!</span>
+      </div>
+      <div class="text text--best-time">
+        <icon trophy></icon>
+        <span>Best Time!</span>
+      </div>
+ 
+ 
     </div>
-    <div class="text text--complete">
-      <span>Complete!</span>
+
+    <div class="ui__prefs">
+      <range name="size" title="Cube Size" list="2,3,4,5"></range>
+      <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
+      <range name="scramble" title="Scramble Length" list="20,25,30"></range>
+      <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
+      <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
     </div>
-    <div class="text text--best-time">
-      <icon trophy></icon>
-      <span>Best Time!</span>
+
+    <div class="ui__theme">
+      <range name="hue" title="Hue" color></range>
+      <range name="saturation" title="Saturation" color></range>
+      <range name="lightness" title="Lightness" color></range>
     </div>
-  </div>
 
   <div class="ui__prefs">
-    <range name="size" title="Cube Size" list="2,3,4,5"></range>
-    <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
-    <range name="scramble" title="Scramble Length" list="20,25,30"></range>
-    <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
-    <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
+    <range class="p1" name="size" title="Cube Size" list="2,3,4,5"></range>
+    <range class="p2" name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
+    <range class="p3" name="scramble" title="Scramble Length" list="20,25,30"></range>
+    <range class="p4" name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
+    <range class="p5" name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
   </div>
 
-  <div class="ui__theme">
-    <range name="hue" title="Hue" color></range>
-    <range name="saturation" title="Saturation" color></range>
-    <range name="lightness" title="Lightness" color></range>
-  </div>
+    <div class="ui__stats">
+
+      <div class="stats" name="cube-size">
+        <i>Cube:</i><b>3x3x3</b>
+      </div>
+      <div class="stats" name="total-solves">
+        <i>Total solves:</i><b>-</b>
+      </div>
+      <div class="stats" name="best-time">
+        <i>Best time:</i><b>-</b>
+      </div>
+      <div class="stats" name="worst-time">
+        <i>Worst time:</i><b>-</b>
+      </div>
+      <div class="stats" name="average-5">
+        <i>Average of 5:</i><b>-</b>
+      </div>
+      <div class="stats" name="average-12">
+        <i>Average of 12:</i><b>-</b>
+      </div>
+      <div class="stats" name="average-25">
+        <i>Average of 25:</i><b>-</b>
+      </div>
 
   <div class="ui__stats">
     <div class="stats" name="cube-size">
-      <i>Cube:</i><b>3x3x3</b>
+      <i class="t1">Cube:</i><b>3x3x3</b>
     </div>
     <div class="stats" name="total-solves">
-      <i>Total solves:</i><b>-</b>
+      <i class="t2">Total solves:</i><b>-</b>
     </div>
     <div class="stats" name="best-time">
-      <i>Best time:</i><b>-</b>
+      <i class="t3">Best time:</i><b>-</b>
     </div>
     <div class="stats" name="worst-time">
-      <i>Worst time:</i><b>-</b>
+      <i class="t4">Worst time:</i><b>-</b>
     </div>
     <div class="stats" name="average-5">
-      <i>Average of 5:</i><b>-</b>
+      <i class="t5">Average of 5:</i><b>-</b>
     </div>
     <div class="stats" name="average-12">
-      <i>Average of 12:</i><b>-</b>
+      <i class="t6">Average of 12:</i><b>-</b>
     </div>
     <div class="stats" name="average-25">
-      <i>Average of 25:</i><b>-</b>
+      <i class="t7">Average of 25:</i><b>-</b>
     </div>
-  </div>
+
+    <div class="ui__buttons">
+      <button class="btn btn--bl btn--stats">
+        <icon trophy></icon>
+      </button>
+      <button class="btn btn--br btn--prefs">
+        <icon settings></icon>
+      </button>
+      <button class="btn btn--tl btn--back">
+        <icon back></icon>
+      </button>
+      <button class="btn btn--br btn--theme">
+        <icon theme></icon>
+      </button>
+      <button class="btn btn--br btn--reset">
+        <icon reset></icon>
+      </button>
+    </div>
+
+
+      
+
+
+    </div>
+
+    <div class="ui__prefs">
+      <range name="size" title="Cube Size" list="2,3,4,5"></range>
+      <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
+      <range name="scramble" title="Scramble Length" list="20,25,30"></range>
+      <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
+      <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
+    </div>
+
+    <div class="ui__theme">
+      <range name="hue" title="Hue" color></range>
+      <range name="saturation" title="Saturation" color></range>
+      <range name="lightness" title="Lightness" color></range>
+    </div>
+
+    <div class="ui__stats">
+      <div class="stats" name="cube-size">
+        <i>Cube:</i><b>3x3x3</b>
+      </div>
+      <div class="stats" name="total-solves">
+        <i>Total solves:</i><b>-</b>
+      </div>
+      <div class="stats" name="best-time">
+        <i>Best time:</i><b>-</b>
+      </div>
+      <div class="stats" name="worst-time">
+        <i>Worst time:</i><b>-</b>
+      </div>
+      <div class="stats" name="average-5">
+        <i>Average of 5:</i><b>-</b>
+      </div>
+      <div class="stats" name="average-12">
+        <i>Average of 12:</i><b>-</b>
+      </div>
+      <div class="stats" name="average-25">
+        <i>Average of 25:</i><b>-</b>
+      </div>
+    </div>
+
+    <div class="theme-selector" id="theme_selector_id">
+      <label for="theme">Choose Theme:</label>
+      <select id="theme">
+        <option value="default">Default</option>
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+        <option value="colorful">Colorful</option>
+      </select>
+    </div> 
+    <div id="rubiks-cube">
+      <!-- Your Rubik's Cube game code -->
+    </div>
+
 
   <div class="ui__buttons">
-    <button class="btn btn--bl btn--stats">
+    <button id="b1" class="btn btn--bl btn--stats">
       <icon trophy></icon>
     </button>
-    <button class="btn btn--br btn--prefs">
+    <button id="b2" class="btn btn--br btn--prefs">
       <icon settings></icon>
     </button>
+    <button id="b3" class="btn btn--bl btn--back">
+
     <button class="btn btn--tl btn--back">
       <icon back></icon>
     </button>
-    <button class="btn btn--br btn--theme">
+    <button id="b4" class="btn btn--br btn--theme">
       <icon theme></icon>
     </button>
-    <button class="btn btn--br btn--reset">
+    <button id="b5" class="btn btn--br btn--reset">
       <icon reset></icon>
-      <button class="btn btn--tr fa-solid fa-volume-high" id="play-btn"></button>
     </button>
 
     <!-- <div class="buttons">
@@ -134,16 +344,214 @@
 
     <a href="./AboutUs/About.html"><button class="btn btn--in fa-solid fa-circle-info"></button></a>
 
+
+<div class="main_B">
+  <div class="sub_main">
+      <button class="btn btn--tc btn--button3">Restart</button>
+      <button class="btn btn--tr fa-solid fa-volume-high" id="play-btn"></button>
   </div>
-  
-  <!-- Audio element for background music -->
+</div>
+
+
+
+    <!-- the data client id is the goggle o-auth secret client id. -->
+    <!-- g_id_signin is for rendering the Google Sign-In button. -->
+
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <!-- Adding the Google Identity Services script to your HTML file. -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Added the script1.js file for initializing the Google Identity Services client and handle the sign-in process. -->
+    <script src="script1.js"></script>
+
+    <div class="ui">
+
+        <div class="ui__background"></div>
+
+        <div class="ui__game"></div>
+
+        <div class="ui__texts">
+            <h1 class="text text--title">
+                <span>Let's</span>
+                <span>Solve!</span>
+            </h1>
+            <div class="text text--note">
+                Double tap to start
+            </div>
+            <div class="text text--timer">
+                0:00
+            </div>
+            <div class="text text--complete">
+                <span>Complete!</span>
+            </div>
+            <div class="text text--best-time">
+                <icon trophy></icon>
+                <span>Best Time!</span>
+            </div>
+        </div>
+
+        <div class="ui__prefs">
+            <range name="size" title="Cube Size" list="2,3,4,5"></range>
+            <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
+            <range name="scramble" title="Scramble Length" list="20,25,30"></range>
+            <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
+            <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
+        </div>
+
+        <div class="ui__theme">
+            <range name="hue" title="Hue" color></range>
+            <range name="saturation" title="Saturation" color></range>
+            <range name="lightness" title="Lightness" color></range>
+        </div>
+
+        <div class="ui__stats">
+            <div class="stats" name="cube-size">
+                <i>Cube:</i><b>3x3x3</b>
+            </div>
+            <div class="stats" name="total-solves">
+                <i>Total solves:</i><b>-</b>
+            </div>
+            <div class="stats" name="best-time">
+                <i>Best time:</i><b>-</b>
+            </div>
+            <div class="stats" name="worst-time">
+                <i>Worst time:</i><b>-</b>
+            </div>
+            <div class="stats" name="average-5">
+                <i>Average of 5:</i><b>-</b>
+            </div>
+            <div class="stats" name="average-12">
+                <i>Average of 12:</i><b>-</b>
+            </div>
+            <div class="stats" name="average-25">
+                <i>Average of 25:</i><b>-</b>
+            </div>
+        </div>
+
+        <div class="ui__buttons">
+            <button class="btn btn--bl btn--stats">
+      <icon trophy></icon>
+    </button>
+            <button class="btn btn--br btn--prefs">
+      <icon settings></icon>
+    </button>
+            <button class="btn btn--tl btn--back">
+      <icon back></icon>
+    </button>
+            <button class="btn btn--br btn--theme">
+      <icon theme></icon>
+    </button>
+            <button class="btn btn--br btn--reset">
+      <icon reset></icon>
+      <button class="btn btn--tr fa-solid fa-volume-high" id="play-btn"></button>
+            </button>
+            <a href="./AboutUs/About.html"><button class="btn btn--in fa-solid fa-circle-info"></button></a>
+        </div>
+
+
 <audio id="background-music" autoplay loop >
+
+        <!-- Audio element for background music -->
+        <audio id="background-music" autoplay loop>
+
   <source src="Music/8 Bit Space Groove! Chill Pretty Chiptune Game Music by HeatleyBros.mp3" type="audio/mpeg">
 </audio>
 
-</div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
+
+
+    <div class="ui__buttons">
+      <button class="btn btn--bl btn--stats">
+        <icon trophy></icon>
+      </button>
+      <button class="btn btn--br btn--prefs">
+        <icon settings></icon>
+      </button>
+      <button class="btn btn--tl btn--back">
+        <icon back></icon>
+      </button>
+      <button class="btn btn--br btn--theme">
+        <icon theme></icon>
+      </button>
+      <button class="btn btn--br btn--reset">
+        <icon reset></icon>
+        <button class="btn btn--tr fa-solid fa-volume-high" id="play-btn"></button>
+      </button>
+      <a href="./AboutUs/About.html"><button class="btn btn--in fa-solid fa-circle-info"></button></a>
+    </div>
+
+    <!-- Audio element for background music -->
+    <audio id="background-music" autoplay loop>
+      <source src="Music/8 Bit Space Groove! Chill Pretty Chiptune Game Music by HeatleyBros.mp3" type="audio/mpeg">
+    </audio>
+
+ 
+  </div>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script>
+  <script src="./script.js"></script>
+ 
 
 </body>
+
 </html>
+
+  <script src="progress.js"></script>
+  
+
+  <div class="sec-center">
+    <input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+    <label class="for-dropdown" for="dropdown">How To Play! <i class="uil uil-arrow-down"></i></label>
+    <div class="section-dropdown">
+        <h2>1. Twisting the segments</h2>
+        <br>
+        This can be done by dragging the cursor over the segment you want to rotate.
+        <br>
+        <br>
+        
+        <h2>2. Changing the view of the cube</h2>
+        <br>
+        This can be done by dragging the cursor in an arrow around the cube.
+        <br>
+        <br>
+        
+        <img src="twist1.png" height="150" width="240">
+        <img src="twist2.png" height="150" width="240">
+        <img src="changeview.png" height="150" width="240">
+    </div>
+</div>
+ 
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="script.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script><script  src="./script.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+  const loader = document.querySelector(".box");
+
+  loader.classList.add("box--hidden");
+
+  loader.addEventListener("transitionend", () => {
+  document.body.removeChild(loader);
+  });
+  });
+  
+  window.addEventListener("load", () => {
+  const loader = document.querySelector(".con");
+
+  loader.classList.add("con--hidden");
+
+
+
+
+ 
+
+  loader.addEventListener("transitionend", () => {
+  document.body.removeChild(loader);
+  });
+  });
+  </script>
+</body>
+
+</html>
+ 

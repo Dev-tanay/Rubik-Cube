@@ -84,9 +84,48 @@
   </div>
   <hr/>
 
+  <div class="icons">
+    <a href="">
+      <div class="icon">
+        <i class="fab fa-linkedin" title="linkedin" style="cursor: pointer;"></i>
+      </div>
+    </a>
+
+    <a href="">
+      <div class="icon">
+        <i class="fab fa-twitter" title="X"style="cursor: pointer;"></i>
+      </div>
+    </a>
+
+    <a href="">
+      <div class="icon">
+        <i class="fab fa-instagram" title="Instagram"style="cursor: pointer;"></i>
+      </div>
+    </a>
+    
+
+    <a href="" title="YouTube">
+      <div class="icon">
+        <i class="fab fa-youtube" style="cursor: pointer;"></i>
+      </div>
+    </a>
+
+    <a href="">
+      <div class="icon">
+        <i class="fab fa-github" title="Github"></i>
+      </div>
+    </a>
+   
+  </div>
+
   <footer class="footer">
-    <p class="text--footer">© 2024 Rubik-Cube</p>
+    <p id="current-year" class="text--footer">© <span id="year"></span> Rubik-Cube</p>
   </footer>
+  
 </body>
 <script  src="./About.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </html>
