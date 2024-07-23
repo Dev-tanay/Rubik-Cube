@@ -2386,6 +2386,16 @@ class Transition {
 }
 
 class Timer extends Animation {
+  constructor(game) {
+    super(false);
+    this.game = game;
+    this.reset();
+  }
+
+  start(continueGame = false) {
+    this.startTime = continueGame ? Date.now() - this.deltaTime : Date.now();
+    this.isRunning = true;
+
 
   constructor(game) {
 
@@ -2405,11 +2415,9 @@ class Timer extends Animation {
     this.deltaTime = 0;
     this.converted = this.convert();
     super.start();
-
   }
 
   reset() {
-
     this.startTime = 0;
     this.currentTime = 0;
     this.deltaTime = 0;
@@ -2427,25 +2435,33 @@ class Timer extends Animation {
       super.stop();
     }
   }
+  
+  resume() {
+    if (!this.isRunning) {
+      this.start(true);
+    }
+  }
 
   update() {
-
     const old = this.converted;
-
     this.currentTime = Date.now();
     this.deltaTime = this.currentTime - this.startTime;
     this.convert();
+
+    if (this.converted !== old) {
 
     if (this.converted != old) {
 
       localStorage.setItem('theCube_time', this.deltaTime);
       this.setText();
-
     }
-
   }
 
   convert() {
+    const seconds = parseInt((this.deltaTime / 1000) % 60);
+    const minutes = parseInt(this.deltaTime / (1000 * 60));
+    this.converted = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
 
     const seconds = parseInt((this.deltaTime / 1000) % 60);
     const minutes = parseInt(this.deltaTime / (1000 * 60));
@@ -2454,12 +2470,10 @@ class Timer extends Animation {
   }
 
   setText() {
-
     this.game.dom.texts.timer.innerHTML = this.converted;
-
   }
-
 }
+
 
 const RangeHTML = [
 
@@ -3706,6 +3720,7 @@ const Icons = new IconsConverter({
       viewbox: '0 0 448 512',
       content: '<path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" />',
     },
+    
   },
 
   convert: true,
@@ -3724,6 +3739,9 @@ const STATE = {
 const BUTTONS = {
 
   Menu: [ 'stats', 'prefs' ],
+ 
+  Playing: [ 'back' ,"button1",'button3'],
+
   Playing: [ 'back','button3' ],
 
   Complete: [],
@@ -3760,6 +3778,9 @@ class Game {
 
         prefs: document.querySelector( '.btn--prefs' ),
         back: document.querySelector( '.btn--back' ),
+        button1: document.querySelector( '.btn--button1' ),
+        button3: document.querySelector( '.btn--button3' ),
+
         button3: document.querySelector('.btn--button3'),
         stats: document.querySelector( '.btn--stats' ),
         reset: document.querySelector( '.btn--reset' ),
@@ -3851,6 +3872,24 @@ class Game {
       }
 
     };
+    this.dom.buttons.button1.onclick = event => {
+      // Handle button1 click event
+      if (this.timer.isRunning) {
+        this.timer.stop();
+        event.target.innerText = 'Play';
+      } else {
+        this.timer.resume();
+        event.target.innerText = 'Pause';
+      }
+    };
+    
+    this.dom.buttons.button3.onclick = event => {
+      // Handle button3 click event
+      this.timer.stop(); 
+      this.timer.reset();
+      this.timer.start();
+      this.dom.buttons.button1.innerText = 'Pause';
+    };
 
     this.dom.buttons.button3.onclick = event => {
       // Handle button3 click event
@@ -3918,6 +3957,10 @@ class Game {
         // Show additional buttons
         this.showPlayingButtons();
 
+        this.transition.buttons(BUTTONS.None, BUTTONS.Playing.concat(BUTTONS.Menu));
+
+        // Show additional buttons
+        this.showPlayingButtons();
       }
 
       const duration = this.saved ? 0 :
@@ -3950,6 +3993,10 @@ class Game {
       this.state = STATE.Menu;
 
       this.transition.buttons(BUTTONS.Menu, BUTTONS.Playing);
+
+      this.transition.zoom( STATE.Menu, 0 );
+      this.hidePlayingButtons();
+      
 
       this.transition.zoom(STATE.Menu, 0);
 
@@ -4130,6 +4177,22 @@ class Game {
 
     }
 
+  }
+  
+  showPlayingButtons() {
+    if (this.state === STATE.Playing) {
+      // Show the additional buttons only if the game is in the Playing state
+      this.dom.buttons.button1.style.display = 'block';
+      this.dom.buttons.button2.style.display = 'block';
+      this.dom.buttons.button3.style.display = 'block';
+    }
+  }
+  
+  hidePlayingButtons() {
+    // Hide the additional buttons
+    this.dom.buttons.button1.style.display = 'none';
+    this.dom.buttons.button2.style.display = 'none';
+    this.dom.buttons.button3.style.display = 'none';
   }
 
   showPlayingButtons() {
