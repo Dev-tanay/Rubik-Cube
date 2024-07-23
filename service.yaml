@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-web-app-service
+spec:
+  selector:
+    app: static-web-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 80
+  type: LoadBalancer
