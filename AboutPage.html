@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="styleAbout.css" rel="stylesheet">
+  
+</head>
+<body>
+  <h1>Rubik's Cube Solution Guide</h1>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">1</div>
+            <h2>Complete the First Layer Cross</h2>
+        </div>
+        <div class="step-content">
+            <ul>
+                <li>Keep WHITE centre on top.</li>
+                <li>Put the GREEN centre piece in front (facing you).</li>
+                <li>Find the GREEN/WHITE edge piece (it only has 2 colours) and turn it to one of the positions shown below (keeping white on top and green in front).</li>
+                <li>Choose the options below that matches your situation and follow the arrow steps to place the GREEN/WHITE edge piece in place.</li>
+            </ul>
+            <div class="highlight">
+                Keeping white on top, turn the cube so that a different colour face (center) is toward you. Follow the above instructions again. Repeat with the other two faces until the white cross is complete. This step is quite intuitive; you can do it for sure but it does take a little practice. Just move the white edges to their places not messing up the ones already fixed.
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">2</div>
+            <h2>Complete the First Layer Corners</h2>
+        </div>
+        <div class="step-content">
+            <ul>
+                <li>Keep WHITE on top.</li>
+                <li>Put the GREEN centre piece in front (facing you).</li>
+                <li>Find the GREEN/WHITE/RED corner (it has 3 colours) and place it in one of the positions below (without disturbing the white cross).</li>
+                <li>Choose from the steps below to place the GREEN/WHITE/RED corner piece in place without disturbing the white cross.</li>
+            </ul>
+            <div class="problem">
+                <strong>Possible Problem:</strong> The corner you are looking for is in the top layer, but in the wrong position or turned the wrong way around. Turn the cube so that the corner is in the front right top corner then move the corner to the bottom layer by following the following steps.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong> Perform these steps, then choose again from steps above to put the corner in place. Keeping white on top, turn the cube so that a different colour face is toward you. Follow the above instructions again. Repeat with the other two faces until the white layer is complete.
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">3</div>
+            <h2>Complete the Second Layer</h2>
+        </div>
+        <div class="step-content">
+            <ul>
+                <li>Keep WHITE on top.</li>
+                <li>Find the GREEN/RED edge piece.</li>
+                <li>If it is in the bottom layer, then turn the bottom layer to match the edge with the centre colour.</li>
+                <li>If the edge is not in the bottom layer, then go to Step C.</li>
+                <li>Choose from the steps below to place the edge piece in place.</li>
+            </ul>
+            <div class="problem">
+                <strong>Possible Problem:</strong> The edge piece you want to move is in the second layer, but in the wrong position or the wrong way around.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong> Turn the cube so that the edge is in the front layer then do either solution above to move the piece into the bottom row. Then go back to step 4 above.
+            </div>
+            <div class="highlight">
+                Continue with steps A/B with different centers facing you until the second layer is complete.
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">4</div>
+            <h2>Complete the Third Layer Cross</h2>
+        </div>
+        <div class="step-content">
+            <ul>
+                <li>Turn the cube over (white is now on the bottom and yellow on top).</li>
+                <li>You should find that there are 0, 2 or 4 pieces (of the cross) facing upward. Ignore the corners for now.</li>
+                <li>The idea is firstly to get the yellow cross and secondly to swap pieces to the correct position in the cross.</li>
+                <li>Perform the algorithm below to get to the yellow cross. Make sure your cube is orientated as shown in the image.</li>
+            </ul>
+            <div class="highlight">
+                Repeat this algorithm till you get the yellow cross. You will now have 4 or 2 edge pieces in the correct place. Matching with the center colors. Ensure the correct edge pieces are at the back and right face. Use the algorithm below to put the edge pieces in the correct position.
+            </div>
+            <div class="problem">
+                <strong>Possible Problem:</strong> Two pieces that are in the correct position are opposite each other.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong> Perform the steps above once and then turn the cube like the one shown above and perform the steps again.
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">5</div>
+            <h2>Complete the Third Layer Corners</h2>
+        </div>
+        <div class="step-content">
+            <ul>
+                <li>First, we will put the corners in the correct position (A).</li>
+                <li>You will now have either 0, 1 or ALL the corner pieces in their correct positions, either the right way up or reversed.</li>
+                <li>If one corner piece is in the correct corner, turn the cube so that this correct corner is in the front top right position. The piece is in the correct position, BUT may not be turned the correct way around.</li>
+            </ul>
+            <div class="highlight">
+                Repeat the sequence until all the corners are in the correct position.
+            </div>
+            <div class="problem">
+                <strong>Possible Problem:</strong> None of the corners is in the correct position.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong> Perform the steps in (A) once with ANY side facing you (YELLOW at the top). Now one corner will be in the correct position. Proceed with (A) above.
+            </div>
+            <div class="highlight">
+                The next steps will turn the corners (one by one) the correct way and ultimately solve the cube.
+            </div>
+            <p>Note: This routine may appear to upset the rest of the cube. Do not despair and keep the same side facing you. It will only be solved once the last corner is orientated.</p>
+            <div class="highlight">
+                Repeat the moves until the YELLOW side of the corner piece is on top. You may have to do it 2-3 times. KEEP THE SAME SIDE FACING YOU. Rotate the TOP LAYER until the next corner piece to be rotated is in the top right position. Repeat the above sequence until the YELLOW side of the corner that you are rotating is on top. Continue the process until the cube is complete.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
