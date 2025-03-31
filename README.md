@@ -1,6 +1,6 @@
 # Rubik-Cube
 
-# <p align="center">✨Rubik-Cube✨</p>
+# <p align="center">✨Rubik-Cube </p>
  
 
 <p align="center">
@@ -61,7 +61,7 @@ Follow the steps below to install and set up the Rubik-Cube project on your loca
 
 ### 📋 Prerequisites
 - Ensure you have `git` installed on your system. If not, download and install it from [here](https://git-scm.com/).
-- A modern web browser (e.g., Chrome, Firefox, Edge).
+- You need the modern browsers like (eg., Chrome, Firefox, Edge etc)
 
 ### 🛠️ Steps
 
